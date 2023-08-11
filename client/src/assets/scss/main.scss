@@ -50,7 +50,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .top-bar {
-  background-color: var(--top-bar-color);
+  background-color: var(--tile-color);
+  border-bottom: 3px solid #094067;
 }
 
 .top-bar .menu {
@@ -105,7 +106,27 @@ h1, h2, h3, h4, h5 {
   width: 75%;
   margin: 5% auto;
   padding: 5%;
-  background: var(--tile-color);
+  // background: var(--tile-color);
+  border: 3px solid #094067;
   color: #000000;
   border-radius: 25px;
+}
+
+.container-2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: fit-content;
+  margin: 0 auto;
+  width: 88%;
+  padding: 5%;
+  // background: var(--tile-color);
+  border: 3px solid #094067;
+  color: #000000;
+  border-radius: 25px;
+}
+
+.icon-title{
+  color: #094067;
 }
