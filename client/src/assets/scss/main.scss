@@ -49,6 +49,10 @@ h1, h2, h3, h4, h5 {
   color: var(--heading-color);
 }
 
+// .top-bar-left{
+//   border: 3px solid red;
+// }
+
 .top-bar {
   background-color: var(--tile-color);
   border-bottom: 3px solid #094067;
@@ -56,6 +60,7 @@ h1, h2, h3, h4, h5 {
 
 .top-bar .menu {
   background-color: var(--top-bar-color);
+  padding: 0 4rem;
 }
 
 .button-1 {
@@ -106,7 +111,6 @@ h1, h2, h3, h4, h5 {
   width: 75%;
   margin: 5% auto;
   padding: 5%;
-  // background: var(--tile-color);
   border: 3px solid #094067;
   color: #000000;
   border-radius: 25px;
@@ -121,10 +125,24 @@ h1, h2, h3, h4, h5 {
   margin: 0 auto;
   width: 88%;
   padding: 5%;
-  // background: var(--tile-color);
   border: 3px solid #094067;
   color: #000000;
   border-radius: 25px;
+}
+
+.container-3{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: fit-content;
+  width: 75%;
+  margin: 5% auto;
+  padding: 5%;
+  border: 3px solid #094067;
+  color: #000000;
+  border-radius: 25px;
+  text-align: center;
 }
 
 .icon-title{

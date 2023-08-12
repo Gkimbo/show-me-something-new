@@ -21,18 +21,15 @@ const TopBar = ({ user }) => {
   ];
 
   return (
-    <div className="top-bar">
+    <div className="top-bar grid-x">
       <div className="top-bar-left">
         <ul className="menu">
-        <Link to="/"><i class="fa-solid fa-street-view fa-xl icon-title"></i></Link>
-          <li>
-            <Link to="/" className="button-1">Home</Link>
-          </li>
+        <Link to="/home"><i class="fa-solid fa-street-view fa-xl icon-title"></i></Link>
         </ul>
       </div>
-      <div className="top-bar-right">
+      {/* <div className="top-bar-right">
         <ul className="menu">{user ? authenticatedListItems : unauthenticatedListItems}</ul>
-      </div>
+      </div> */}
     </div>
   );
 };
