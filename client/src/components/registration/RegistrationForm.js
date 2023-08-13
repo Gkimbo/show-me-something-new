@@ -11,8 +11,6 @@ const RegistrationForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-
   const validateInput = (payload) => {
     setErrors({});
     const { email, password, passwordConfirmation } = payload;
@@ -67,7 +65,7 @@ const RegistrationForm = () => {
           throw error;
         }
         const userData = await response.json();
-        setShouldRedirect(true);
+        // setShouldRedirect(true);
       }
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`);
@@ -81,47 +79,47 @@ const RegistrationForm = () => {
     });
   };
 
-  if (shouldRedirect) {
-    location.href = "/";
-  }
-
   return (
-    <div className="grid-container">
-      <h1>Register</h1>
+    <div className="grid-x container-3">
+      <div className="cell small-12">
+        <h1>Sign-up</h1>
+      </div>
       <form onSubmit={onSubmit}>
-        <div>
-          <label>
-            Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
-            <FormError error={errors.email} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={userPayload.password}
-              onChange={onInputChange}
-            />
-            <FormError error={errors.password} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password Confirmation
-            <input
-              type="password"
-              name="passwordConfirmation"
-              value={userPayload.passwordConfirmation}
-              onChange={onInputChange}
-            />
-            <FormError error={errors.passwordConfirmation} />
-          </label>
-        </div>
-        <div>
-          <input type="submit" className="button" value="Register" />
+        <div className="cell small-12">
+          <div>
+            <label>
+              Email
+              <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+              <FormError error={errors.email} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={userPayload.password}
+                onChange={onInputChange}
+              />
+              <FormError error={errors.password} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password Confirmation
+              <input
+                type="password"
+                name="passwordConfirmation"
+                value={userPayload.passwordConfirmation}
+                onChange={onInputChange}
+              />
+              <FormError error={errors.passwordConfirmation} />
+            </label>
+          </div>
+          <div>
+            <input type="submit" className="button-1" value="Register" />
+          </div>
         </div>
       </form>
     </div>
