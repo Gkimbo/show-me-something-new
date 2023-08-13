@@ -14,16 +14,16 @@ const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const fetchCurrentUser = async () => {
     try {
-      const user = await getCurrentUser()
-      setCurrentUser(user)
-    } catch(err) {
-      setCurrentUser(null)
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    } catch (err) {
+      setCurrentUser(null);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchCurrentUser()
-  }, [])
+    fetchCurrentUser();
+  }, []);
 
   return (
     <Router>
