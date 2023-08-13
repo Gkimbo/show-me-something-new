@@ -11,8 +11,6 @@ const RegistrationForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-
   const validateInput = (payload) => {
     setErrors({});
     const { email, password, passwordConfirmation } = payload;
@@ -67,7 +65,7 @@ const RegistrationForm = () => {
           throw error;
         }
         const userData = await response.json();
-        setShouldRedirect(true);
+        // setShouldRedirect(true);
       }
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`);
@@ -80,10 +78,6 @@ const RegistrationForm = () => {
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-
-  if (shouldRedirect) {
-    location.href = "/";
-  }
 
   return (
     <div className="grid-x container-3">
