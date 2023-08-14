@@ -1,4 +1,5 @@
 import React from "react";
+import PopularDestinationList from "./PopularDestinationList";
 
 const HomePage = (props) => {
 
@@ -12,14 +13,7 @@ const HomePage = (props) => {
                 </div>
             </div>
             <div className="cell small-12 medium-12 large-6">
-                <div className="container">
-                    <h1>Popular destinations</h1>
-                    <ul>
-                        <li>list of popular cities in united states (links to a show page)
-                            render another component here that fetches the list from another source
-                        </li>
-                    </ul>
-                </div>
+                <PopularDestinationList />
             </div>
             <div className="cell large-12">
             <div className="container-2">
