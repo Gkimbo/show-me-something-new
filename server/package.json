@@ -20,7 +20,7 @@
   "private": true,
   "type": "module",
   "version": "0.0.1",
-  "name": "WithinReach-server",
+  "name": "within-reach-server",
   "engines": {
     "node": "^16.18"
   },

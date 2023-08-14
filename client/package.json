@@ -5,7 +5,7 @@
   },
   "license": "UNLICENSED",
   "private": true,
-  "name": "WithinReach-client",
+  "name": "within-reach-client",
   "version": "0.0.1",
   "engines": {
     "node": "^16.18"

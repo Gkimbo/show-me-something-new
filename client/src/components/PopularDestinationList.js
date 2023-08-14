@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import PopularDestinationTile from "./PopularDestinationTile";
 
 const PopularDestinationList = (props) => {
     const [popularDestinations, setPopularDestinations] = useState([])
-    console.log(popularDestinations)
 
     const getDestinations = async () => {
         try {
@@ -12,8 +12,7 @@ const PopularDestinationList = (props) => {
                 throw error
             }
             const responseData = await response.json()
-            const newCities = JSON.parse(responseData.cities)
-            setPopularDestinations(newCities)
+            setPopularDestinations(responseData.cities)
         } catch (error) {
             console.error("Error in fetch!", error.message)
         }
@@ -25,7 +24,11 @@ const PopularDestinationList = (props) => {
 
     const listDestinations = popularDestinations.map(destination => {
         return(
-            <li key={destination.name}>{destination.name}</li>
+            <PopularDestinationTile 
+                key={destination.name}
+                name={destination.name}
+                photo={destination.url}
+            />
         )
         
     })
