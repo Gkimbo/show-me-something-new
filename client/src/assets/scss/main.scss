@@ -112,6 +112,7 @@ h5 {
   border: 3px solid #094067;
   color: #000000;
   border-radius: 25px;
+  text-align: center;
 }
 
 .container-2 {
@@ -164,3 +165,57 @@ h5 {
 .home-page-div{
   padding: 0 4rem;
 }
+
+.slider {
+  height: 200px;
+  margin:auto;
+  position:relative;
+  width:90%;
+  display:block;
+  place-items: center;
+  overflow:scroll;
+  background-color: transparent;
+}
+
+.slide{
+  width: 300px; 
+  height: 300px; 
+  margin: 0 25px;
+}
+
+.slide img {
+  width: 250px; 
+  height: 150px; 
+  object-fit: cover;
+}
+
+.list-destinations{
+  font-size: x-large;
+  list-style-type: none;
+}
+
+.slide-track {
+  display: flex;
+  width: fit-content;
+  animation: scrollAnimation 120s linear infinite; 
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% + 100px));
+  }
+}
+
+.slider:hover .slide-track {
+  animation-play-state: paused;
+}
+
+.slider .slide-track {
+  animation-play-state: running;
+}
+
+
+

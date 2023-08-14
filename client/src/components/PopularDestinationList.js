@@ -35,9 +35,11 @@ const PopularDestinationList = (props) => {
     return(
         <div className="container">
             <h1>Popular destinations</h1>
-            <ul>
+            <div className="slider">
+            <div className="slide-track">
                 {listDestinations}
-            </ul>
+            </div>
+            </div>
         </div>
     )
 }
