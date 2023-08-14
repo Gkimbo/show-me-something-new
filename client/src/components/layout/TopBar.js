@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
+import Logo from "../Logo";
 
 const TopBar = ({ user }) => {
   const authenticatedListItems = [
@@ -19,7 +20,7 @@ const TopBar = ({ user }) => {
       <div className="top-bar-left">
         <ul className="menu">
           <Link to="/">
-            <i className="fa-solid fa-street-view fa-xl icon-title"></i>
+            <Logo />
           </Link>
         </ul>
       </div>

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "show-me-something-new-e2e",
+  "name": "WithinReach-e2e",
   "version": "0.0.1",
   "scripts": {
     "e2e:open": "NODE_ENV=e2e ./node_modules/.bin/cypress open",

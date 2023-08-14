@@ -15,7 +15,7 @@
 }
 
 :root {
-  --font-family: "Roboto", serif;
+  --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   --font-size: 1rem;
   --font-weight: 400;
   --line-height: 1.5;
@@ -60,7 +60,7 @@ h5 {
 
 .top-bar .menu {
   background-color: var(--top-bar-color);
-  padding: 0 4rem;
+  padding: 0 7rem;
 }
 
 .button-1 {
@@ -100,6 +100,7 @@ h5 {
 }
 
 .container {
+  font-family: var(--font-family);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -150,3 +151,16 @@ h5 {
   text-align: center;
 }
 
+.logo-title{
+  display: inline;
+  color: #094067;
+  font-size: larger;
+}
+
+.alt-link{
+  text-align: center;
+}
+
+.home-page-div{
+  padding: 0 4rem;
+}

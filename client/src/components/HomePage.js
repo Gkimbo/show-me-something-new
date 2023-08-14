@@ -3,7 +3,7 @@ import React from "react";
 const HomePage = (props) => {
 
     return(
-        <div className="grid-x">
+        <div className="grid-x home-page-div">
             <div className="cell small-12 medium-12 large-6">
                 <div className="container">
                     <h1>Hello from user home page</h1>
