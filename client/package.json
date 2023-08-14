@@ -5,7 +5,7 @@
   },
   "license": "UNLICENSED",
   "private": true,
-  "name": "WithinReach-client",
+  "name": "within-reach-client",
   "version": "0.0.1",
   "engines": {
     "node": "^16.18"
@@ -38,6 +38,7 @@
     "react-dom": "~16.13",
     "react-hot-loader": "^4.12.21",
     "react-router-dom": "5.2",
+    "react-scroll": "^1.8.9",
     "redbox-react": "~1.6",
     "sass-loader": "^6.0.7",
     "style-loader": "^1.2.1",

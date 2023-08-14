@@ -1,9 +1,9 @@
 const getDatabaseUrl = (nodeEnv) => {
   return (
     {
-      development: "postgres://postgres:postgres@localhost:5432/WithinReach_development",
-      test: "postgres://postgres:postgres@localhost:5432/WithinReach_test",
-      e2e: "postgres://postgres:postgres@localhost:5432/WithinReach_e2e",
+      development: "postgres://postgres:postgres@localhost:5432/within-reach_development",
+      test: "postgres://postgres:postgres@localhost:5432/within-reach_test",
+      e2e: "postgres://postgres:postgres@localhost:5432/within-reach_e2e",
     }[nodeEnv] || process.env.DATABASE_URL
   );
 };

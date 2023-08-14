@@ -7,14 +7,14 @@
     "e2e"
   ],
   "scripts": {
-    "build:client": "yarn workspace WithinReach-client build",
-    "dev": "yarn workspace WithinReach-server dev",
-    "dev:debug": "yarn workspace WithinReach-server dev:debug",
-    "heroku-postbuild": "yarn workspace WithinReach-client build",
-    "start": "yarn workspace WithinReach-server start",
-    "dev:cypress": "yarn workspace WithinReach-server dev:e2e",
-    "e2e:open": "yarn workspace WithinReach-e2e e2e:open",
-    "e2e:run": "yarn workspace WithinReach-e2e e2e:run"
+    "build:client": "yarn workspace within-reach-client build",
+    "dev": "yarn workspace within-reach-server dev",
+    "dev:debug": "yarn workspace within-reach-server dev:debug",
+    "heroku-postbuild": "yarn workspace within-reach-client build",
+    "start": "yarn workspace within-reach-server start",
+    "dev:cypress": "yarn workspace within-reach-server dev:e2e",
+    "e2e:open": "yarn workspace within-reach-e2e e2e:open",
+    "e2e:run": "yarn workspace within-reach-e2e e2e:run"
   },
   "engines": {
     "node": "^16.18"
