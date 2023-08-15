@@ -7,7 +7,9 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     passwordConfirmation: "",
+    preferences: [],
   });
+  console.log(userPayload);
 
   const [errors, setErrors] = useState({});
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -46,6 +48,24 @@ const RegistrationForm = () => {
     }
 
     setErrors(newErrors);
+  };
+
+  const onPreferencesChange = (event) => {
+    const selectedPreferences = [...userPayload.preferences];
+
+    if (event.target.checked) {
+      selectedPreferences.push(event.target.value);
+    } else {
+      const index = selectedPreferences.indexOf(event.target.value);
+      if (index !== -1) {
+        selectedPreferences.splice(index, 1);
+      }
+    }
+
+    setUserPayload({
+      ...userPayload,
+      preferences: selectedPreferences,
+    });
   };
 
   const onSubmit = async (event) => {
@@ -120,6 +140,67 @@ const RegistrationForm = () => {
                 onChange={onInputChange}
               />
               <FormError error={errors.passwordConfirmation} />
+            </label>
+          </div>
+          <div className="checkbox-div">
+            <label>
+              What do you like? (click all that apply)
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="beaches"
+                onChange={onPreferencesChange}
+              />
+              Beaches
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="parks"
+                onChange={onPreferencesChange}
+              />
+              Parks
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="bars"
+                onChange={onPreferencesChange}
+              />
+              Bars
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="swimming"
+                onChange={onPreferencesChange}
+              />
+              Swimming
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="breweries"
+                onChange={onPreferencesChange}
+              />
+              Breweries
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="wine tasting"
+                onChange={onPreferencesChange}
+              />
+              Wine Tasting
+              <input
+                className="preferences"
+                type="checkbox"
+                name="preferences"
+                value="restaurants"
+                onChange={onPreferencesChange}
+              />
+              Restaurants
             </label>
           </div>
           <div>
