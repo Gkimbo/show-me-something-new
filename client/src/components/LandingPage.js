@@ -9,7 +9,7 @@ const LandingPage = (props) => {
       <div className="landing-page-description cell small-12 medium-6">
         <h2>WithinReach</h2>
         <p>Discover Within a Mile - The one app you truly need in your life.</p>
-        <p>Happiness is just one button away</p>
+        <p>Happiness is just one click away</p>
       </div>
       <div className="cell small-12 medium-6">
         <SignInForm />
