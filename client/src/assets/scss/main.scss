@@ -99,21 +99,6 @@ h5 {
     border-radius: 10px;
 }
 
-.container-4 {
-    font-family: var(--font-family);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    height: fit-content;
-    width: 100%;
-    margin: 5% auto;
-    border: 3px solid #094067;
-    color: #000000;
-    border-radius: 25px;
-    text-align: center;
-    overflow: scroll;
-}
 .container {
     font-family: var(--font-family);
     display: flex;
@@ -131,17 +116,19 @@ h5 {
 }
 
 .container-2 {
+    font-family: var(--font-family);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 17rem;
-    margin: 0 auto;
-    width: 88%;
+    height: fit-content;
+    width: 75%;
+    margin: 5% auto;
     padding: 5%;
     border: 3px solid #094067;
     color: #000000;
     border-radius: 25px;
+    text-align: center;
     overflow: scroll;
 }
 
@@ -152,6 +139,50 @@ h5 {
     align-items: center;
     height: fit-content;
     width: 75%;
+    margin: 5% auto;
+    padding: 5%;
+    border: 3px solid #094067;
+    color: #000000;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.container-4 {
+    font-family: var(--font-family);
+    align-items: center;
+    height: 100vw;
+    width: 100%;
+    margin: 0 auto;
+    color: #000000;
+    border-radius: 10px;
+    text-align: center;
+    overflow: scroll;
+}
+
+.container-4-map {
+    font-family: var(--font-family);
+    width: 35vw;
+    height: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3% auto 0 auto;
+    padding-right: 3rem;
+    border: 1px solid #094067;
+    border-radius: 4px;
+    text-align: center;
+    overflow: scroll;
+}
+
+.container-button {
+    font-family: var(--font-family);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: fit-content;
+    width: 87%;
     margin: 5% auto;
     padding: 5%;
     border: 3px solid #094067;
@@ -239,8 +270,10 @@ h5 {
 
 .tile-container-activities {
     font-family: var(--font-family);
+    display: inline-block;
     height: 5rem;
-    margin: 1%;
+    width: 5rem;
+    margin: 5%;
     padding-top: 1.5%;
     border: 3px solid #094067;
     border-radius: 10px;
@@ -253,15 +286,13 @@ h5 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: fit-content;
-    width: 75%;
-    margin: 5% auto;
-    padding: 5%;
-    border: 3px solid #094067;
+    margin: 3%;
+    padding: 2%;
+    border: 1px solid #094067;
     color: #000000;
     border-radius: 25px;
     text-align: center;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 #preferences {

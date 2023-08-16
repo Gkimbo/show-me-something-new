@@ -10,6 +10,7 @@ const clientRoutes = [
     "/:city",
     "/activity/map",
     "/activity/:name",
+    "/myActivities",
 ];
 const authedClientRoutes = ["/profile"];
 

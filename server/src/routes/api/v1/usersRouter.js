@@ -1,14 +1,14 @@
 import express from "express";
 import passport from "passport";
 import { User } from "../../../models/index.js";
-
+import AddToPreferences from "../../../../serializers/AddToPreferences.js";
 const usersRouter = new express.Router();
 
 usersRouter.post("/", async (req, res) => {
-    console.log(req.body);
-    const { email, password, passwordConfirmation } = req.body;
+    const { email, password, passwordConfirmation, preferences } = req.body;
     try {
         const persistedUser = await User.query().insertAndFetch({ email, password });
+        await AddToPreferences.addPreferencesArray(preferences, persistedUser);
         return req.login(persistedUser, () => {
             return res.status(201).json({ user: persistedUser });
         });

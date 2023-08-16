@@ -9,7 +9,6 @@ const RegistrationForm = () => {
         passwordConfirmation: "",
         preferences: [],
     });
-    console.log(userPayload);
 
     const [errors, setErrors] = useState({});
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -51,20 +50,15 @@ const RegistrationForm = () => {
     };
 
     const onPreferencesChange = (event) => {
-        const selectedPreferences = [...userPayload.preferences];
-
-        if (event.target.value) {
-            selectedPreferences.push(event.target.value);
-        } else {
-            const index = selectedPreferences.indexOf(event.target.value);
-            if (index !== -1) {
-                selectedPreferences.splice(index, 1);
-            }
-        }
+        const enteredValue = event.target.value;
+        const newPreferences = enteredValue
+            .split(",")
+            .map((pref) => pref.trim())
+            .filter((pref) => pref !== "");
 
         setUserPayload({
             ...userPayload,
-            preferences: selectedPreferences,
+            preferences: newPreferences,
         });
     };
 
@@ -157,7 +151,7 @@ const RegistrationForm = () => {
                                 placeholder="Golfing, Pottery, Parks, Restaurants, Breweries...."
                                 onChange={onPreferencesChange}
                             />
-                            <FormError error={errors.passwordConfirmation} />
+                            <FormError error={errors.preferences} />
                         </label>
                     </div>
                     <div>
