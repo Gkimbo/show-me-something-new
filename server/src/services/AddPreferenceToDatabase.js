@@ -1,22 +1,20 @@
-import { Preference, UserPreference } from "../src/models/index.js";
+import { Preference, UserPreference } from "../models/index.js";
 
-class AddToPreferences {
+class AddPreferenceToDatabase {
     static async addPreferencesArray(array, persistedUser) {
         for (const eachPreference of array) {
+            const lowerCasePreference = eachPreference.toLowerCase();
             const currentPreference = await Preference.query().findOne({
-                name: eachPreference,
+                name: lowerCasePreference,
             });
             if (!currentPreference) {
                 await persistedUser.$relatedQuery("preferences").insert({ name: eachPreference });
             } else {
-                await UserPreference.query().insert({
-                    preferenceId: currentPreference.id,
-                    userId: persistedUser.id,
-                });
+                await currentPreference.$relatedQuery("users").relate(persistedUser);
             }
         }
         return true;
     }
 }
 
-export default AddToPreferences;
+export default AddPreferenceToDatabase;

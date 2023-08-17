@@ -14,4 +14,14 @@ popularDestinationRouter.get("/", async (req, res) => {
     }
 });
 
+popularDestinationRouter.get("/:city", async (req, res) => {
+    try {
+        const city = await CityClientApi.getOneCity(req.params.city);
+        const serializedCity = await CitySerializer.getSummaryOfArray(city);
+        return res.status(200).json({ city: serializedCity[0] });
+    } catch (error) {
+        return res.status(500).json({ errors: error });
+    }
+});
+
 export default popularDestinationRouter;

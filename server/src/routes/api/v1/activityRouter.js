@@ -1,22 +1,25 @@
 import express from "express";
 import { Preference, User } from "../../../models/index.js";
+import PreferenceSerializer from "../../../../serializers/PreferenceSerializer.js";
 
 const activityRouter = new express.Router();
 
 activityRouter.get("/", async (req, res) => {
     try {
-        const allActivities = await Preference.query();
-        return res.status(200).json({ activities: allActivities });
+        const allPreferences = await Preference.query();
+        const serializedUserPreferences = PreferenceSerializer.getSummaryOfArray(allPreferences);
+        return res.status(200).json({ activities: serializedUserPreferences });
     } catch (error) {
         return res.status(500).json({ errors: error });
     }
 });
 
-activityRouter.get("/:myActivities", async (req, res) => {
+activityRouter.get("/:my-activities", async (req, res) => {
     try {
         const currentUser = await User.query().findById(req.user.id);
-        const customActivities = await currentUser.$relatedQuery("preferences");
-        return res.status(200).json({ activities: customActivities });
+        const customPreferences = await currentUser.$relatedQuery("preferences");
+        const serializedUserPreferences = PreferenceSerializer.getSummaryOfArray(customPreferences);
+        return res.status(200).json({ activities: serializedUserPreferences });
     } catch (error) {
         return res.status(500).json({ errors: error });
     }

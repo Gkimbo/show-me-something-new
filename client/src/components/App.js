@@ -10,7 +10,9 @@ import TopBar from "./layout/TopBar";
 import LandingPage from "./LandingPage";
 import HomePage from "./HomePage";
 import ActivitiesAroundMeMap from "./ActivitiesAroundMeMap";
-import ActivityShowPage from "./ActivityShowPage";
+import CustomMap from "./CustomMap";
+import CityMap from "./CityMap";
+import UpdatePreferences from "./UpdatePreferences";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,7 +34,9 @@ const App = (props) => {
             <TopBar user={currentUser} />
             <Switch>
                 <Route exact path="/" component={currentUser ? HomePage : LandingPage} />
-                <Route exact path="/myActivities" component={ActivityShowPage} />
+                <Route exact path="/my-activities" component={CustomMap} />
+                <Route exact path="/manage-preferences" component={UpdatePreferences} />
+                <Route exact path="/:name" component={CityMap} />
                 <Route exact path="/activity/map" component={ActivitiesAroundMeMap} />
                 <Route exact path="/activity/:name" component={ActivitiesAroundMeMap} />
                 <Route exact path="/users/new" component={RegistrationForm} />

@@ -60,7 +60,7 @@ h5 {
 
 .top-bar .menu {
     background-color: var(--top-bar-color);
-    padding: 0 7rem;
+    padding: 0 3rem;
 }
 
 .button-1 {
@@ -157,6 +157,8 @@ h5 {
     border-radius: 10px;
     text-align: center;
     overflow: scroll;
+    width: 35vw;
+    height: 50vw;
 }
 
 .container-4-map {
@@ -275,9 +277,14 @@ h5 {
     width: 5rem;
     margin: 5%;
     padding-top: 1.5%;
-    border: 3px solid #094067;
+    border: 2px solid #094067;
     border-radius: 10px;
     text-align: center;
+    color: #094067;
+    padding-top: 1.5rem;
+}
+.tile-container-activities:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .tile-container {
@@ -286,6 +293,8 @@ h5 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    height: 10rem;
+    width: 10rem;
     margin: 3%;
     padding: 2%;
     border: 1px solid #094067;
@@ -295,7 +304,15 @@ h5 {
     overflow: hidden;
 }
 
+.tile-container:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
 #preferences {
     width: 20rem;
     height: 10rem;
+}
+
+.sign-out-button {
+    margin-right: 4rem;
 }

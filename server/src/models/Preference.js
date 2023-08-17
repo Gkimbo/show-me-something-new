@@ -7,7 +7,7 @@ class Preference extends Model {
     static get relationMappings() {
         const { User, UserPreference } = require("./index.js");
         return {
-            preferences: {
+            users: {
                 relation: Model.ManyToManyRelation,
                 modelClass: User,
                 join: {
