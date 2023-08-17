@@ -8,7 +8,7 @@ const HomePage = (props) => {
         <div className="grid-x home-page-div">
             <div className="cell small-12">
                 <div className="container-button">
-                    <Link to="/myActivities" className="button-1">
+                    <Link to="/my-activities" className="button-1">
                         Click Me for things to do!
                     </Link>
                 </div>

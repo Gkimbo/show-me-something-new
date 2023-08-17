@@ -23,6 +23,23 @@ class CityClientApi {
         }
     }
 
+    static async getOneCity(name) {
+        const baseUrl = "https://api.api-ninjas.com";
+        try {
+            const apiResponse = await got({
+                url: `${baseUrl}/v1/city?name=${name}`,
+                headers: {
+                    "X-Api-Key": `${cityApiKey}`,
+                },
+            });
+            const responseBody = apiResponse.body;
+            const parsedData = JSON.parse(responseBody);
+            return parsedData;
+        } catch (error) {
+            return { error: error.message };
+        }
+    }
+
     static async getCityPhotos(city) {
         const baseUrl = "https://api.unsplash.com/search/";
         try {

@@ -1,47 +1,33 @@
 import React, { useEffect, useState } from "react";
 import PopularDestinationTile from "./PopularDestinationTile";
+import GetDestination from "../services/GetDestination";
 
 const PopularDestinationList = (props) => {
-    const [popularDestinations, setPopularDestinations] = useState([])
-
-    const getDestinations = async () => {
-        try {
-            const response = await fetch("/api/v1/destinations")
-            if(!response){
-                const error = new Error(`${response.status} (${response.statusText})`)
-                throw error
-            }
-            const responseData = await response.json()
-            setPopularDestinations(responseData.cities)
-        } catch (error) {
-            console.error("Error in fetch!", error.message)
-        }
-    } 
+    const [popularDestinations, setPopularDestinations] = useState([]);
 
     useEffect(() => {
-        getDestinations()
-    }, [])
+        GetDestination.getDestinations().then((destinations) => {
+            setPopularDestinations(destinations);
+        });
+    }, []);
 
-    const listDestinations = popularDestinations.map(destination => {
-        return(
-            <PopularDestinationTile 
+    const listDestinations = popularDestinations.map((destination) => {
+        return (
+            <PopularDestinationTile
                 key={destination.name}
                 name={destination.name}
                 photo={destination.url}
             />
-        )
-        
-    })
-    return(
+        );
+    });
+    return (
         <div className="container">
             <h1>Popular destinations</h1>
             <div className="slider">
-            <div className="slide-track">
-                {listDestinations}
-            </div>
+                <div className="slide-track">{listDestinations}</div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PopularDestinationList
+export default PopularDestinationList;

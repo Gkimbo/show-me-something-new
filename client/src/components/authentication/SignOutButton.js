@@ -1,39 +1,39 @@
 import React, { useState } from "react";
 
 const SignOutButton = () => {
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const signOut = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch("/api/v1/user-sessions", {
-        method: "delete",
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-      });
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`;
-        const error = new Error(errorMessage);
-        throw error;
-      }
-      const respBody = await response.json();
-      setShouldRedirect(true);
-      return { status: "ok" };
-    } catch (err) {
-      console.error(`Error in fetch: ${err.message}`);
+    const signOut = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("/api/v1/user-sessions", {
+                method: "delete",
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+            });
+            if (!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`;
+                const error = new Error(errorMessage);
+                throw error;
+            }
+            const respBody = await response.json();
+            setShouldRedirect(true);
+            return { status: "ok" };
+        } catch (err) {
+            console.error(`Error in fetch: ${err.message}`);
+        }
+    };
+
+    if (shouldRedirect) {
+        location.href = "/";
     }
-  };
 
-  if (shouldRedirect) {
-    location.href = "/";
-  }
-
-  return (
-    <a type="button" className="button-1" onClick={signOut}>
-      Sign Out
-    </a>
-  );
+    return (
+        <a type="button" className="button-1 sign-out-button" onClick={signOut}>
+            Sign Out
+        </a>
+    );
 };
 
 export default SignOutButton;

@@ -2,7 +2,7 @@ import CityClientApi from "../src/apiClient/CityClientApi.js";
 
 class CitySerializer {
     static async getSummaryOfArray(array) {
-        const allowedAttributes = ["name"];
+        const allowedAttributes = ["name", "latitude", "longitude"];
         const serializedCities = await Promise.all(
             array.map(async (city) => {
                 const eachCitySerialized = {};

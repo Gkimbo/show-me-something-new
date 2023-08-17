@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from "react";
+import GetActivity from "../services/GetActivity";
 import ActivityTile from "./ActivityTile";
 
 const ActivitiesList = (props) => {
     const [activities, setActivities] = useState([]);
 
-    const getActivities = async () => {
-        try {
-            const response = await fetch("/api/v1/activity");
-            if (!response) {
-                const error = new Error(`${response.status} (${response.statusText})`);
-                throw error;
-            }
-            const responseData = await response.json();
-            setActivities(responseData.activities);
-        } catch (error) {
-            console.error("Error in fetch", error.message);
-        }
-    };
-
     useEffect(() => {
-        getActivities();
+        GetActivity.getAllActivities().then((activities) => {
+            setActivities(activities);
+        });
     }, []);
 
     const activitiesList = activities.map((activity) => {
