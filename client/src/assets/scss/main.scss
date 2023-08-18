@@ -61,6 +61,11 @@ h5 {
 .top-bar .menu {
     background-color: var(--top-bar-color);
     padding: 0 3rem;
+    height: 50%;
+}
+
+.city-img {
+    border-radius: 10px;
 }
 
 .button-1 {
@@ -109,9 +114,9 @@ h5 {
     width: 75%;
     margin: 5% auto;
     padding: 5%;
-    border: 3px solid #094067;
+    border: 2px solid #094067;
     color: #000000;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -121,13 +126,13 @@ h5 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: fit-content;
+    height: 83%;
     width: 75%;
     margin: 5% auto;
     padding: 5%;
-    border: 3px solid #094067;
+    border: 2px solid #094067;
     color: #000000;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
     overflow: scroll;
 }
@@ -143,16 +148,14 @@ h5 {
     padding: 5%;
     border: 3px solid #094067;
     color: #000000;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
 }
 
 .container-4 {
     font-family: var(--font-family);
     align-items: center;
-    height: 100vw;
-    width: 100%;
-    margin: 0 auto;
+    margin: 1% auto;
     color: #000000;
     border-radius: 10px;
     text-align: center;
@@ -189,7 +192,7 @@ h5 {
     padding: 5%;
     border: 3px solid #094067;
     color: #000000;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -268,6 +271,7 @@ h5 {
 
 .activity-title {
     text-align: center;
+    align-items: center;
 }
 
 .tile-container-activities {
@@ -295,11 +299,11 @@ h5 {
     align-items: center;
     height: 10rem;
     width: 10rem;
-    margin: 3%;
+    margin: 5%;
     padding: 2%;
     border: 1px solid #094067;
     color: #000000;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
     overflow: hidden;
 }
@@ -315,4 +319,9 @@ h5 {
 
 .sign-out-button {
     margin-right: 4rem;
+}
+
+.search-bar {
+    max-width: 50%;
+    margin: 1% auto;
 }

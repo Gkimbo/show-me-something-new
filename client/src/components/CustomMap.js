@@ -6,8 +6,10 @@ import LocationSearchBar from "./LocationSearchBar";
 
 const CustomMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
+    const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [markerLocation, setMarkerLocation] = useState();
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -31,6 +33,10 @@ const CustomMap = (props) => {
         }
     };
     const currentLocation = chosenLocation;
+    const centerMapOnMarker = (marker) => {
+        setMarkerLocation(marker);
+    };
+
     useEffect(() => {
         setError("");
         loader.load().then(() => {
@@ -68,11 +74,17 @@ const CustomMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
+                        if (openInfoWindow) {
+                            openInfoWindow.close();
+                        }
                         infowindow.open({
                             anchor: marker,
                             map,
                         });
+                        setOpenInfoWindow(infowindow);
+                        map.panTo(marker.getPosition());
                     });
+                    map.panTo(markerLocation);
                 });
             };
 
@@ -105,14 +117,19 @@ const CustomMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
+            <div className="cell small-12 activity-title">
+                <h1>What you like near you!</h1>
+                <LocationSearchBar setChosenLocation={setChosenLocation} />
+            </div>
             <div className="cell small-12 medium-6 container-4">
-                <div className="cell small-12">
-                    <h1>What you like near you!</h1>
-                </div>
-                <ResultList searchResults={searchResults} />
+                <div className="cell small-12"></div>
+                <ResultList
+                    searchResults={searchResults}
+                    centerMapOnMarker={centerMapOnMarker}
+                    markerLocation={markerLocation}
+                />
             </div>
             <div className="cell small-12 medium-6 ">
-                <LocationSearchBar setChosenLocation={setChosenLocation} />
                 <div id="map" className="container-4-map"></div>
             </div>
         </div>

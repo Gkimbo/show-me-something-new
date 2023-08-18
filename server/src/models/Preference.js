@@ -4,6 +4,15 @@ class Preference extends Model {
     static get tableName() {
         return "preferences";
     }
+    static get jsonSchema() {
+        return {
+            type: "object",
+            required: ["name"],
+            properties: {
+                name: { type: "string" },
+            },
+        };
+    }
     static get relationMappings() {
         const { User, UserPreference } = require("./index.js");
         return {

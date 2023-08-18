@@ -2,8 +2,11 @@ import express from "express";
 import passport from "passport";
 import { User } from "../../../models/index.js";
 import AddPreferenceToDatabase from "../../../services/AddPreferenceToDatabase.js";
+import userPreferencesRouter from "./userPreferencesRouter.js";
 
 const usersRouter = new express.Router();
+
+usersRouter.use("/preferences", userPreferencesRouter);
 
 usersRouter.post("/", async (req, res) => {
     const { email, password, passwordConfirmation, preferences } = req.body;

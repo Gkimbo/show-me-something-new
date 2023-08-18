@@ -4,11 +4,13 @@ import { Loader } from "@googlemaps/js-api-loader";
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
 import GetDestination from "../services/GetDestination";
+import LocationSearchBar from "./LocationSearchBar";
 
 const CityMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState({ lat: 42.361, lng: -71.057 });
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [markerLocation, setMarkerLocation] = useState();
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -19,6 +21,9 @@ const CityMap = (props) => {
     let currentLocation = {
         lat: chosenLocation.latitude,
         lng: chosenLocation.longitude,
+    };
+    const centerMapOnMarker = (marker) => {
+        setMarkerLocation(marker);
     };
 
     useEffect(() => {
@@ -98,11 +103,17 @@ const CityMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
+            <div className="cell small-12 activity-title">
+                <h1>{`What you like in ${props.match.params.name}!`}</h1>
+                <LocationSearchBar setChosenLocation={setChosenLocation} />
+            </div>
             <div className="cell small-12 medium-6 container-4">
-                <div className="cell small-12">
-                    <h1>{`What you like in ${props.match.params.name}!`}</h1>
-                </div>
-                <ResultList searchResults={searchResults} />
+                <div className="cell small-12"></div>
+                <ResultList
+                    searchResults={searchResults}
+                    centerMapOnMarker={centerMapOnMarker}
+                    markerLocation={markerLocation}
+                />
             </div>
             <div className="cell small-12 medium-6 ">
                 <div id="map" className="container-4-map"></div>

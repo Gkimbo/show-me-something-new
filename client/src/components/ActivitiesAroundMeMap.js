@@ -8,7 +8,9 @@ const ActivitiesAroundMeMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
     const [searchQuery, setSearchQuery] = useState(props.match.params.name);
     const [searchResults, setSearchResults] = useState([]);
+    const [markerLocation, setMarkerLocation] = useState();
     const [error, setError] = useState("");
+    console.log(searchResults);
 
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
@@ -30,6 +32,9 @@ const ActivitiesAroundMeMap = (props) => {
         }
     };
     const currentLocation = chosenLocation;
+    const centerMapOnMarker = (marker) => {
+        setMarkerLocation(marker);
+    };
 
     useEffect(() => {
         setError("");
@@ -99,16 +104,19 @@ const ActivitiesAroundMeMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
+            <div className="cell small-12 activity-title">
+                <h1>What you like near you!</h1>
+                <LocationSearchBar setChosenLocation={setChosenLocation} />
+            </div>
             <div className="cell small-12 medium-6 container-4">
-                <div className="cell small-12">
-                    <h1>{props.match.params.name} near you!</h1>
-                </div>
-                <ResultList searchResults={searchResults} />
+                <div className="cell small-12"></div>
+                <ResultList
+                    searchResults={searchResults}
+                    centerMapOnMarker={centerMapOnMarker}
+                    markerLocation={markerLocation}
+                />
             </div>
             <div className="cell small-12 medium-6 ">
-                {!currentLocation ? (
-                    <LocationSearchBar setChosenLocation={setChosenLocation} />
-                ) : null}
                 <div id="map" className="container-4-map"></div>
             </div>
         </div>
