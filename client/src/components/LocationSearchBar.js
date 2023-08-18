@@ -30,6 +30,7 @@ const LocationSearchBar = ({ setChosenLocation }) => {
                 <input
                     type="text"
                     name="search-bar"
+                    className="search-bar"
                     value={searchBarInput}
                     placeholder="Boston"
                     onChange={handleChange}
