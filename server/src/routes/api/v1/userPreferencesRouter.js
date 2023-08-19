@@ -3,6 +3,7 @@ import { ValidationError } from "objection";
 import { Preference, UserPreference, User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import AddPreferenceToDatabase from "../../../services/AddPreferenceToDatabase.js";
+import PreferenceSerializer from "../../../../serializers/PreferenceSerializer.js";
 
 const userPreferencesRouter = new express.Router({ mergeParams: true });
 
@@ -12,7 +13,8 @@ userPreferencesRouter.post("/", async (req, res) => {
         const user = await User.query().findOne({ id: req.user.id });
         await AddPreferenceToDatabase.addOnePreference(name, user);
         const preferences = await user.$relatedQuery("preferences");
-        return res.status(201).json({ preferences });
+        const serializedPreferences = PreferenceSerializer.getSummaryOfArray(preferences);
+        return res.status(201).json({ preferences: serializedPreferences });
     } catch (error) {
         console.log(error);
         return res.status(422).json({ errors: error });
@@ -46,7 +48,8 @@ userPreferencesRouter.patch("/:preferenceId", async (req, res) => {
         const user = await User.query().findOne({ id: req.user.id });
         await AddPreferenceToDatabase.addOnePreference(editedPreference.name, user);
         const preference = await Preference.query().findOne({ name: lowercasePreference });
-        return res.status(201).json(preference);
+        const serializedPreference = PreferenceSerializer.getSummaryOfOne(preference);
+        return res.status(201).json(serializedPreference);
     } catch (error) {
         if (error instanceof ValidationError) {
             return res.status(422).json({ errors: error.data });

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GetDestination from "../services/GetDestination";
+import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
 const LocationSearchBar = ({ setChosenLocation }) => {
     const [searchBarInput, setSearchBarInput] = useState("");
@@ -27,17 +28,29 @@ const LocationSearchBar = ({ setChosenLocation }) => {
         <form onSubmit={handelSubmit}>
             <label htmlFor="search-bar">
                 Type in a city you'd like to see!
-                <input
-                    type="text"
-                    name="search-bar"
-                    className="search-bar"
-                    value={searchBarInput}
-                    placeholder="Boston"
-                    onChange={handleChange}
-                />
+                <InputGroup size="md">
+                    <Input
+                        pr="4.5rem"
+                        type="text"
+                        placeholder="Type new city"
+                        onChange={handleChange}
+                    />
+                    <InputRightElement width="4.5rem">
+                        <Button
+                            type="submit"
+                            size="md"
+                            height="20px"
+                            width="400px"
+                            border="1px"
+                            borderColor="blue.500"
+                            marginRight="1rem"
+                        >
+                            Search
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
             </label>
             {error ? <p>Please enter a valid city!</p> : null}
-            <input type="submit" className="button-1" />
         </form>
     );
 };

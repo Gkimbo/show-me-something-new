@@ -9,6 +9,7 @@ const UpdatePreferences = (props) => {
     const [customActivities, setCustomActivities] = useState([]);
     const [editForm, setEditForm] = useState(false);
     const [preference, setPreference] = useState([]);
+    console.log(customActivities);
 
     useEffect(() => {
         GetActivity.getCustomActivities().then((activityData) => {
@@ -27,7 +28,7 @@ const UpdatePreferences = (props) => {
         ModifyPreferences.editPreference(id, newEditedPreference).then((response) => {
             const addEditedPreference = customActivities.map((preference) => {
                 if (preference.id === id) {
-                    preference.name = response.name;
+                    preference = response;
                 }
                 return preference;
             });
@@ -80,13 +81,10 @@ const UpdatePreferences = (props) => {
                 <div className="container">
                     <div className="change-forms">
                         {!editForm && (
-                            <>
-                                <h3>Add a new preference!</h3>
-                                <AddPreferenceForm
-                                    preference={preference}
-                                    onAddPreference={onAddPreference}
-                                />
-                            </>
+                            <AddPreferenceForm
+                                preference={preference}
+                                onAddPreference={onAddPreference}
+                            />
                         )}
                         {editForm && (
                             <>
@@ -94,14 +92,20 @@ const UpdatePreferences = (props) => {
                                 <EditPreferenceForm
                                     preference={preference}
                                     changePreference={changePreference}
+                                    setEditForm={setEditForm}
                                 />
-                                <button className="button" onClick={handleNewPreferenceButton}>
-                                    Add a new preference
-                                </button>
                             </>
                         )}
                     </div>
                 </div>
+                {editForm && (
+                    <div
+                        className="button-toggle cell small-12"
+                        onClick={handleNewPreferenceButton}
+                    >
+                        Add new preference
+                    </div>
+                )}
             </div>
         </div>
     );

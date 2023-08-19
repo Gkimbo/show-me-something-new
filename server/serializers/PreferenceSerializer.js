@@ -10,6 +10,15 @@ class PreferenceSerializer {
         });
         return serializedPreferences;
     }
+
+    static getSummaryOfOne(preference) {
+        const allowedAttributes = ["id", "name"];
+        const serializedPreference = {};
+        for (const attribute of allowedAttributes) {
+            serializedPreference[attribute] = preference[attribute];
+        }
+        return serializedPreference;
+    }
 }
 
 export default PreferenceSerializer;

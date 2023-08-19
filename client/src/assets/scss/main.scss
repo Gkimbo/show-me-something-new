@@ -56,6 +56,8 @@ h5 {
 .top-bar {
     background-color: var(--tile-color);
     border-bottom: 3px solid #094067;
+    position: fixed;
+    width: 100%;
 }
 
 .top-bar .menu {
@@ -101,7 +103,154 @@ h5 {
     border: none;
     color: var(--button-text);
     margin: 0 1rem;
-    border-radius: 10px;
+    border-radius: 5px;
+}
+
+.button-delete {
+    --c: rgb(162, 0, 0);
+    /* the color*/
+    box-shadow: 0 0 0 0.1em inset var(--c);
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: var(--_g) calc(var(--_p, 0%) - 100%) 0%, var(--_g) calc(200% - var(--_p, 0%)) 0%,
+        var(--_g) calc(var(--_p, 0%) - 100%) 100%, var(--_g) calc(200% - var(--_p, 0%)) 100%;
+    background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+    outline-offset: 0.1em;
+    transition: background-size 0.2s, background-position 0s 0.2s;
+}
+
+.button-delete:hover {
+    --_p: 100%;
+    transition: background-position 0.2s, background-size 0s;
+    color: var(--button-text-second);
+}
+
+.button-delete:active {
+    box-shadow: 0 0 9e9Q inset #0009;
+    background-color: var(--c);
+    color: var(--button-text-second);
+}
+
+.button-delete {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.1em 0.6em;
+    font-weight: bold;
+    border: none;
+    color: var(--button-text);
+    margin: 0 1rem;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.button-edit {
+    --c: rgb(19, 162, 0);
+    /* the color*/
+    box-shadow: 0 0 0 0.1em inset var(--c);
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: var(--_g) calc(var(--_p, 0%) - 100%) 0%, var(--_g) calc(200% - var(--_p, 0%)) 0%,
+        var(--_g) calc(var(--_p, 0%) - 100%) 100%, var(--_g) calc(200% - var(--_p, 0%)) 100%;
+    background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+    outline-offset: 0.1em;
+    transition: background-size 0.2s, background-position 0s 0.2s;
+}
+
+.button-edit:hover {
+    --_p: 100%;
+    transition: background-position 0.2s, background-size 0s;
+    color: var(--button-text-second);
+}
+
+.button-edit:active {
+    box-shadow: 0 0 9e9Q inset #0009;
+    background-color: var(--c);
+    color: var(--button-text-second);
+}
+
+.button-edit {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.1em 0.6em;
+    font-weight: bold;
+    border: none;
+    color: var(--button-text);
+    margin: 0 1rem;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.button-add {
+    --c: var(--button-color);
+    /* the color*/
+    box-shadow: 0 0 0 0.1em inset var(--c);
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: var(--_g) calc(var(--_p, 0%) - 100%) 0%, var(--_g) calc(200% - var(--_p, 0%)) 0%,
+        var(--_g) calc(var(--_p, 0%) - 100%) 100%, var(--_g) calc(200% - var(--_p, 0%)) 100%;
+    background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+    outline-offset: 0.1em;
+    transition: background-size 0.2s, background-position 0s 0.2s;
+}
+
+.button-add:hover {
+    --_p: 100%;
+    transition: background-position 0.2s, background-size 0s;
+    color: var(--button-text-second);
+}
+
+.button-add:active {
+    box-shadow: 0 0 9e9Q inset #0009;
+    background-color: var(--c);
+    color: var(--button-text-second);
+}
+
+.button-add {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.1em 0.6em;
+    font-weight: bold;
+    border: none;
+    color: var(--button-text);
+    margin: 2px auto;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.button-toggle {
+    --c: #0606ff;
+    /* the color*/
+    box-shadow: 0 0 0 0.1em inset var(--c);
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: var(--_g) calc(var(--_p, 0%) - 100%) 0%, var(--_g) calc(200% - var(--_p, 0%)) 0%,
+        var(--_g) calc(var(--_p, 0%) - 100%) 100%, var(--_g) calc(200% - var(--_p, 0%)) 100%;
+    background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+    outline-offset: 0.1em;
+    transition: background-size 0.2s, background-position 0s 0.2s;
+}
+
+.button-toggle:hover {
+    --_p: 100%;
+    transition: background-position 0.2s, background-size 0s;
+    color: var(--button-text-second);
+}
+
+.button-toggle:active {
+    box-shadow: 0 0 9e9Q inset #0009;
+    background-color: var(--c);
+    color: var(--button-text-second);
+}
+
+.button-toggle {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.1em 0.6em;
+    font-weight: bold;
+    border: none;
+    color: var(--button-text);
+    margin: 5px auto;
+    border-radius: 5px;
 }
 
 .container {
@@ -233,12 +382,14 @@ h5 {
     width: 300px;
     height: 300px;
     margin: 0 25px;
+    text-align: center;
 }
 
 .slide img {
     width: 250px;
     height: 150px;
     object-fit: cover;
+    margin: 0 auto;
 }
 
 .list-destinations {
@@ -272,6 +423,7 @@ h5 {
 .activity-title {
     text-align: center;
     align-items: center;
+    margin-top: 10%;
 }
 
 .tile-container-activities {
@@ -324,4 +476,8 @@ h5 {
 .search-bar {
     max-width: 50%;
     margin: 1% auto;
+}
+
+.container-button {
+    margin-top: 10%;
 }

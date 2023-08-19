@@ -8,9 +8,16 @@ class AddPreferenceToDatabase {
                 name: lowerCasePreference,
             });
             if (!currentPreference) {
-                await persistedUser.$relatedQuery("preferences").insert({ name: eachPreference });
+                await user.$relatedQuery("preferences").insert({ name: lowerCasePreference.name });
             } else {
-                await currentPreference.$relatedQuery("users").relate(persistedUser);
+                const check = await user
+                    .$relatedQuery("preferences")
+                    .findById(currentPreference.id);
+                if (!check) {
+                    await currentPreference.$relatedQuery("users").relate(user);
+                } else {
+                    return false;
+                }
             }
         }
         return true;
@@ -24,7 +31,12 @@ class AddPreferenceToDatabase {
         if (!currentPreference) {
             await user.$relatedQuery("preferences").insert({ name: lowerCasePreference });
         } else {
-            await currentPreference.$relatedQuery("users").relate(user);
+            const check = await user.$relatedQuery("preferences").findById(currentPreference.id);
+            if (!check) {
+                await currentPreference.$relatedQuery("users").relate(user);
+            } else {
+                return false;
+            }
         }
         return true;
     }
