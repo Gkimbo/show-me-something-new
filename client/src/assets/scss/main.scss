@@ -58,6 +58,7 @@ h5 {
     border-bottom: 3px solid #094067;
     position: fixed;
     width: 100%;
+    z-index: 99;
 }
 
 .top-bar .menu {
@@ -293,7 +294,7 @@ h5 {
     align-items: center;
     height: fit-content;
     width: 75%;
-    margin: 5% auto;
+    margin: 7% auto;
     padding: 5%;
     border: 3px solid #094067;
     color: #000000;
@@ -350,6 +351,11 @@ h5 {
 }
 
 .landing-page-description {
+    text-align: center;
+}
+
+.landing-page {
+    margin-top: 7%;
     text-align: center;
 }
 
@@ -423,16 +429,13 @@ h5 {
 .activity-title {
     text-align: center;
     align-items: center;
-    margin-top: 10%;
 }
 
 .tile-container-activities {
     font-family: var(--font-family);
-    display: inline-block;
+    text-align: center;
     height: 5rem;
     width: 5rem;
-    margin: 5%;
-    padding-top: 1.5%;
     border: 2px solid #094067;
     border-radius: 10px;
     text-align: center;
@@ -480,4 +483,18 @@ h5 {
 
 .container-button {
     margin-top: 10%;
+    background-image: url("http://d2ouvy59p0dg6k.cloudfront.net/img/people_and_nature_701917.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 25rem;
+    border-radius: 10px;
+    border: 2px solid #094067;
+}
+.container-button .button-1 {
+    margin-bottom: 50%;
+    background-color: #ffffff;
+}
+
+.form-error {
+    margin-top: 5%;
 }

@@ -16,7 +16,6 @@ userPreferencesRouter.post("/", async (req, res) => {
         const serializedPreferences = PreferenceSerializer.getSummaryOfArray(preferences);
         return res.status(201).json({ preferences: serializedPreferences });
     } catch (error) {
-        console.log(error);
         return res.status(422).json({ errors: error });
     }
 });
@@ -31,7 +30,6 @@ userPreferencesRouter.delete("/:preferenceId", async (req, res) => {
         await userPreferenceToDelete.$query().delete();
         return res.status(200).json({ preference: preferenceToDelete });
     } catch (err) {
-        console.log(err);
         return res.status(500).json({ errors: err });
     }
 });

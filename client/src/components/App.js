@@ -2,16 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 import { ChakraProvider } from "@chakra-ui/react";
-// `@chakra-ui/theme` is a part of the base install with `@chakra-ui/react`
-// import chakraTheme from "@chakra-ui/theme";
-
-// const { Button } = chakraTheme.components;
-
-// const theme = extendBaseTheme({
-//     components: {
-//         Button,
-//     },
-// });
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
