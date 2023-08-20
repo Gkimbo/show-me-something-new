@@ -1,16 +1,23 @@
 import { Preference, UserPreference } from "../models/index.js";
 
 class AddPreferenceToDatabase {
-    static async addPreferencesArray(array, persistedUser) {
+    static async addPreferencesArray(array, user) {
         for (const eachPreference of array) {
             const lowerCasePreference = eachPreference.toLowerCase();
             const currentPreference = await Preference.query().findOne({
                 name: lowerCasePreference,
             });
             if (!currentPreference) {
-                await persistedUser.$relatedQuery("preferences").insert({ name: eachPreference });
+                await user.$relatedQuery("preferences").insert({ name: lowerCasePreference });
             } else {
-                await currentPreference.$relatedQuery("users").relate(persistedUser);
+                const check = await user
+                    .$relatedQuery("preferences")
+                    .findById(currentPreference.id);
+                if (!check) {
+                    await currentPreference.$relatedQuery("users").relate(user);
+                } else {
+                    return false;
+                }
             }
         }
         return true;
@@ -24,7 +31,12 @@ class AddPreferenceToDatabase {
         if (!currentPreference) {
             await user.$relatedQuery("preferences").insert({ name: lowerCasePreference });
         } else {
-            await currentPreference.$relatedQuery("users").relate(user);
+            const check = await user.$relatedQuery("preferences").findById(currentPreference.id);
+            if (!check) {
+                await currentPreference.$relatedQuery("users").relate(user);
+            } else {
+                return false;
+            }
         }
         return true;
     }

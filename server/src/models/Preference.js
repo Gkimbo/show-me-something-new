@@ -1,6 +1,12 @@
 const Model = require("./Model.js");
 
-class Preference extends Model {
+const uniqueFactory = require("objection-unique");
+
+const unique = uniqueFactory({
+    fields: ["name"],
+});
+
+class Preference extends unique(Model) {
     static get tableName() {
         return "preferences";
     }

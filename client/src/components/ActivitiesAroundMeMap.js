@@ -10,7 +10,6 @@ const ActivitiesAroundMeMap = (props) => {
     const [searchResults, setSearchResults] = useState([]);
     const [markerLocation, setMarkerLocation] = useState();
     const [error, setError] = useState("");
-    console.log(searchResults);
 
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",

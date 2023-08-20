@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
+
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
 import LocationSearchBar from "./LocationSearchBar";
 
 const CustomMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
-    const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [markerLocation, setMarkerLocation] = useState();
@@ -74,17 +74,11 @@ const CustomMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
-                        if (openInfoWindow) {
-                            openInfoWindow.close();
-                        }
                         infowindow.open({
                             anchor: marker,
                             map,
                         });
-                        setOpenInfoWindow(infowindow);
-                        map.panTo(marker.getPosition());
                     });
-                    map.panTo(markerLocation);
                 });
             };
 

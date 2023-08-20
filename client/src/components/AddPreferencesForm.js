@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input, Text } from "@chakra-ui/react";
 
 const AddPreferenceForm = (props) => {
     const [newPreference, setNewPreference] = useState({
@@ -26,16 +27,19 @@ const AddPreferenceForm = (props) => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <input
-                        className="text-box-1"
-                        type="text"
+                    <Text mb="8px">Add a new Preference!</Text>
+                    <Input
                         name="name"
                         onChange={handleInputChange}
+                        focusBorderColor="#094067"
+                        placeholder="Breweries..."
                         value={newPreference.name}
-                        placeholder="Add New Preference"
+                        size="sm"
                     />
                 </label>
-                <input className="button" type="submit" value="Add" />
+                <div className="button-add cell small-12" onClick={handleSubmit}>
+                    Add
+                </div>
             </form>
         </div>
     );

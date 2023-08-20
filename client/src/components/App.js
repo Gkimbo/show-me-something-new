@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
@@ -30,19 +31,21 @@ const App = (props) => {
     }, []);
 
     return (
-        <Router>
-            <TopBar user={currentUser} />
-            <Switch>
-                <Route exact path="/" component={currentUser ? HomePage : LandingPage} />
-                <Route exact path="/my-activities" component={CustomMap} />
-                <Route exact path="/manage-preferences" component={UpdatePreferences} />
-                <Route exact path="/:name" component={CityMap} />
-                <Route exact path="/activity/map" component={ActivitiesAroundMeMap} />
-                <Route exact path="/activity/:name" component={ActivitiesAroundMeMap} />
-                <Route exact path="/users/new" component={RegistrationForm} />
-                <Route exact path="/user-sessions/new" component={SignInForm} />
-            </Switch>
-        </Router>
+        <ChakraProvider>
+            <Router>
+                <TopBar user={currentUser} />
+                <Switch>
+                    <Route exact path="/" component={currentUser ? HomePage : LandingPage} />
+                    <Route exact path="/my-activities" component={CustomMap} />
+                    <Route exact path="/manage-preferences" component={UpdatePreferences} />
+                    <Route exact path="/:name" component={CityMap} />
+                    <Route exact path="/activity/map" component={ActivitiesAroundMeMap} />
+                    <Route exact path="/activity/:name" component={ActivitiesAroundMeMap} />
+                    <Route exact path="/users/new" component={RegistrationForm} />
+                    <Route exact path="/user-sessions/new" component={SignInForm} />
+                </Switch>
+            </Router>
+        </ChakraProvider>
     );
 };
 

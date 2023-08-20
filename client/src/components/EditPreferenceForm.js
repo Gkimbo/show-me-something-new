@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EditPreferenceForm = ({ changePreference, preference }) => {
+const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
         name: "",
     });
@@ -14,7 +14,7 @@ const EditPreferenceForm = ({ changePreference, preference }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        changePreference({ ...newPreference });
+        changePreference(newPreference);
         clearForm();
     };
 
@@ -22,6 +22,7 @@ const EditPreferenceForm = ({ changePreference, preference }) => {
         setNewPreference({
             name: "",
         });
+        setEditForm(false);
     };
 
     return (
@@ -37,7 +38,9 @@ const EditPreferenceForm = ({ changePreference, preference }) => {
                         placeholder="Edit Your preference!"
                     />
                 </label>
-                <input className="button" type="submit" value="Edit" />
+                <div className="button-add cell small-12" onClick={handleSubmit}>
+                    Edit
+                </div>
             </form>
         </div>
     );
