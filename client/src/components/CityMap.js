@@ -106,7 +106,9 @@ const CityMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
+
                 <h1>{`What you like in ${props.computedMatch.params.name}!`}</h1>
+
                 <LocationSearchBar setChosenLocation={setChosenLocation} />
             </div>
             <div className="cell small-12 medium-6 container-4">
