@@ -111,7 +111,7 @@ const CustomMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
-            <div className="cell small-12 activity-title">
+            <div className="cell small-12 activity-title-1">
                 <h1>What you like near you!</h1>
                 <LocationSearchBar setChosenLocation={setChosenLocation} />
             </div>
