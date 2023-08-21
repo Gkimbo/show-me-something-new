@@ -3,7 +3,7 @@ import { ValidationError } from "objection";
 import { Preference, UserPreference, User } from "../../../models/index.js";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import AddPreferenceToDatabase from "../../../services/AddPreferenceToDatabase.js";
-import PreferenceSerializer from "../../../../serializers/PreferenceSerializer.js";
+import PreferenceSerializer from "../../../serializers/PreferenceSerializer.js";
 
 const userPreferencesRouter = new express.Router({ mergeParams: true });
 

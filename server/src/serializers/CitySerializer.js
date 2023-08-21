@@ -1,4 +1,4 @@
-import CityClientApi from "../src/apiClient/CityClientApi.js";
+import CityClientApi from "../apiClient/CityClientApi.js";
 
 class CitySerializer {
     static async getSummaryOfArray(array) {

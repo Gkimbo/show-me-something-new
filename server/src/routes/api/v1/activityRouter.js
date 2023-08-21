@@ -1,6 +1,6 @@
 import express from "express";
 import { Preference, User } from "../../../models/index.js";
-import PreferenceSerializer from "../../../../serializers/PreferenceSerializer.js";
+import PreferenceSerializer from "../../../serializers/PreferenceSerializer.js";
 
 const activityRouter = new express.Router();
 
