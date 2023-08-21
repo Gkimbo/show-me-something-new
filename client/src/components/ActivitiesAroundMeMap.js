@@ -6,9 +6,9 @@ import LocationSearchBar from "./LocationSearchBar";
 
 const ActivitiesAroundMeMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(props.match.params.name);
+    const [searchQuery, setSearchQuery] = useState(props.computedMatch.params.name);
     const [searchResults, setSearchResults] = useState([]);
-    const [markerLocation, setMarkerLocation] = useState();
+    const [selectedMarker, setSelectedMarker] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -32,7 +32,7 @@ const ActivitiesAroundMeMap = (props) => {
     };
     const currentLocation = chosenLocation;
     const centerMapOnMarker = (marker) => {
-        setMarkerLocation(marker);
+        setSelectedMarker(marker === selectedMarker ? null : marker);
     };
 
     useEffect(() => {
@@ -94,6 +94,7 @@ const ActivitiesAroundMeMap = (props) => {
                     }
                 });
             }
+            setSelectedMarker(null);
         });
     }, [chosenLocation]);
 
@@ -103,7 +104,7 @@ const ActivitiesAroundMeMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
-            <div className="cell small-12 activity-title">
+            <div className="cell small-12 activity-title-1">
                 <h1>What you like near you!</h1>
                 <LocationSearchBar setChosenLocation={setChosenLocation} />
             </div>
@@ -112,7 +113,8 @@ const ActivitiesAroundMeMap = (props) => {
                 <ResultList
                     searchResults={searchResults}
                     centerMapOnMarker={centerMapOnMarker}
-                    markerLocation={markerLocation}
+                    markerLocation={selectedMarker}
+                    setSelectedMarker={setSelectedMarker}
                 />
             </div>
             <div className="cell small-12 medium-6 ">

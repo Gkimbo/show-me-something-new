@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 import { ChakraProvider } from "@chakra-ui/react";
 
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
-import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import LandingPage from "./LandingPage";
 import HomePage from "./HomePage";
@@ -29,20 +29,43 @@ const App = (props) => {
     useEffect(() => {
         fetchCurrentUser();
     }, []);
-
     return (
         <ChakraProvider>
             <Router>
                 <TopBar user={currentUser} />
                 <Switch>
-                    <Route exact path="/" component={currentUser ? HomePage : LandingPage} />
-                    <Route exact path="/my-activities" component={CustomMap} />
-                    <Route exact path="/manage-preferences" component={UpdatePreferences} />
-                    <Route exact path="/:name" component={CityMap} />
-                    <Route exact path="/activity/map" component={ActivitiesAroundMeMap} />
-                    <Route exact path="/activity/:name" component={ActivitiesAroundMeMap} />
+                    <Route exact path="/" component={LandingPage} />
+                    <AuthenticatedRoute
+                        exact={true}
+                        path="/home"
+                        user={currentUser}
+                        component={HomePage}
+                    />
+                    <AuthenticatedRoute
+                        exact={true}
+                        path="/my-activities"
+                        component={CustomMap}
+                        user={currentUser}
+                    />
+                    <AuthenticatedRoute
+                        exact={true}
+                        path="/manage-preferences"
+                        component={UpdatePreferences}
+                        user={currentUser}
+                    />
+                    <AuthenticatedRoute
+                        exact={true}
+                        path="/:name"
+                        component={CityMap}
+                        user={currentUser}
+                    />
+                    <AuthenticatedRoute
+                        exact={true}
+                        path="/activity/:name"
+                        component={ActivitiesAroundMeMap}
+                        user={currentUser}
+                    />
                     <Route exact path="/users/new" component={RegistrationForm} />
-                    <Route exact path="/user-sessions/new" component={SignInForm} />
                 </Switch>
             </Router>
         </ChakraProvider>

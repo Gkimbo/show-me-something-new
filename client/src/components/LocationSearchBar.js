@@ -38,12 +38,14 @@ const LocationSearchBar = ({ setChosenLocation }) => {
                     <InputRightElement width="4.5rem">
                         <Button
                             type="submit"
-                            size="md"
-                            height="20px"
-                            width="400px"
+                            size="lg"
+                            height="25px"
+                            width="600px"
                             border="1px"
                             borderColor="blue.500"
                             marginRight="1rem"
+                            fontSize="small"
+                            borderRadius="3px"
                         >
                             Search
                         </Button>

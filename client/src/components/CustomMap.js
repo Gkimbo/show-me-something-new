@@ -9,7 +9,7 @@ const CustomMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
-    const [markerLocation, setMarkerLocation] = useState();
+    const [selectedMarker, setSelectedMarker] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -34,7 +34,7 @@ const CustomMap = (props) => {
     };
     const currentLocation = chosenLocation;
     const centerMapOnMarker = (marker) => {
-        setMarkerLocation(marker);
+        setSelectedMarker(marker === selectedMarker ? null : marker);
     };
 
     useEffect(() => {
@@ -99,6 +99,7 @@ const CustomMap = (props) => {
                     }
                 });
             });
+            setSelectedMarker(null);
         });
     }, [chosenLocation]);
 
@@ -111,7 +112,7 @@ const CustomMap = (props) => {
 
     return (
         <div className="grid-x home-page-div">
-            <div className="cell small-12 activity-title">
+            <div className="cell small-12 activity-title-1">
                 <h1>What you like near you!</h1>
                 <LocationSearchBar setChosenLocation={setChosenLocation} />
             </div>
@@ -120,7 +121,8 @@ const CustomMap = (props) => {
                 <ResultList
                     searchResults={searchResults}
                     centerMapOnMarker={centerMapOnMarker}
-                    markerLocation={markerLocation}
+                    markerLocation={selectedMarker}
+                    setSelectedMarker={setSelectedMarker}
                 />
             </div>
             <div className="cell small-12 medium-6 ">

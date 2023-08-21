@@ -57,7 +57,6 @@ const RegistrationForm = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        console.log(validateInput(userPayload));
         if (validateInput(userPayload)) {
             makeNewUser(userPayload);
             setShouldRedirect(true);
@@ -72,7 +71,7 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        location.href = "/";
+        location.href = "/home";
     }
 
     return (
