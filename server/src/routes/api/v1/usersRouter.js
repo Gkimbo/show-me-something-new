@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 import { User } from "../../../models/index.js";
 import AddPreferenceToDatabase from "../../../services/AddPreferenceToDatabase.js";
 import userPreferencesRouter from "./userPreferencesRouter.js";

@@ -1,5 +1,4 @@
 import React from "react";
-
 import ResultTile from "./ResultTile";
 
 const ResultList = (props) => {
@@ -8,8 +7,10 @@ const ResultList = (props) => {
             <ResultTile
                 key={result.place_id}
                 result={result}
-                onTileHover={props.centerMapOnMarker}
+                onTileClick={props.centerMapOnMarker}
                 markerLocation={props.markerLocation}
+                setSelectedMarker={props.setSelectedMarker}
+                centerMapOnMarker={props.centerMapOnMarker}
             />
         );
     });

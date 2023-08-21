@@ -1,5 +1,5 @@
 import express from "express";
-import CitySerializer from "../../../../serializers/CitySerializer.js";
+import CitySerializer from "../../../serializers/CitySerializer.js";
 import CityClientApi from "../../../apiClient/CityClientApi.js";
 
 const popularDestinationRouter = new express.Router();

@@ -13,6 +13,11 @@
     -moz-tab-size: 4;
     tab-size: 4;
 }
+// 320px — 480px: Mobile devices
+// 481px — 768px: iPads, Tablets
+// 769px — 1024px: Small screens, laptops
+// 1025px — 1200px: Desktops, large screens
+// 1201px and more —  Extra large screens, TV
 
 :root {
     --font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -31,6 +36,11 @@
     --top-bar-color: transparent;
 }
 
+// @media (min-width: 320px) and (max-width: 769px) {
+//     body {
+//         color: red;
+//     }
+// }
 //define global styles
 body {
     margin: 0;
@@ -432,8 +442,10 @@ h5 {
 }
 
 .activity-title-1 {
-    margin-top: 8%;
+
     text-align: center;
+    align-items: center;
+    margin-top: 7%;
 }
 
 .tile-container-activities {
@@ -502,4 +514,21 @@ h5 {
 
 .form-error {
     margin-top: 5%;
+}
+
+.selected {
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+    background-color: rgb(255, 255, 255);
+    z-index: 99;
+}
+
+.google-maps-marker {
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.tile-text {
+    font-size: x-small;
 }

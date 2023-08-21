@@ -7,10 +7,11 @@ import GetDestination from "../services/GetDestination";
 import LocationSearchBar from "./LocationSearchBar";
 
 const CityMap = (props) => {
+    console.log(props);
     const [chosenLocation, setChosenLocation] = useState({ lat: 42.361, lng: -71.057 });
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
-    const [markerLocation, setMarkerLocation] = useState();
+    const [selectedMarker, setSelectedMarker] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -23,7 +24,7 @@ const CityMap = (props) => {
         lng: chosenLocation.longitude,
     };
     const centerMapOnMarker = (marker) => {
-        setMarkerLocation(marker);
+        setSelectedMarker(marker === selectedMarker ? null : marker);
     };
 
     useEffect(() => {
@@ -89,6 +90,7 @@ const CityMap = (props) => {
                     }
                 });
             });
+            setSelectedMarker(null);
         });
     }, [chosenLocation]);
 
@@ -96,7 +98,7 @@ const CityMap = (props) => {
         GetActivity.getCustomActivities().then((activityData) => {
             setCustomActivities(activityData);
         });
-        GetDestination.getChosenDestination(props.match.params.name).then((destination) => {
+        GetDestination.getChosenDestination(props.computedMatch.params.name).then((destination) => {
             setChosenLocation(destination);
         });
     }, []);
@@ -104,7 +106,9 @@ const CityMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
-                <h1>{`What you like in ${props.match.params.name}!`}</h1>
+
+                <h1>{`What you like in ${props.computedMatch.params.name}!`}</h1>
+
                 <LocationSearchBar setChosenLocation={setChosenLocation} />
             </div>
             <div className="cell small-12 medium-6 container-4">
@@ -112,7 +116,8 @@ const CityMap = (props) => {
                 <ResultList
                     searchResults={searchResults}
                     centerMapOnMarker={centerMapOnMarker}
-                    markerLocation={markerLocation}
+                    markerLocation={selectedMarker}
+                    setSelectedMarker={setSelectedMarker}
                 />
             </div>
             <div className="cell small-12 medium-6 ">

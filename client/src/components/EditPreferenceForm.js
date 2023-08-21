@@ -35,7 +35,7 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
                         name="name"
                         onChange={handleInputChange}
                         value={newPreference.name}
-                        placeholder="Edit Your preference!"
+                        placeholder={`Edit Your ${preference.name} interest!`}
                     />
                 </label>
                 <div className="button-add cell small-12" onClick={handleSubmit}>
