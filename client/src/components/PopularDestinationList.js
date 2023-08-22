@@ -22,7 +22,7 @@ const PopularDestinationList = (props) => {
     });
     return (
         <div className="container">
-            <h1>Popular destinations</h1>
+            <h1 className="page-title">Popular destinations</h1>
             <div className="slider">
                 <div className="slide-track">{listDestinations}</div>
             </div>

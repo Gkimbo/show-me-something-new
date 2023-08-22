@@ -90,6 +90,7 @@ const RegistrationForm = () => {
                                     name="email"
                                     value={userPayload.email}
                                     onChange={onInputChange}
+                                    className="form-fields"
                                 />
                                 <FormError error={errors.email} />
                             </label>
@@ -102,6 +103,7 @@ const RegistrationForm = () => {
                                     name="password"
                                     value={userPayload.password}
                                     onChange={onInputChange}
+                                    className="form-fields"
                                 />
                                 <FormError error={errors.password} />
                             </label>
@@ -114,6 +116,7 @@ const RegistrationForm = () => {
                                     name="passwordConfirmation"
                                     value={userPayload.passwordConfirmation}
                                     onChange={onInputChange}
+                                    className="form-fields"
                                 />
                                 <FormError error={errors.passwordConfirmation} />
                             </label>
@@ -127,6 +130,7 @@ const RegistrationForm = () => {
                                     name="preferences"
                                     placeholder="Golfing, Pottery, Parks, Restaurants, Breweries...."
                                     onChange={onPreferencesChange}
+                                    className="form-fields"
                                 />
                                 <FormError error={errors.preferences} />
                             </label>

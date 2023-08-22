@@ -108,7 +108,7 @@ const UpdatePreferences = (props) => {
     return (
         <div className="grid-x">
             <div className="cell small-12 activity-title-1">
-                <h1>Manage your interests here!</h1>
+                <h1 className="page-title">Manage your interests here!</h1>
             </div>
             <div className="cell small-12 medium-6">
                 <div className="container-2">
@@ -116,7 +116,7 @@ const UpdatePreferences = (props) => {
                 </div>
             </div>
             <div className="cell small-12 medium-6">
-                <div className="container">
+                <div className="container-form">
                     <div className="change-forms">
                         {!editForm && (
                             <>
@@ -134,7 +134,6 @@ const UpdatePreferences = (props) => {
                         )}
                         {editForm && (
                             <>
-                                <h3>Edit interest here! </h3>
                                 <EditPreferenceForm
                                     preference={preference}
                                     changePreference={changePreference}
@@ -149,7 +148,7 @@ const UpdatePreferences = (props) => {
                         className="button-toggle cell small-12"
                         onClick={handleNewPreferenceButton}
                     >
-                        Add new preference
+                        Go back to add new Interest!
                     </div>
                 )}
             </div>

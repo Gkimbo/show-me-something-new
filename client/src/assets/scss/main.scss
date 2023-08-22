@@ -36,12 +36,6 @@
     --top-bar-color: transparent;
 }
 
-// @media (min-width: 320px) and (max-width: 769px) {
-//     body {
-//         color: red;
-//     }
-// }
-//define global styles
 body {
     margin: 0;
     font-family: var(--font-family);
@@ -61,6 +55,11 @@ h3,
 h4,
 h5 {
     color: var(--heading-color);
+}
+
+.page-title {
+    font-size: 150%;
+    margin-bottom: 5%;
 }
 
 .top-bar {
@@ -107,9 +106,9 @@ h5 {
 
 .button-1 {
     font-family: system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     cursor: pointer;
-    padding: 0.1em 0.6em;
+    padding: 0.3em 1em;
     font-weight: bold;
     border: none;
     color: var(--button-text);
@@ -155,7 +154,7 @@ h5 {
 }
 
 .button-edit {
-    --c: rgb(19, 162, 0);
+    --c: #13a200;
     /* the color*/
     box-shadow: 0 0 0 0.1em inset var(--c);
     --_g: linear-gradient(var(--c) 0 0) no-repeat;
@@ -254,7 +253,7 @@ h5 {
 
 .button-toggle {
     font-family: system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     cursor: pointer;
     padding: 0.1em 0.6em;
     font-weight: bold;
@@ -262,6 +261,8 @@ h5 {
     color: var(--button-text);
     margin: 5px auto;
     border-radius: 5px;
+    width: 50%;
+    text-align: center;
 }
 
 .container {
@@ -357,6 +358,26 @@ h5 {
     text-align: center;
 }
 
+.container-form {
+    font-family: var(--font-family);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: fit-content;
+    width: 75%;
+    margin: 5% auto;
+    padding: 5%;
+    border: 2px solid #094067;
+    color: #000000;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.container-form:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
 .icon-title {
     color: #094067;
 }
@@ -412,6 +433,15 @@ h5 {
 .list-destinations {
     font-size: x-large;
     list-style-type: none;
+}
+
+.list-landing-page {
+    list-style-type: none;
+    font-size: medium;
+}
+
+.landing-title {
+    font-size: x-large;
 }
 
 .slide-track {
@@ -506,11 +536,6 @@ h5 {
     margin: 5% 10%;
 }
 
-#preferences {
-    width: 20rem;
-    height: 10rem;
-}
-
 .sign-out-button {
     margin-right: 4rem;
 }
@@ -574,4 +599,23 @@ h5 {
 
 .grid-x.grid-margin-x.grid-margin-y .tile.selected {
     order: 2;
+}
+
+.interest-title {
+    font-size: 1.5rem;
+}
+
+.landing-paragraph {
+    text-align: justify;
+    border-top: 1px solid #094067;
+    margin-top: 10%;
+}
+
+.form-fields {
+    margin: 5% auto;
+    min-width: 5rem;
+    width: 100%;
+}
+#preferences {
+    height: 6rem;
 }

@@ -18,7 +18,7 @@ const HomePage = (props) => {
             </div>
             <div className="cell medium-12 large-6">
                 <div className="container-2">
-                    <h1 className="activity-title cell small-12">Activity List</h1>
+                    <h1 className="page-title cell small-12">Activity List</h1>
                     <ActivitiesList />
                 </div>
             </div>

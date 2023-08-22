@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input, Text } from "@chakra-ui/react";
 
 const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
@@ -29,17 +30,18 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <input
-                        className="text-box-1"
-                        type="text"
+                    <Text lg="20px">{`Edit Your ${preference.name} interest!`}</Text>
+                    <Input
                         name="name"
                         onChange={handleInputChange}
-                        value={newPreference.name}
+                        focusBorderColor="#13a200"
                         placeholder={`Edit Your ${preference.name} interest!`}
+                        value={newPreference.name}
+                        size="sm"
                     />
                 </label>
                 <div className="button-add cell small-12" onClick={handleSubmit}>
-                    Edit
+                    Add
                 </div>
             </form>
         </div>
