@@ -95,7 +95,6 @@ const CityMap = (props) => {
                             setSelectedMarker(null);
                         } else {
                             setSelectedMarker(result.geometry.location);
-                            console.log("clicked");
                             infowindow.open(map, marker);
                         }
                     });

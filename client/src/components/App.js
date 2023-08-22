@@ -29,18 +29,19 @@ const App = (props) => {
     useEffect(() => {
         fetchCurrentUser();
     }, []);
+
     return (
         <ChakraProvider>
             <Router>
                 <TopBar user={currentUser} />
                 <Switch>
-                    <Route exact path="/landing" component={LandingPage} />
                     <AuthenticatedRoute
                         exact={true}
                         path="/"
                         user={currentUser}
                         component={HomePage}
                     />
+                    <Route exact path="/landing" component={LandingPage} />
                     <AuthenticatedRoute
                         exact={true}
                         path="/my-activities"

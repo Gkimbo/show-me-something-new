@@ -43,7 +43,6 @@ const CustomMap = (props) => {
                 query: request,
             };
             service.textSearch(searchRequest, (results, status) => {
-                console.log(results);
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     setChosenLocation(results[0].geometry.location);
                 } else {
@@ -109,7 +108,6 @@ const CustomMap = (props) => {
                             setSelectedMarker(null);
                         } else {
                             setSelectedMarker(result.geometry.location);
-                            console.log("clicked");
                             infowindow.open(map, marker);
                         }
                     });

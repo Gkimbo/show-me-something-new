@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import makeNewUser from "../../services/makeNewUser";
+import { Redirect } from "react-router-dom";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
@@ -71,7 +72,7 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        location.href = "/";
+        return <Redirect push to="/" />;
     }
 
     return (
