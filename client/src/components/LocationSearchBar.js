@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import GetDestination from "../services/GetDestination";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
 const LocationSearchBar = ({ setMapSearchQuery }) => {
@@ -13,6 +12,7 @@ const LocationSearchBar = ({ setMapSearchQuery }) => {
     const handelSubmit = (event) => {
         event.preventDefault();
         setMapSearchQuery(searchBarInput);
+        setSearchBarInput("");
     };
 
     return (
@@ -25,6 +25,7 @@ const LocationSearchBar = ({ setMapSearchQuery }) => {
                         type="text"
                         placeholder="Type new city"
                         onChange={handleChange}
+                        value={searchBarInput}
                     />
                     <InputRightElement width="4.5rem">
                         <Button

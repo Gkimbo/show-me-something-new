@@ -53,6 +53,20 @@ class CityClientApi {
             return { error: error.message };
         }
     }
+
+    static async getLandscape() {
+        const baseUrl = "https://api.unsplash.com/search/";
+        try {
+            const url = `${baseUrl}photos/?client_id=${photoApiAccessKey}&query=landscape&count=1&order_by=relevant&orientation=landscape`;
+            const apiResponse = await got(url);
+            const responseBody = apiResponse.body;
+            const parsedData = JSON.parse(responseBody);
+            const urlNeeded = parsedData.results[5].urls.full;
+            return urlNeeded;
+        } catch (error) {
+            return { error: error.message };
+        }
+    }
 }
 
 export default CityClientApi;
