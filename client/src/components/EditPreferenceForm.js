@@ -35,13 +35,13 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
                         name="name"
                         onChange={handleInputChange}
                         focusBorderColor="#13a200"
-                        placeholder={`Edit Your ${preference.name} interest!`}
+                        placeholder={`Edit ${preference.name} here!`}
                         value={newPreference.name}
                         size="sm"
                     />
                 </label>
                 <div className="button-add cell small-12" onClick={handleSubmit}>
-                    Add
+                    Edit
                 </div>
             </form>
         </div>
