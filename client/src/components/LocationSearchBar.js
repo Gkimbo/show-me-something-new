@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GetDestination from "../services/GetDestination";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
-const LocationSearchBar = ({ setChosenLocation }) => {
+const LocationSearchBar = ({ setMapSearchQuery }) => {
     const [searchBarInput, setSearchBarInput] = useState("");
     const [error, setError] = useState(false);
 
@@ -10,20 +10,11 @@ const LocationSearchBar = ({ setChosenLocation }) => {
         setSearchBarInput(event.currentTarget.value);
     };
 
-    const handelSubmit = async (event) => {
+    const handelSubmit = (event) => {
         event.preventDefault();
-        const newLocation = await GetDestination.getChosenDestination(searchBarInput);
-        if (!newLocation) {
-            setError(true);
-        } else {
-            setError(false);
-            setChosenLocation({
-                lat: newLocation.latitude,
-                lng: newLocation.longitude,
-            });
-            setSearchBarInput("");
-        }
+        setMapSearchQuery(searchBarInput);
     };
+
     return (
         <form onSubmit={handelSubmit}>
             <label htmlFor="search-bar">

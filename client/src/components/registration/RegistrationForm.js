@@ -71,7 +71,7 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        location.href = "/home";
+        location.href = "/";
     }
 
     return (

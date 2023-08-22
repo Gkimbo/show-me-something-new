@@ -34,10 +34,10 @@ const App = (props) => {
             <Router>
                 <TopBar user={currentUser} />
                 <Switch>
-                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/landing" component={LandingPage} />
                     <AuthenticatedRoute
                         exact={true}
-                        path="/home"
+                        path="/"
                         user={currentUser}
                         component={HomePage}
                     />

@@ -19,7 +19,7 @@ const TopBar = ({ user }) => {
         <div className="top-bar grid-x">
             <div className="top-bar-left">
                 <ul className="menu">
-                    <Link to="/home">
+                    <Link to="/">
                         <Logo />
                     </Link>
                 </ul>

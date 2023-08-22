@@ -7,10 +7,12 @@ const clientRoutes = [
     "/",
     "/user-sessions/new",
     "/users/new",
-    "/:city",
+    "/:name",
     "/activity/map",
     "/activity/:name",
     "/my-activities",
+    "/landing",
+    "/manage-preferences",
 ];
 const authedClientRoutes = ["/profile"];
 

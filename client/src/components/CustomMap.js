@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
+import { Spinner } from "@chakra-ui/react";
 
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
@@ -11,6 +12,7 @@ const CustomMap = (props) => {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
+    const [mapSearchQuery, setMapSearchQuery] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -18,7 +20,7 @@ const CustomMap = (props) => {
         libraries: ["places"],
     });
 
-    const getLocation = () => {
+    const getCurrentPosition = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -33,7 +35,25 @@ const CustomMap = (props) => {
             setError("Geolocation is not supported by this browser.");
         }
     };
-    const currentLocation = chosenLocation;
+
+    const getLocation = (request) => {
+        loader.load().then(() => {
+            const service = new google.maps.places.PlacesService(map);
+            const searchRequest = {
+                query: request,
+            };
+            service.textSearch(searchRequest, (results, status) => {
+                console.log(results);
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    setChosenLocation(results[0].geometry.location);
+                } else {
+                    setError(`No results found for "${mapSearchQuery}".`);
+                    setSearchResults([]);
+                }
+            });
+        });
+    };
+
     const centerMapOnMarker = (marker) => {
         setSelectedMarker(marker === selectedMarker ? null : marker);
     };
@@ -42,11 +62,11 @@ const CustomMap = (props) => {
         setError("");
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
-                center: currentLocation,
+                center: chosenLocation,
                 zoom: 13,
             });
             const userMarker = new google.maps.Marker({
-                position: currentLocation,
+                position: chosenLocation,
                 map: map,
                 icon: {
                     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -113,13 +133,13 @@ const CustomMap = (props) => {
             customActivities.forEach((activity) => {
                 const request = {
                     query: activity.name,
-                    location: currentLocation,
+                    location: chosenLocation,
                     radius: "100",
                 };
 
                 service.textSearch(request, (results, status) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        setSearchResults((prevResults) => [...prevResults, ...results]);
+                        setSearchResults(results);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);
                     } else {
@@ -135,23 +155,37 @@ const CustomMap = (props) => {
         GetActivity.getCustomActivities().then((activityData) => {
             setCustomActivities(activityData);
         });
-        getLocation();
+        getCurrentPosition();
     }, []);
+
+    useEffect(() => {
+        getLocation(mapSearchQuery);
+    }, [mapSearchQuery]);
 
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
                 <h1>What you like near you!</h1>
-                <LocationSearchBar setChosenLocation={setChosenLocation} />
+                <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
                 <div className="cell small-12"></div>
-                <ResultList
-                    searchResults={searchResults}
-                    centerMapOnMarker={centerMapOnMarker}
-                    markerLocation={selectedMarker}
-                    setSelectedMarker={setSelectedMarker}
-                />
+                {chosenLocation === null ? (
+                    <Spinner
+                        thickness="4px"
+                        speed="0.65s"
+                        emptyColor="gray.200"
+                        color="blue.500"
+                        size="xl"
+                    />
+                ) : (
+                    <ResultList
+                        searchResults={searchResults}
+                        centerMapOnMarker={centerMapOnMarker}
+                        markerLocation={selectedMarker}
+                        setSelectedMarker={setSelectedMarker}
+                    />
+                )}
             </div>
             <div className="cell small-12 medium-6 ">
                 <div id="map" className="container-4-map"></div>

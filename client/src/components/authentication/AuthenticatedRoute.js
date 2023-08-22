@@ -8,7 +8,7 @@ const AuthenticationCheck = ({ component: Component, user, ...rest }) => {
     if (user !== null) {
         return <Component user={user} {...rest} />;
     }
-    return <Redirect to="/" />;
+    return <Redirect to="/landing" />;
 };
 
 const AuthenticatedRoute = ({ component, user, ...rest }) => {
