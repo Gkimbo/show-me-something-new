@@ -8,20 +8,22 @@ const LandingPage = (props) => {
         <div className="grid-x">
             <div className="landing-page cell small-12 medium-6">
                 <div className="landing-page-description container-2">
-                    <h2>Welcome to WithinReach </h2>
-                    <ul>
-                        <li>Your personalized guide to discovering new surroundings!</li>
+                    <h2 className="landing-title">Welcome to WithinReach </h2>
+                    <ul className="list-landing-page">
                         <li>One click unlocks the world around you!</li>
-                        <li>
+                        <li>Your personalized guide to discovering new surroundings!</li>
+                    </ul>
+                    <div className="landing-paragraph">
+                        <p>
                             Say goodbye to the hassle of searching – our location-based platform
                             instantly shows you the best places, events, and more, all perfectly
-                            matched to your preferences.
-                        </li>
-                        <li>
+                            matched to your Interests.
+                        </p>
+                        <p>
                             Join us today and start your journey of seamless exploration with
                             WithinReach!
-                        </li>
-                    </ul>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className="landing-page cell small-12 medium-6">

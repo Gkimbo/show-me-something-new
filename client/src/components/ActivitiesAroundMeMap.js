@@ -9,6 +9,7 @@ const ActivitiesAroundMeMap = (props) => {
     const [searchQuery, setSearchQuery] = useState(props.computedMatch.params.name);
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -64,8 +65,20 @@ const ActivitiesAroundMeMap = (props) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         setSearchResults(results);
                         results.forEach((result) => {
-                            const resultContent =
-                                `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                            let resultContent;
+                            if (result.photos) {
+                                resultContent =
+                                    `<p>${result.name}</p>` +
+                                    `<p>${result.formatted_address}</p>` +
+                                    `<img src="${
+                                        result.photos && result.photos[0].getUrl()
+                                    }" alt="${
+                                        result.name
+                                    }" style="max-width: 100px; max-height: 100px;">`;
+                            } else {
+                                resultContent =
+                                    `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                            }
 
                             const infowindow = new google.maps.InfoWindow({
                                 content: resultContent,
@@ -81,10 +94,27 @@ const ActivitiesAroundMeMap = (props) => {
                             });
 
                             marker.addListener("click", () => {
-                                infowindow.open({
-                                    anchor: marker,
-                                    map,
+                                if (result.geometry.location === selectedMarker) {
+                                    setSelectedMarker(null);
+                                } else {
+                                    setSelectedMarker(result.geometry.location);
+                                    console.log("clicked");
+                                    infowindow.open(map, marker);
+                                }
+                            });
+
+                            marker.addListener("click", () => {
+                                if (openInfoWindow) {
+                                    openInfoWindow.infoWindow.close();
+                                }
+
+                                const infowindow = new google.maps.InfoWindow({
+                                    content: resultContent,
+                                    ariaLabel: result.name,
                                 });
+
+                                infowindow.open(map, marker);
+                                setOpenInfoWindow({ infoWindow: infowindow, marker });
                             });
                         });
 

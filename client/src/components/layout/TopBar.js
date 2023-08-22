@@ -7,7 +7,7 @@ const TopBar = ({ user }) => {
     const authenticatedListItems = [
         <li key="sign-up">
             <Link to="/manage-preferences" className="button-1">
-                Update preferences
+                Update Interests
             </Link>
         </li>,
         <li key="sign-out">

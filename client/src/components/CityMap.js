@@ -7,11 +7,11 @@ import GetDestination from "../services/GetDestination";
 import LocationSearchBar from "./LocationSearchBar";
 
 const CityMap = (props) => {
-    console.log(props);
     const [chosenLocation, setChosenLocation] = useState({ lat: 42.361, lng: -71.057 });
     const [customActivities, setCustomActivities] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -29,6 +29,7 @@ const CityMap = (props) => {
 
     useEffect(() => {
         setError("");
+        setSelectedMarker(null);
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: currentLocation,
@@ -48,8 +49,18 @@ const CityMap = (props) => {
 
             const addMarkersAndInfoWindows = (places) => {
                 places.forEach((result) => {
-                    const resultContent =
-                        `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                    let resultContent;
+                    if (result.photos) {
+                        resultContent =
+                            `<p>${result.name}</p>` +
+                            `<p>${result.formatted_address}</p>` +
+                            `<img src="${result.photos && result.photos[0].getUrl()}" alt="${
+                                result.name
+                            }" style="max-width: 100px; max-height: 100px;">`;
+                    } else {
+                        resultContent =
+                            `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                    }
 
                     const infowindow = new google.maps.InfoWindow({
                         content: resultContent,
@@ -65,10 +76,27 @@ const CityMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
-                        infowindow.open({
-                            anchor: marker,
-                            map,
+                        if (result.geometry.location === selectedMarker) {
+                            setSelectedMarker(null);
+                        } else {
+                            setSelectedMarker(result.geometry.location);
+                            console.log("clicked");
+                            infowindow.open(map, marker);
+                        }
+                    });
+
+                    marker.addListener("click", () => {
+                        if (openInfoWindow) {
+                            openInfoWindow.infoWindow.close();
+                        }
+
+                        const infowindow = new google.maps.InfoWindow({
+                            content: resultContent,
+                            ariaLabel: result.name,
                         });
+
+                        infowindow.open(map, marker);
+                        setOpenInfoWindow({ infoWindow: infowindow, marker });
                     });
                 });
             };
@@ -90,7 +118,6 @@ const CityMap = (props) => {
                     }
                 });
             });
-            setSelectedMarker(null);
         });
     }, [chosenLocation]);
 
@@ -106,7 +133,6 @@ const CityMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
-
                 <h1>{`What you like in ${props.computedMatch.params.name}!`}</h1>
 
                 <LocationSearchBar setChosenLocation={setChosenLocation} />

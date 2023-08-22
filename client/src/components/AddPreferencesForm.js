@@ -27,11 +27,11 @@ const AddPreferenceForm = (props) => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <Text mb="8px">Add a new Interest!</Text>
+                    <Text lg="20px">Add a new Interest!</Text>
                     <Input
                         name="name"
                         onChange={handleInputChange}
-                        focusBorderColor="#094067"
+                        focusBorderColor="#0606ff"
                         placeholder="Type a new interest!"
                         value={newPreference.name}
                         size="sm"
