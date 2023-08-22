@@ -15,7 +15,7 @@ const ResultList = (props) => {
         );
     });
 
-    return <div className="grid-x">{results}</div>;
+    return <div className="grid-x grid-margin-x grid-margin-y">{results}</div>;
 };
 
 export default ResultList;

@@ -313,6 +313,7 @@ h5 {
 }
 
 .container-4 {
+    padding: 5%;
     font-family: var(--font-family);
     align-items: center;
     margin: 1% auto;
@@ -442,10 +443,9 @@ h5 {
 }
 
 .activity-title-1 {
-
     text-align: center;
     align-items: center;
-    margin-top: 7%;
+    margin-top: 10%;
 }
 
 .tile-container-activities {
@@ -469,8 +469,7 @@ h5 {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 10rem;
-    width: 10rem;
+    min-height: 10rem;
     margin: 5%;
     padding: 2%;
     border: 1px solid #094067;
@@ -478,10 +477,33 @@ h5 {
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
+    font-size: 85%;
 }
-
+.selected .tile-container {
+    font-family: var(--font-family);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10%;
+    padding: 2%;
+    border: 2px solid #ef4565;
+    color: #000000;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 85%;
+    z-index: 99;
+}
 .tile-container:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.tile-container img {
+    width: 7rem;
+    height: 4rem;
+    border-radius: 5px;
+    margin: 5% 10%;
 }
 
 #preferences {
@@ -519,8 +541,13 @@ h5 {
 .selected {
     transform: scale(1.2);
     transition: transform 0.3s ease-in-out;
-    background-color: rgb(255, 255, 255);
-    z-index: 99;
+    width: 100px;
+    height: 100px;
+}
+
+.selected img {
+    width: 150px;
+    height: 100px;
 }
 
 .google-maps-marker {
@@ -531,4 +558,20 @@ h5 {
 
 .tile-text {
     font-size: x-small;
+}
+
+.grid-x.grid-margin-x.grid-margin-y {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.grid-x.grid-margin-x.grid-margin-y .tile {
+    order: 2;
+    flex: 0 0 calc(33.33% - 20px);
+    margin: 10px;
+}
+
+.grid-x.grid-margin-x.grid-margin-y .tile.selected {
+    order: 2;
 }
