@@ -14,48 +14,50 @@ WithinReach is a location-based platform that instantly provides personalized re
 ## 🌱 Install
 
 Prerequisites
-Install <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git</a> if you don't already have it.
 
-Install yarn via npm
+1. Install <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Git</a> if you don't already have it.
+
+2. Install yarn via npm
 
 ```bash
 npm install --global yarn
 ```
 
-Install <a href="https://www.postgresql.org/download/" >PostGreSQL</a>
+3. Install <a href="https://www.postgresql.org/download/" >PostGreSQL</a>
 
-Use Git to clone the repository
+4. Use Git to clone the repository
 
 ```bash
 git clone https://github.com/Gkimbo/within-reach.git
 ```
+
+5. Run yarn install
 
 ```bash
 cd within-reach
 yarn install
 ```
 
-Create database with
+6. Create database with
 
 ```bash
 createdb within-reach_development
 ```
 
-Run migration with
+7. Run migration with
 
 ```bash
 yarn run migrate:latest
 ```
 
-Create a `.env` file in the root of your project:
-
-Run in the terminal
+8. Create a `.env` file in the root of your project:
+   Run in the terminal
 
 ```bash
 touch .env
 ```
 
-Copy the keys below into it and add your own api keys:
+9. Copy the keys below into it and add your own api keys:
 
 ```dosini
 SESSION_SECRET="YOURSECRETKEY"
@@ -66,14 +68,14 @@ UNSPLASH_PHOTO_SECRET_KEY=""
 
 You will also need the google maps api key as well!
 
--   Once you're done all that
+10. Once you're done all that
     Launch the app
 
 ```bash
 yarn run dev
 ```
 
-Finally navigate to navigate to http://localhost:3000 in your browser and make sure you're getting the page!
+11. Finally navigate to navigate to http://localhost:3000 in your browser and make sure you're getting the page!
 
 ## 🚀 Features
 
