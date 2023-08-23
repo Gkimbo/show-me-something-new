@@ -177,6 +177,12 @@ const ActivitiesAroundMeMap = (props) => {
                         setSelectedMarker={setSelectedMarker}
                     />
                 )}
+                {error ? (
+                    <div className="location-error">
+                        <h3>{error} </h3>
+                        <p>Please search the location you'd like to see in the search bar above</p>
+                    </div>
+                ) : null}
             </div>
             <div className="cell small-12 medium-6 ">
                 <div id="map" className="container-4-map"></div>

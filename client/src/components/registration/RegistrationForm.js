@@ -125,7 +125,7 @@ const RegistrationForm = () => {
                         <div className="preferences-div">
                             <label htmlFor="preferences">
                                 Type things you like!
-                                <input
+                                <textarea
                                     type="text"
                                     id="preferences"
                                     name="preferences"
