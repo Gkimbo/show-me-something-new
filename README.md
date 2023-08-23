@@ -47,36 +47,33 @@ Run migration with
 yarn run migrate:latest
 ```
 
-Launch the app
+Create a `.env` file in the root of your project:
+
+Run in the terminal
+
+```bash
+touch .env
+```
+
+Copy the keys below into it and add your own api keys:
+
+```dosini
+SESSION_SECRET="YOURSECRETKEY"
+API_NINJA_API_KEY=""
+UNSPLASH_PHOTO_ACCESS_KEY=""
+UNSPLASH_PHOTO_SECRET_KEY=""
+```
+
+You will also need the google maps api key as well!
+
+-   Once you're done all that
+    Launch the app
 
 ```bash
 yarn run dev
 ```
 
-Create a `.env` file in the root of your project:
-
-```dosini
-SECRET_KEY="YOURSECRETKEYGOESHERE"
-```
-
-You will also need the google maps api key as well as the keys in .env.example file.
-
-As early as possible in your application, import and configure dotenv:
-
-```javascript
-require("dotenv").config();
-console.log(process.env); // remove this after you've confirmed it is working
-```
-
-.. [or using ES6?](#how-do-i-use-dotenv-with-import)
-
-```javascript
-import "dotenv/config";
-```
-
-That's it. `process.env` now has the keys and values you defined in your `.env` file:
-
-Then, navigate to http://localhost:3000 in your browser and make sure you're getting the page!
+Finally navigate to navigate to http://localhost:3000 in your browser and make sure you're getting the page!
 
 ## 🚀 Features
 
