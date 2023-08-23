@@ -44,6 +44,7 @@
     "react-hot-loader": "^4.12.21",
     "react-router-dom": "5.2",
     "react-scroll": "^1.8.9",
+    "react-select": "^5.7.4",
     "redbox-react": "~1.6",
     "sass-loader": "^6.0.7",
     "style-loader": "^1.2.1",

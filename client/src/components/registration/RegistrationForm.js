@@ -3,6 +3,8 @@ import FormError from "../layout/FormError";
 import config from "../../config";
 import makeNewUser from "../../services/makeNewUser";
 import { Redirect } from "react-router-dom";
+import Select from "react-select";
+import options from "../../services/userSelections";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
@@ -11,6 +13,7 @@ const RegistrationForm = () => {
         passwordConfirmation: "",
         preferences: [],
     });
+    console.log(userPayload);
 
     const [errors, setErrors] = useState({});
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -37,30 +40,31 @@ const RegistrationForm = () => {
         }
 
         if (preferences.length === 0) {
-            newErrors = { ...newErrors, preferences: "You need at least one preference!" };
+            newErrors = { ...newErrors, preferences: "You need at least one Interest!" };
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const onPreferencesChange = (event) => {
-        const enteredValue = event.target.value;
-        const newPreferences = enteredValue
-            .split(",")
-            .map((pref) => pref.trim())
-            .filter((pref) => pref !== "");
+        const eventArray = event.map((eachEvent) => {
+            return eachEvent.value;
+        });
+        console.log(eventArray);
+        // // const enteredValue = event.value;
 
         setUserPayload({
             ...userPayload,
-            preferences: newPreferences,
+            preferences: eventArray,
         });
     };
 
     const onSubmit = async (event) => {
         event.preventDefault();
         if (validateInput(userPayload)) {
-            makeNewUser(userPayload);
-            setShouldRedirect(true);
+            makeNewUser(userPayload).then(() => {
+                setShouldRedirect(true);
+            });
         }
     };
 
@@ -72,7 +76,7 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        return <Redirect push to="/" />;
+        window.location.href = "/";
     }
 
     return (
@@ -125,13 +129,14 @@ const RegistrationForm = () => {
                         <div className="preferences-div">
                             <label htmlFor="preferences">
                                 Type things you like!
-                                <textarea
-                                    type="text"
-                                    id="preferences"
+                                <Select
+                                    placeholder="Choose all the interest you'd like!"
+                                    isMulti
                                     name="preferences"
-                                    placeholder="Golfing, Pottery, Parks, Restaurants, Breweries...."
+                                    options={options}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
                                     onChange={onPreferencesChange}
-                                    className="form-fields"
                                 />
                                 <FormError error={errors.preferences} />
                             </label>
