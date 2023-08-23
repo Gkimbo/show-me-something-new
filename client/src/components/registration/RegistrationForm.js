@@ -50,9 +50,6 @@ const RegistrationForm = () => {
         const eventArray = event.map((eachEvent) => {
             return eachEvent.value;
         });
-        console.log(eventArray);
-        // // const enteredValue = event.value;
-
         setUserPayload({
             ...userPayload,
             preferences: eventArray,

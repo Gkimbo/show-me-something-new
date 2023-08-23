@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Input, Text } from "@chakra-ui/react";
+import CreatableSelect from "react-select/creatable";
+import options from "../services/userSelections";
 
 const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
         name: "",
     });
-
+    console.log(newPreference);
     const handleInputChange = (event) => {
         setNewPreference({
             ...newPreference,
-            [event.currentTarget.name]: event.currentTarget.value,
+            name: event.value,
         });
     };
 
@@ -31,12 +33,13 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
                     <Text lg="20px">{`Edit Your ${preference.name} interest!`}</Text>
-                    <Input
-                        name="name"
+                    <CreatableSelect
+                        isClearable
+                        options={options}
                         onChange={handleInputChange}
                         focusBorderColor="#13a200"
                         placeholder={`Edit ${preference.name} here!`}
-                        value={newPreference.name}
+                        defaultValue={newPreference.name}
                         size="sm"
                     />
                 </label>
