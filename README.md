@@ -8,7 +8,7 @@ WithinReach is a location-based platform that instantly provides personalized re
 <div align="left">
 
 -   [🌱 Install](#-install)
--   [🚀 Features](#-deploying)
+-   [🚀 Features](#-features)
 -   [📚 Examples](#-examples)
 
 ## 🌱 Install
