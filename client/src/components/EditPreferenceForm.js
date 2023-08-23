@@ -7,7 +7,7 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
         name: "",
     });
-    console.log(newPreference);
+
     const handleInputChange = (event) => {
         setNewPreference({
             ...newPreference,

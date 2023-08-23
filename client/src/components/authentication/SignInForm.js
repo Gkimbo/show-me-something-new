@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import config from "../../config";
 import FormError from "../layout/FormError";
+import { Link } from "react-router-dom";
 
 const SignInForm = () => {
     const [userPayload, setUserPayload] = useState({ email: "", password: "" });
@@ -66,7 +67,7 @@ const SignInForm = () => {
     }
 
     return (
-        <div className="grid-x container-2" onSubmit={onSubmit}>
+        <div className="grid-x container-manage" onSubmit={onSubmit}>
             <div className="cell small-12">
                 <h1>Sign-In</h1>
             </div>
@@ -97,10 +98,16 @@ const SignInForm = () => {
                         </label>
                     </div>
                     <div>
-                        <input type="submit" className="button-1" value="Sign In" />
+                        <input type="submit" className="button-1-sign-in" value="Sign In" />
                     </div>
                 </div>
             </form>
+            <p className="alt-link cell small-12">
+                Don't have an account?
+                <Link to="/users/new" className="button-toggle-1">
+                    Sign-Up Here
+                </Link>
+            </p>
         </div>
     );
 };

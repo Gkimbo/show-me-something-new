@@ -137,6 +137,7 @@ const CustomMap = (props) => {
 
                 service.textSearch(request, (results, status) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        results.activity = activity.name;
                         setSearchResults(results);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);

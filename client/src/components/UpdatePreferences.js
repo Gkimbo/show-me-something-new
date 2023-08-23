@@ -111,7 +111,7 @@ const UpdatePreferences = (props) => {
                 <h1 className="page-title">Manage your interests here!</h1>
             </div>
             <div className="cell small-12 medium-6">
-                <div className="container-2">
+                <div className="container-manage">
                     <div className="grid-x">{listUsersPreference}</div>
                 </div>
             </div>

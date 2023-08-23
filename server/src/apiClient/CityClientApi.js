@@ -61,7 +61,7 @@ class CityClientApi {
             const apiResponse = await got(url);
             const responseBody = apiResponse.body;
             const parsedData = JSON.parse(responseBody);
-            const urlNeeded = parsedData.results[3].urls.full;
+            const urlNeeded = parsedData.results[4].urls.full;
             return urlNeeded;
         } catch (error) {
             return { error: error.message };

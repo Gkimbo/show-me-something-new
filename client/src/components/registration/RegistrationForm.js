@@ -13,7 +13,6 @@ const RegistrationForm = () => {
         passwordConfirmation: "",
         preferences: [],
     });
-    console.log(userPayload);
 
     const [errors, setErrors] = useState({});
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -77,72 +76,78 @@ const RegistrationForm = () => {
     }
 
     return (
-        <div className="grid-x">
-            <div className="container-3">
-                <div className="cell small-12">
-                    <h1>Sign-up</h1>
-                </div>
-                <form onSubmit={onSubmit}>
+        <div className="landing-page-image">
+            <div className="grid-x">
+                <div className="container-3">
                     <div className="cell small-12">
-                        <div>
-                            <label>
-                                Email
-                                <input
-                                    type="text"
-                                    name="email"
-                                    value={userPayload.email}
-                                    onChange={onInputChange}
-                                    className="form-fields"
-                                />
-                                <FormError error={errors.email} />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Password
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={userPayload.password}
-                                    onChange={onInputChange}
-                                    className="form-fields"
-                                />
-                                <FormError error={errors.password} />
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Password Confirmation
-                                <input
-                                    type="password"
-                                    name="passwordConfirmation"
-                                    value={userPayload.passwordConfirmation}
-                                    onChange={onInputChange}
-                                    className="form-fields"
-                                />
-                                <FormError error={errors.passwordConfirmation} />
-                            </label>
-                        </div>
-                        <div className="preferences-div">
-                            <label htmlFor="preferences">
-                                Type things you like!
-                                <Select
-                                    placeholder="Choose all the interest you'd like!"
-                                    isMulti
-                                    name="preferences"
-                                    options={options}
-                                    className="basic-multi-select"
-                                    classNamePrefix="select"
-                                    onChange={onPreferencesChange}
-                                />
-                                <FormError error={errors.preferences} />
-                            </label>
-                        </div>
-                        <div>
-                            <input type="submit" className="button-1" value="Register" />
-                        </div>
+                        <h1>Sign-up</h1>
                     </div>
-                </form>
+                    <form onSubmit={onSubmit}>
+                        <div className="cell small-12">
+                            <div>
+                                <label>
+                                    Email
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        value={userPayload.email}
+                                        onChange={onInputChange}
+                                        className="form-fields"
+                                    />
+                                    <FormError error={errors.email} />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Password
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value={userPayload.password}
+                                        onChange={onInputChange}
+                                        className="form-fields"
+                                    />
+                                    <FormError error={errors.password} />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Password Confirmation
+                                    <input
+                                        type="password"
+                                        name="passwordConfirmation"
+                                        value={userPayload.passwordConfirmation}
+                                        onChange={onInputChange}
+                                        className="form-fields"
+                                    />
+                                    <FormError error={errors.passwordConfirmation} />
+                                </label>
+                            </div>
+                            <div className="preferences-div">
+                                <label htmlFor="preferences">
+                                    Type things you like!
+                                    <Select
+                                        placeholder="Choose all the interest you'd like!"
+                                        isMulti
+                                        name="preferences"
+                                        options={options}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                        onChange={onPreferencesChange}
+                                    />
+                                    <FormError error={errors.preferences} />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="submit"
+                                    className="button-1-sign-in"
+                                    value="Register"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
