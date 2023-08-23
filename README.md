@@ -1,8 +1,11 @@
 <div align="center">
 
-# within-reach [![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)]
+# within-reach ![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)
 
 WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. Integrated the Google Maps API into a React web app with a PostgreSQL database, using the Foundation front end along with custom CSS. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
+
+</div>
+<div align="left">
 
 -   [🌱 Install](#-install)
 -   [🚀 Features](#-deploying)
@@ -89,3 +92,5 @@ Then, navigate to http://localhost:3000 in your browser and make sure you're get
 'Delete Review' - Users can delete their previous reviews of an activity.
 
 ## 🌴 Manage Multiple Environments
+
+</div>
