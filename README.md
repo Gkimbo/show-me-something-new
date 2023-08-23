@@ -51,7 +51,7 @@ yarn run migrate:latest
 ```
 
 8. Create a `.env` file in the root of your project:
-   Run in the terminal
+   Run in the terminal from your root project folder
 
 ```bash
 touch .env
@@ -79,16 +79,23 @@ yarn run dev
 
 ## 🚀 Features
 
-'Categories List' - When users visit the home page of the website, they should be able to see the list of categories.
-'Sign-Up/Sign-In' - Users can create an account and login to view the activities, activity details, and add personal reviews for activities.
-'Activities List' - Users can navigate to different activities lists by choosing a category and clicking on the category name from the 'Categories List'.
-'Activity Details' - Users can navigate to view details and reviews of an activity by clicking on the activity name.
-'Add Reviews' - Users can leave reviews for the activity via the form on the 'Activity Details' page.
-'Voting Button' - Users can up-vote or down-vote other user reviews of an activity.
-'Review Rating' - Users can view the review ratings, which is calculated based on the total votes on the reviews.
-'User Reviews List' - Users Navigate to a list of their personal activity reviews by clicking on the 'Edit/Delete Reviews' button, after the user has left a review on an activity.
-'Edit Review' - Users can edit their previous reviews of an activity.
-'Delete Review' - Users can delete their previous reviews of an activity.
+1. 'Landing Page' - When a user visits the website they will see the Landing page. This page will describe the App have form to sign in. Under the form is link to have the user sign-up.
+
+2. 'Home Page' - When a logged in user visits the home page, they will be able to see 3 different features.
+
+    - A button that when pressed will bring the user to a map with everything around them that might be of interest.
+    - A list of Activities that the user can select that will bring the user to a map of places they can do that activity.
+    - A Popular destinations list that has city names and pictures scrolling by, If the user selects a city it will tak them to a map of that city with their interest around that city.
+
+3. 'Update Interests' - Users update their own interests at anytime. In the Navigation bar at the top of the page there is a button called "Update Interests" what will direct the user to a page that has a list of their interests and a form to the right to add new interests. - in the list of the users interest the user can click on an edit button to change that interest and a delet button to remove it.
+
+    -The edit button will replace the Add new interest form with an edit form.
+    -the user can always click a button under the edit form to return to the add interest form.
+
+4. 'Map' - Users can navigate to any map from any page by first clicking the icon in the top left of the nav bar. This will bring the user to the home page where they can click on the "Click Me for things to do!" button and that will take them to a map with things around them. - On the map page there is a search bar at the top where the user can type in any city and see on the map their interests in that city.
+
+    -Also on the map page the user will see a list of interesting things around them to the left of the map.
+    -Clicking on one of the interests will expand it to show the user more information including the address of the interesting thing to do.
 
 ## 🌴 Manage Multiple Environments
 
