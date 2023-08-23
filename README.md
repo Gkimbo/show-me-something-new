@@ -68,14 +68,13 @@ UNSPLASH_PHOTO_SECRET_KEY=""
 
 You will also need the google maps api key as well!
 
-10. Once you're done all that
-    Launch the app
+10. Once you're done all that its time to launch the app
 
 ```bash
 yarn run dev
 ```
 
-11. Finally navigate to navigate to http://localhost:3000 in your browser and make sure you're getting the page!
+11. Finally navigate to http://localhost:3000 in your browser and make sure you're all set!
 
 ## 🚀 Features
 
