@@ -151,6 +151,7 @@ h5 {
     margin: 0 1rem;
     border-radius: 5px;
     width: 50%;
+    min-width: fit-content;
 }
 
 .button-edit {
@@ -188,6 +189,7 @@ h5 {
     margin: 0 1rem;
     border-radius: 5px;
     width: 50%;
+    min-width: fit-content;
 }
 
 .button-add {
@@ -304,8 +306,8 @@ h5 {
     justify-content: space-around;
     align-items: center;
     height: fit-content;
-    width: 75%;
-    margin: 7% auto;
+    width: fit-content;
+    margin: 17% auto;
     padding: 5%;
     border: 3px solid #094067;
     color: #000000;
@@ -508,6 +510,7 @@ h5 {
     text-align: center;
     overflow: hidden;
     font-size: 85%;
+    min-width: fit-content;
 }
 .selected .tile-container {
     font-family: var(--font-family);
@@ -596,7 +599,7 @@ h5 {
     margin: 10px;
 }
 
-.grid-x.grid-margin-x.grid-margin-y .tile.selected {
+.grid-x.grid-margin-x.grid-margin-y .tile .selected {
     order: 2;
 }
 
