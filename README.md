@@ -1,15 +1,15 @@
 <div align="center">
 
-# within-reach ![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)
+# WithinReach ![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)
 
-WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. Integrated the Google Maps API into a React web app with a PostgreSQL database, using the Foundation front end along with custom CSS. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
+WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. The Google Maps API has been integrated into a React web app with a PostgreSQL database. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
 
 </div>
 <div align="left">
 
 -   [🌱 Install](#-install)
 -   [🚀 Features](#-features)
--   [📚 Examples](#-examples)
+-   [🌴 Technologies](#-technologies)
 
 ## 🌱 Install
 
@@ -103,6 +103,17 @@ yarn run dev
     - Additionally, the map page presents a list of interesting things around the user to the left of the map.
     - Clicking on one of the points of interest will expand its details, providing the user with more information, including the address of the attraction.
 
-## 🌴 Manage Multiple Environments
+## 🌴 Technologies
+
+React , Node.js , Express , JavaScript , HTML , CSS , PostgreSQL , Knex/Objection , Foundation , Font-Awesome, Google Maps API, API-Ninja, Unsplash API.
+
+If you would like to contribute to this code base:
+
+Follow the 'Install' instructions to clone the repository from GitHub.
+To prevent unwanted modifications of the application:
+Create a new git branch to refactor existing features, or implement any new features.
+Send pull request for review and consideration of merging the new features into the main application branch.
+
+Know what there is to do around you at all times. Fun things are just one click way.
 
 </div>
