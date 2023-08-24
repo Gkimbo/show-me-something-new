@@ -23,10 +23,10 @@ const HomePage = (props) => {
                     </Link>
                 </div>
             </div>
-            <div className="cell small-12 medium-12 large-6">
+            <div className="cell small-12">
                 <PopularDestinationList />
             </div>
-            <div className="cell medium-12 large-6">
+            <div className="cell small-12">
                 <div className="container-2">
                     <h1 className="page-title cell small-12">Activity List</h1>
                     <ActivitiesList />

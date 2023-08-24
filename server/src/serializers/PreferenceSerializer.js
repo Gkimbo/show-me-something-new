@@ -1,6 +1,6 @@
 class PreferenceSerializer {
     static getSummaryOfArray(array) {
-        const allowedAttributes = ["id", "name"];
+        const allowedAttributes = ["id", "name", "icon"];
         const serializedPreferences = array.map((preference) => {
             const cleanedPreference = {};
             for (const attribute of allowedAttributes) {
@@ -12,7 +12,7 @@ class PreferenceSerializer {
     }
 
     static getSummaryOfOne(preference) {
-        const allowedAttributes = ["id", "name"];
+        const allowedAttributes = ["id", "name", "icon"];
         const serializedPreference = {};
         for (const attribute of allowedAttributes) {
             serializedPreference[attribute] = preference[attribute];

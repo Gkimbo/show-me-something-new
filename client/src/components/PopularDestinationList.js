@@ -21,7 +21,7 @@ const PopularDestinationList = (props) => {
         );
     });
     return (
-        <div className="container">
+        <div className="container-dest">
             <h1 className="page-title">Popular destinations</h1>
             <div className="slider">
                 <div className="slide-track">{listDestinations}</div>
