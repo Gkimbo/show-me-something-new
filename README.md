@@ -50,14 +50,21 @@ createdb within-reach_development
 yarn run migrate:latest
 ```
 
-8. Create a `.env` file in the root of your project:
-   Run in the terminal from your root project folder
+8. Seed the Database
 
 ```bash
+yarn run db:seed
+```
+
+9. Create a `.env` file in the server of your project:
+   Run in the terminal
+
+```bash
+cd server
 touch .env
 ```
 
-9. Copy the keys below into it and add your own api keys:
+10. Copy the keys below into it and add your own api keys:
 
 ```dosini
 SESSION_SECRET="YOURSECRETKEY"
@@ -68,13 +75,13 @@ UNSPLASH_PHOTO_SECRET_KEY=""
 
 You will also need the google maps api key as well!
 
-10. Once you're done all that its time to launch the app
+11. Once you're done all that its time to launch the app
 
 ```bash
 yarn run dev
 ```
 
-11. Finally navigate to http://localhost:3000 in your browser and make sure you're all set!
+12. Finally navigate to http://localhost:3000 in your browser and make sure you're all set!
 
 ## 🚀 Features
 
