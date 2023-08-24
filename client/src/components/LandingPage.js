@@ -6,7 +6,7 @@ const LandingPage = (props) => {
     return (
         <div className="landing-page-image">
             <div className="grid-x">
-                <div className="landing-page cell small-12 medium-6">
+                <div className="landing-page cell medium-12 large-6">
                     <div className="landing-page-description container-manage">
                         <h2 className="landing-title">Welcome to WithinReach </h2>
                         <ul className="list-landing-page">
@@ -26,7 +26,7 @@ const LandingPage = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="landing-page cell small-12 medium-6">
+                <div className="landing-page cell medium-12 large-6">
                     <SignInForm />
                 </div>
             </div>

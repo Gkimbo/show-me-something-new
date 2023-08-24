@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import makeNewUser from "../../services/makeNewUser";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import options from "../../services/userSelections";
 
@@ -88,7 +88,7 @@ const RegistrationForm = () => {
             <div className="grid-x">
                 <div className="container-3">
                     <div className="cell small-12">
-                        <h1>Sign-up</h1>
+                        <h1 className="createable-select-title">Sign-up</h1>
                     </div>
                     <form onSubmit={onSubmit}>
                         <div className="cell small-12">
@@ -156,6 +156,12 @@ const RegistrationForm = () => {
                             </div>
                         </div>
                     </form>
+                    <p className="sign-in-link cell small-12">
+                        Already have an account?
+                        <Link to="/landing" className="button-toggle-1">
+                            Sign-In Here
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

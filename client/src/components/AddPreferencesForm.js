@@ -31,9 +31,12 @@ const AddPreferenceForm = (props) => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <Text lg="20px">Add a new Interest!</Text>
+                    <Text lg="20px" className="createable-select-title">
+                        Add a new Interest!
+                    </Text>
                     <CreatableSelect
                         isClearable
+                        className="createable-select"
                         options={options}
                         onChange={handleInputChange}
                         focusBorderColor="#0606ff"

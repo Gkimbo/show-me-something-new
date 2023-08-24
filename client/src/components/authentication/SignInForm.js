@@ -72,7 +72,7 @@ const SignInForm = () => {
     return (
         <div className="grid-x container-manage" onSubmit={onSubmit}>
             <div className="cell small-12">
-                <h1>Sign-In</h1>
+                <h1 className="createable-select-title">Sign-In</h1>
             </div>
             <form>
                 <div className="cell small-12">
