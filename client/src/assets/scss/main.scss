@@ -542,7 +542,7 @@ h5 {
     margin: 0 auto;
 }
 .slide img:hover {
-    box-shadow: 0 0 20px rgba(239, 69, 101, 0.5);
+    box-shadow: 0 0 20px rgba(73, 73, 73, 0.5);
 }
 
 .list-destinations {
@@ -610,19 +610,19 @@ h5 {
 }
 
 .tile-container-activities:hover {
-    box-shadow: 0 0 20px rgba(239, 69, 101, 0.9);
+    box-shadow: 0 0 11px rgba(78, 78, 78, 0.6);
 }
 
 .tile-container-activities:hover {
-    background-color: rgba(100, 162, 206, 0.9);
+    background-color: rgba(100, 162, 206, 0.2);
     transition: background-position 0.2s, background-size 0s;
-    color: rgb(120, 49, 20);
+    color: black;
 }
 
 .tile-container-activities:active {
     box-shadow: 0 0 9e9Q inset #0009;
     background-color: rgba(100, 162, 206, 0.3);
-    color: rgba(120, 49, 20, 0.9);
+    color: white;
 }
 
 .tile-container {

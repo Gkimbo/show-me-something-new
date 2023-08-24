@@ -58,8 +58,12 @@ const RegistrationForm = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
         if (validateInput(userPayload)) {
-            makeNewUser(userPayload).then(() => {
-                setShouldRedirect(true);
+            makeNewUser(userPayload).then((resp) => {
+                if (resp === "User already exists") {
+                    setErrors({ exists: resp });
+                } else {
+                    setShouldRedirect(true);
+                }
             });
         }
     };
@@ -72,7 +76,11 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        window.location.href = "/";
+        if (Object.keys(errors).length === 0) {
+            window.location.href = "/";
+        } else {
+            setShouldRedirect(false);
+        }
     }
 
     return (
@@ -144,6 +152,7 @@ const RegistrationForm = () => {
                                     className="button-1-sign-in"
                                     value="Register"
                                 />
+                                <FormError error={errors.exists} />
                             </div>
                         </div>
                     </form>
