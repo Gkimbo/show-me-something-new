@@ -6,6 +6,7 @@ import CreatableSelect from "react-select/creatable";
 const AddPreferenceForm = (props) => {
     const [newPreference, setNewPreference] = useState({
         name: "",
+        icon: '<i class="fa-solid fa-user-plus"></i>',
     });
     const handleInputChange = (event) => {
         setNewPreference({
@@ -23,6 +24,7 @@ const AddPreferenceForm = (props) => {
     const clearForm = () => {
         setNewPreference({
             name: "",
+            icon: '<i class="fa-solid fa-user-plus"></i>',
         });
     };
     return (

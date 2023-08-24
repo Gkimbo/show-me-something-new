@@ -16,6 +16,7 @@ class Preference extends unique(Model) {
             required: ["name"],
             properties: {
                 name: { type: "string" },
+                icon: { type: "string" },
             },
         };
     }

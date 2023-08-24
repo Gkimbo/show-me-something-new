@@ -12,9 +12,18 @@ const ActivitiesList = (props) => {
     }, []);
 
     const activitiesList = activities.map((activity) => {
-        return <ActivityTile key={activity.id} id={activity.id} name={activity.name} />;
+        return (
+            <ActivityTile
+                key={activity.id}
+                id={activity.id}
+                name={activity.name}
+                icon={activity.icon}
+            />
+        );
     });
-    return <div className="grid-x grid-margin-x grid-margin-y">{activitiesList}</div>;
+    return (
+        <div className="grid-x grid-margin-x grid-margin-y activity-tiles">{activitiesList}</div>
+    );
 };
 
 export default ActivitiesList;

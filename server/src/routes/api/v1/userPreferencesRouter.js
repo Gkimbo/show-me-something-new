@@ -1,6 +1,7 @@
 import express from "express";
 import { ValidationError } from "objection";
 import { Preference, UserPreference, User } from "../../../models/index.js";
+import _ from "lodash";
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import AddPreferenceToDatabase from "../../../services/AddPreferenceToDatabase.js";
 import PreferenceSerializer from "../../../serializers/PreferenceSerializer.js";
@@ -37,6 +38,7 @@ userPreferencesRouter.delete("/:preferenceId", async (req, res) => {
 userPreferencesRouter.patch("/:preferenceId", async (req, res) => {
     const editedPreference = cleanUserInput(req.body);
     const lowercasePreference = editedPreference.name.toLowerCase();
+    const upperCase = _.upperFirst(lowercasePreference);
     try {
         const userPreferenceToDelete = await UserPreference.query().findOne({
             preferenceId: req.params.preferenceId,
@@ -45,7 +47,7 @@ userPreferencesRouter.patch("/:preferenceId", async (req, res) => {
         await userPreferenceToDelete.$query().delete();
         const user = await User.query().findOne({ id: req.user.id });
         await AddPreferenceToDatabase.addOnePreference(editedPreference.name, user);
-        const preference = await Preference.query().findOne({ name: lowercasePreference });
+        const preference = await Preference.query().findOne({ name: upperCase });
         const serializedPreference = PreferenceSerializer.getSummaryOfOne(preference);
         return res.status(201).json(serializedPreference);
     } catch (error) {
