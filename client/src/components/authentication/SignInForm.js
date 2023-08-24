@@ -51,6 +51,9 @@ const SignInForm = () => {
                 setShouldRedirect(true);
             }
         } catch (err) {
+            if (err.message === "401 (Unauthorized)") {
+                setErrors({ ...errors, unauthorized: "No user found - please sign-up" });
+            }
             console.error(`Error in fetch: ${err.message}`);
         }
     };
@@ -69,7 +72,7 @@ const SignInForm = () => {
     return (
         <div className="grid-x container-manage" onSubmit={onSubmit}>
             <div className="cell small-12">
-                <h1>Sign-In</h1>
+                <h1 className="createable-select-title">Sign-In</h1>
             </div>
             <form>
                 <div className="cell small-12">
@@ -100,6 +103,7 @@ const SignInForm = () => {
                     <div>
                         <input type="submit" className="button-1-sign-in" value="Sign In" />
                     </div>
+                    <FormError error={errors.unauthorized} />
                 </div>
             </form>
             <p className="alt-link cell small-12">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import makeNewUser from "../../services/makeNewUser";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import options from "../../services/userSelections";
 
@@ -58,8 +58,12 @@ const RegistrationForm = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
         if (validateInput(userPayload)) {
-            makeNewUser(userPayload).then(() => {
-                setShouldRedirect(true);
+            makeNewUser(userPayload).then((resp) => {
+                if (resp === "User already exists") {
+                    setErrors({ exists: resp });
+                } else {
+                    setShouldRedirect(true);
+                }
             });
         }
     };
@@ -72,7 +76,11 @@ const RegistrationForm = () => {
     };
 
     if (shouldRedirect) {
-        window.location.href = "/";
+        if (Object.keys(errors).length === 0) {
+            window.location.href = "/";
+        } else {
+            setShouldRedirect(false);
+        }
     }
 
     return (
@@ -80,7 +88,7 @@ const RegistrationForm = () => {
             <div className="grid-x">
                 <div className="container-3">
                     <div className="cell small-12">
-                        <h1>Sign-up</h1>
+                        <h1 className="createable-select-title">Sign-up</h1>
                     </div>
                     <form onSubmit={onSubmit}>
                         <div className="cell small-12">
@@ -144,9 +152,16 @@ const RegistrationForm = () => {
                                     className="button-1-sign-in"
                                     value="Register"
                                 />
+                                <FormError error={errors.exists} />
                             </div>
                         </div>
                     </form>
+                    <p className="sign-in-link cell small-12">
+                        Already have an account?
+                        <Link to="/landing" className="button-toggle-1">
+                            Sign-In Here
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

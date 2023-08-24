@@ -14,6 +14,9 @@ const makeNewUser = async (input) => {
         }
         const userData = await response.json();
     } catch (err) {
+        if (err.message === "422 (Unprocessable Entity)") {
+            return "User already exists";
+        }
         console.error(`Error in fetch: ${err.message}`);
     }
 };

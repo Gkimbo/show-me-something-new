@@ -184,7 +184,7 @@ const ActivitiesAroundMeMap = (props) => {
                     </div>
                 ) : null}
             </div>
-            <div className="cell small-12 medium-6 ">
+            <div className="cell small-12 medium-6 map-surround">
                 <div id="map" className="container-4-map"></div>
             </div>
         </div>

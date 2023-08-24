@@ -14,10 +14,10 @@ const ResultTile = (props) => {
     };
     return (
         <div
-            className={`small-12 medium-6 large-4 tile${isSelectedMarker ? "selected" : ""}`}
+            className={`cell small-12 medium-6 large-4 tile${isSelectedMarker ? "selected" : ""}`}
             onClick={handleTileClick}
         >
-            <div className="tile-container">
+            <div className="tile-container cell small-12">
                 {props.result.photos ? (
                     <img
                         src={`${props.result.photos && props.result.photos[0].getUrl()}`}

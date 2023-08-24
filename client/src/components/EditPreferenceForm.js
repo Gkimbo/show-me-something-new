@@ -32,9 +32,13 @@ const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <Text lg="20px">{`Edit Your ${preference.name} interest!`}</Text>
+                    <Text
+                        lg="20px"
+                        className="createable-select-title"
+                    >{`Edit Your ${preference.name} interest!`}</Text>
                     <CreatableSelect
                         isClearable
+                        className="createable-select"
                         options={options}
                         onChange={handleInputChange}
                         focusBorderColor="#13a200"
