@@ -15,6 +15,7 @@ const HomePage = (props) => {
 
     return (
         <div className="grid-x home-page-div">
+            <h1 className="home-title">Explore your surroundings</h1>
             <div className="cell small-12">
                 <div className="container-button">
                     <style>{`.container-button{background-image: url(${imageUrl})}`}</style>

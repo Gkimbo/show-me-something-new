@@ -156,7 +156,7 @@ const ActivitiesAroundMeMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
-                <h1 className="page-title">What you like near you!</h1>
+                <h1 className="page-title-1">What you like near you!</h1>
                 <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
