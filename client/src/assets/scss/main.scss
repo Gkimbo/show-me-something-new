@@ -485,7 +485,7 @@ $button-margin: 0.5rem;
     align-items: center;
     height: 83%;
     width: 75%;
-    margin: 5% auto;
+    margin: 10% auto;
     padding: 5%;
     border: 1px solid #094067;
     background-color: rgba(255, 255, 255, 0.9);
@@ -494,14 +494,10 @@ $button-margin: 0.5rem;
     text-align: center;
     overflow: hidden;
 
-    @media (max-width: 1300px) {
-        margin: 8% auto 2% auto;
-        margin-bottom: 0;
-    }
-
     @media (max-width: 931px) {
         margin: 10% auto 2% auto;
         font-size: medium;
+        margin-bottom: 0;
     }
 
     @media (max-width: 768px) {
@@ -583,7 +579,7 @@ $button-margin: 0.5rem;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
     @media (max-width: 1480px) {
-        margin: 7% auto 2% auto;
+        margin: 8% auto 2% auto;
         height: 60%;
         width: 60%;
     }
@@ -991,6 +987,10 @@ $button-margin: 0.5rem;
     @media (max-width: 500px) {
         height: 3vh;
     }
+}
+
+.tile-container li {
+    list-style-type: none;
 }
 .selected .tile-container {
     font-family: var(--font-family);
