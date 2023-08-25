@@ -107,11 +107,11 @@ const UpdatePreferences = (props) => {
     });
     return (
         <div className="grid-x">
-            <div className="cell small-12 activity-title-1">
+            <div className="cell small-12 activity-title-2">
                 <h1 className="page-title">Manage your interests here!</h1>
             </div>
             <div className="cell small-12 medium-6 list-div">
-                <div className="container-manage">
+                <div className="container-manage-update">
                     <div className="grid-x">{listUsersPreference}</div>
                 </div>
             </div>

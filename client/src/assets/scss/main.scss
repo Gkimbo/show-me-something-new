@@ -314,6 +314,10 @@ $button-margin: 0.5rem;
     margin: 2px auto;
     border-radius: 5px;
     width: 50%;
+    @media (max-width: 476px) {
+        font-size: 0.8rem;
+        width: 40%;
+    }
 }
 
 .button-toggle {
@@ -451,6 +455,27 @@ $button-margin: 0.5rem;
     border-radius: 5px;
     text-align: center;
     overflow: scroll;
+}
+.container-manage-update {
+    font-family: var(--font-family);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 83%;
+    width: 75%;
+    margin: 0 auto;
+    padding: 5%;
+    border: 1px solid #094067;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+
+    @media (max-width: 636px) {
+        font-size: small;
+    }
 }
 .container-manage {
     font-family: var(--font-family);
@@ -673,12 +698,18 @@ $button-margin: 0.5rem;
     align-items: center;
     height: fit-content;
     width: 75%;
-    margin: 10% auto;
+    margin: 0 auto;
     padding: 5%;
     border: 1px solid #094067;
     color: #000000;
     border-radius: 5px;
     text-align: center;
+    @media (max-width: 500px) {
+        font-size: x-small;
+    }
+    @media (max-width: 380px) {
+        font-size: xx-small;
+    }
 }
 
 .container-form:hover {
@@ -688,6 +719,12 @@ $button-margin: 0.5rem;
 .createable-select {
     min-width: 15rem;
     margin: 5% auto;
+    @media (max-width: 800px) {
+        min-width: 12rem;
+    }
+    @media (max-width: 411px) {
+        min-width: 10rem;
+    }
 }
 
 .createable-select-title {
@@ -867,6 +904,23 @@ $button-margin: 0.5rem;
         margin-top: 20%;
     }
 }
+.activity-title-2 {
+    text-align: center;
+    align-items: center;
+    margin-top: 7%;
+    @media (max-width: 837px) {
+        margin-top: 10%;
+    }
+    @media (max-width: 668px) {
+        margin-top: 13%;
+    }
+    @media (max-width: 480px) {
+        margin-top: 16%;
+    }
+    @media (max-width: 400px) {
+        margin-top: 20%;
+    }
+}
 
 .tile-container-activities {
     font-family: var(--font-family);
@@ -1019,6 +1073,9 @@ $button-margin: 0.5rem;
 
 .interest-title {
     font-size: 1.5rem;
+    @media (max-width: 636px) {
+        font-size: small;
+    }
 }
 
 .landing-paragraph {
@@ -1109,9 +1166,6 @@ $button-margin: 0.5rem;
 
     .nav-bar li {
         margin: 0 $button-margin;
-    }
-    .container-form {
-        margin: 5% auto;
     }
 
     .list-div {
