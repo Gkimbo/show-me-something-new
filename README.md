@@ -2,10 +2,10 @@
 
 # WithinReach ![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)
 
+WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. The Google Maps API has been integrated into a React web app with a PostgreSQL database. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
+
 </div>
 <div align="left">
-WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. The Google Maps API has been integrated into a React web app with a PostgreSQL database. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
-##
 
 -   [🌱 Install](#-install)
 -   [🚀 Features](#-features)
