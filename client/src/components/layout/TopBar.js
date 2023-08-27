@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ActivitySearchBar from "../ActivitySearchBar";
 import SignOutButton from "../authentication/SignOutButton";
 import Logo from "../Logo";
 
@@ -21,6 +22,9 @@ const TopBar = ({ user }) => {
                 <Link to="/">
                     <Logo />
                 </Link>
+            </div>
+            <div className="nave-bar-center">
+                <ActivitySearchBar />
             </div>
             <div className="nav-bar-right">
                 <ul>{user ? authenticatedListItems : null}</ul>
