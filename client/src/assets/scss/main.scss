@@ -383,20 +383,18 @@ $button-margin: 0.5rem;
 }
 
 .button-toggle-1 {
-    @media (max-width: 2000px) {
-        font-family: system-ui, sans-serif;
-        font-size: 0.8rem;
-        cursor: pointer;
-        padding: 0.6em 2em;
-        font-weight: bold;
-        border: none;
-        color: var(--button-text);
-        margin: 5px auto;
-        border-radius: 5px;
-        width: 50%;
-        text-align: center;
-        margin-left: 2%;
-    }
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0.6em 2em;
+    font-weight: bold;
+    border: none;
+    color: var(--button-text);
+    margin: 5px auto;
+    border-radius: 5px;
+    width: 50%;
+    text-align: center;
+    margin-left: 2%;
 
     @media (max-width: 721px) {
         font-size: 0.6rem;
@@ -471,7 +469,7 @@ $button-margin: 0.5rem;
     color: #000000;
     border-radius: 5px;
     text-align: center;
-    overflow: hidden;
+    overflow: scroll;
 
     @media (max-width: 636px) {
         font-size: small;
