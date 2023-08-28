@@ -65,8 +65,11 @@ touch .env
 ```
 
 10. Copy the keys from the .env.example file into it and add your own api keys.
-    you will need keys from the following websites:
+    <br/>
+    You will need keys from the following websites:
+    <br/>
     <a href="https://api-ninjas.com/api/city">API-Ninja</a>
+    <br/>
     <a href="https://unsplash.com/developers">Unsplash-API</a>
 
 You will also need the google maps api key!
