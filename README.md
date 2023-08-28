@@ -82,7 +82,7 @@ yarn run dev
 ## 🚀 Features
 
 1. Landing Page: When a user visits the website, they will see the landing page. This page will describe the app and have a form for signing in. Under the form, there is a link to allow the user to sign up.
-   <a href="https://within-reach-10b07fcd97a3.herokuapp.com/landing"><img src="photos/Landing-page.png" width="100" alt="map"/></a>
+   <a href="https://within-reach-10b07fcd97a3.herokuapp.com/landing"><img src="photos/Landing-page.png" width="200" alt="map"/></a>
 
 2. In order to sign up the user will have to fill out all fields and pick at least on thing that interests them:
 
@@ -94,7 +94,7 @@ yarn run dev
     - A list of activities that the user can select. Upon selecting an activity, the user will be shown a map of places where they can engage in that activity.
     - A list of popular destinations with city names and scrolling pictures. If the user selects a city, they will be directed to a map of that city displaying their points of interest.
 
-    <a href="https://within-reach-10b07fcd97a3.herokuapp.com"><img src="photos/Home-page.png" width="100" alt="map"/></a>
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com"><img src="photos/Home-page.png" width="200" alt="map"/></a>
 
 4. Update Interests: Users can update their interests at any time. In the navigation bar at the top of the page, there is a button called "Update Interests" that will direct the user to a page with a list of their interests and a form on the right to add new interests.
 
@@ -102,7 +102,7 @@ yarn run dev
     - Clicking the edit button will replace the "Add New Interest" form with an edit form.
     - The user can always click a button under the edit form to return to the "Add Interest" form.
 
-    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/manage-preferences"><img src="photos/Manage-Page.png" width="100" alt="map"/></a>
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/manage-preferences"><img src="photos/Manage-Page.png" width="200" alt="map"/></a>
 
 5. Map: Users can access any map from any page by clicking the icon in the top left of the navigation bar. This action will take the user to the home page, where they can click on the "Click Me for Things to Do!" button, leading them to a map displaying nearby points of interest.
 
@@ -110,7 +110,7 @@ yarn run dev
     - Additionally, the map page presents a list of interesting things around the user to the left of the map.
     - Clicking on one of the points of interest will expand its details, providing the user with more information, including the address of the attraction.
 
-    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/my-activities"><img src="photos/Map.png" width="100" alt="map"/></a>
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/my-activities"><img src="photos/Map.png" width="200" border-radius="20%" alt="map"/></a>
 
 ## 🌴 Technologies
 
