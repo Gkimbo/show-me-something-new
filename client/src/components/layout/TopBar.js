@@ -18,7 +18,7 @@ const TopBar = ({ user }) => {
 
     return (
         <div className="grid-x nav-bar">
-            <div className="cell small-12 medium-4">
+            <div className="cell small-6 medium-4">
                 <div className="nav-bar-left">
                     <Link to="/">
                         <Logo />
@@ -30,7 +30,7 @@ const TopBar = ({ user }) => {
                     <ActivitySearchBar />
                 </div>
             </div>
-            <div className="cell small-12 medium-4 ">
+            <div className="cell small-6 medium-4 ">
                 <div className="nav-bar-right">
                     <ul>{user ? authenticatedListItems : null}</ul>
                 </div>

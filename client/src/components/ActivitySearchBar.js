@@ -27,7 +27,8 @@ const ActivitySearchBar = (props) => {
             <label htmlFor="search-bar">
                 <InputGroup size="md">
                     <Input
-                        pr="9rem"
+                        className="top-search-bar"
+                        // pr="9rem"
                         bg="white"
                         type="text"
                         placeholder="Type new activity"
