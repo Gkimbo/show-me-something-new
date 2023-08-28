@@ -110,7 +110,9 @@ yarn run dev
     - Additionally, the map page presents a list of interesting things around the user to the left of the map.
     - Clicking on one of the points of interest will expand its details, providing the user with more information, including the address of the attraction.
 
-    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/my-activities"><img src="photos/Map.png" width="200" style="border-radius:20px;" alt="map"/></a>
+<a href="https://within-reach-10b07fcd97a3.herokuapp.com/my-activities" style="border-radius: 20px;">
+  <img src="photos/Map.png" width="200" alt="map"/>
+</a>
 
 ## 🌴 Technologies
 
