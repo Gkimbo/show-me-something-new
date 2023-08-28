@@ -64,16 +64,12 @@ cd server
 touch .env
 ```
 
-10. Copy the keys below into it and add your own api keys:
+10. Copy the keys from the .env.example file into it and add your own api keys.
+    you will need keys from the following websites:
+    <a href="https://api-ninjas.com/api/city">API-Ninja</a>
+    <a href="https://unsplash.com/developers">Unsplash-API</a>
 
-```dosini
-SESSION_SECRET="YOURSECRETKEY"
-API_NINJA_API_KEY=""
-UNSPLASH_PHOTO_ACCESS_KEY=""
-UNSPLASH_PHOTO_SECRET_KEY=""
-```
-
-You will also need the google maps api key as well!
+You will also need the google maps api key!
 
 11. Once you're done all that its time to launch the app
 
@@ -86,6 +82,7 @@ yarn run dev
 ## 🚀 Features
 
 1. Landing Page: When a user visits the website, they will see the landing page. This page will describe the app and have a form for signing in. Under the form, there is a link to allow the user to sign up.
+   <a href="https://within-reach-10b07fcd97a3.herokuapp.com/landing"><img src="photos/Landing-page.png" alt="map"/></a>
 
 2. In order to sign up the user will have to fill out all fields and pick at least on thing that interests them:
 
@@ -97,17 +94,23 @@ yarn run dev
     - A list of activities that the user can select. Upon selecting an activity, the user will be shown a map of places where they can engage in that activity.
     - A list of popular destinations with city names and scrolling pictures. If the user selects a city, they will be directed to a map of that city displaying their points of interest.
 
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com"><img src="photos/Home-page.png" alt="map"/></a>
+
 4. Update Interests: Users can update their interests at any time. In the navigation bar at the top of the page, there is a button called "Update Interests" that will direct the user to a page with a list of their interests and a form on the right to add new interests.
 
     - In the list of the user's interests, they can click on an edit button to modify that interest, and a delete button to remove it.
     - Clicking the edit button will replace the "Add New Interest" form with an edit form.
     - The user can always click a button under the edit form to return to the "Add Interest" form.
 
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/manage-preferences"><img src="photos/Manage-Page.png" alt="map"/></a>
+
 5. Map: Users can access any map from any page by clicking the icon in the top left of the navigation bar. This action will take the user to the home page, where they can click on the "Click Me for Things to Do!" button, leading them to a map displaying nearby points of interest.
 
     - On the map page, a search bar at the top allows the user to enter any city and view their points of interest on the map.
     - Additionally, the map page presents a list of interesting things around the user to the left of the map.
     - Clicking on one of the points of interest will expand its details, providing the user with more information, including the address of the attraction.
+
+    <a href="https://within-reach-10b07fcd97a3.herokuapp.com/my-activities"><img src="photos/Map.png" alt="map"/></a>
 
 ## 🌴 Technologies
 
