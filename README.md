@@ -2,7 +2,7 @@
 
 # WithinReach ![NPM version](https://img.shields.io/badge/npm-v8.19.2-blue)
 
-<a href="https://within-reach-10b07fcd97a3.herokuapp.com">Click me to got to website! <img src="photos/favicon.png" width="100" alt="Pin Icon"/></a>
+<a href="https://within-reach-10b07fcd97a3.herokuapp.com"><img src="photos/favicon.png" width="50" alt="Pin Icon"/><br/>Link to website! </a>
 
 WithinReach is a location-based platform that instantly provides personalized recommendations for tailored places, events, and experiences; Eliminating the need for extensive searching. The Google Maps API has been integrated into a React web app with a PostgreSQL database. API requests are made from the React frontend to the Express backend using the 'fetch' method, and third-party API requests are handled using the 'got' library on the backend.
 
