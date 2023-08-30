@@ -5,6 +5,7 @@ import makeNewUser from "../../services/makeNewUser";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import options from "../../services/userSelections";
+import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
@@ -134,13 +135,12 @@ const RegistrationForm = () => {
                             <div className="preferences-div">
                                 <label htmlFor="preferences">
                                     Type things you like!
-                                    <Select
+                                    <ReactMultiSelectCheckboxes
                                         placeholder="Choose all the interest you'd like!"
                                         isMulti
                                         name="preferences"
                                         options={options}
                                         className="basic-multi-select"
-                                        classNamePrefix="select"
                                         onChange={onPreferencesChange}
                                     />
                                     <FormError error={errors.preferences} />
