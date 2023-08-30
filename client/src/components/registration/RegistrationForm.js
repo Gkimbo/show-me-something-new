@@ -135,14 +135,6 @@ const RegistrationForm = () => {
                             <div className="preferences-div">
                                 <label htmlFor="preferences">
                                     Type things you like!
-                                    {/* <Select
-                                        
-                                        
-                                        options={options}
-                                        
-                                        classNamePrefix="select"
-
-                                    /> */}
                                     <ReactMultiSelectCheckboxes
                                         placeholder="Choose all the interest you'd like!"
                                         isMulti
