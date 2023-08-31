@@ -22,6 +22,7 @@ const ResultTile = (props) => {
             tileElement.scrollIntoView({ behavior: "smooth" });
         }
     };
+
     return (
         <div
             id={`result-tile-${markerLocation.lat}-${markerLocation.lng}`}
