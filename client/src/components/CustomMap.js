@@ -132,7 +132,7 @@ const CustomMap = (props) => {
                 const request = {
                     query: activity.name,
                     location: chosenLocation,
-                    radius: "100",
+                    radius: "150",
                 };
 
                 service.textSearch(request, (results, status) => {
