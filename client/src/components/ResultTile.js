@@ -10,11 +10,23 @@ const ResultTile = (props) => {
         } else {
             props.setSelectedMarker(markerLocation);
             props.centerMapOnMarker(markerLocation);
+            scrollToTile();
         }
     };
+
+    const scrollToTile = () => {
+        const tileElement = document.getElementById(
+            `result-tile-${markerLocation.lat}-${markerLocation.lng}`
+        );
+        if (tileElement) {
+            tileElement.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <div
-            className={`cell small-12 medium-6 large-4 tile${isSelectedMarker ? "selected" : ""}`}
+            id={`result-tile-${markerLocation.lat}-${markerLocation.lng}`}
+            className={`cell small-12 medium-6 large-4 tile${isSelectedMarker ? " selected" : ""}`}
             onClick={handleTileClick}
         >
             <div className="tile-container cell small-12">

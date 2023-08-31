@@ -132,12 +132,15 @@ const CustomMap = (props) => {
                 const request = {
                     query: activity.name,
                     location: chosenLocation,
-                    radius: "100",
+                    radius: "150",
                 };
 
                 service.textSearch(request, (results, status) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        results.activity = activity.name;
+                        results.forEach((result) => {
+                            result.activity = activity.name;
+                        });
+
                         setSearchResults(results);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);
