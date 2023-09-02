@@ -156,7 +156,7 @@ const CityMap = (props) => {
 
                 <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
-            <div className="cell small-12 medium-6 container-4">
+            <div className="cell small-12 medium-6 container-of-containers">
                 <div className="cell small-12"></div>
                 {chosenLocation.lat === 42.361 ? (
                     <Spinner
