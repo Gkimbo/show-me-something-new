@@ -83,6 +83,9 @@ const ActivitiesAroundMeMap = (props) => {
 
             service.textSearch(request, function (results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach((result) => {
+                        result.activity = searchQuery;
+                    });
                     setSearchResults(results);
                     results.forEach((result) => {
                         let resultContent;
@@ -156,7 +159,7 @@ const ActivitiesAroundMeMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
-                <h1 className="page-title-1">What you like near you!</h1>
+                <h1 className="page-title-1">{searchQuery} near you!</h1>
                 <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
