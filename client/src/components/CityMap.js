@@ -124,7 +124,10 @@ const CityMap = (props) => {
 
                 service.textSearch(request, (results, status) => {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        setSearchResults(results);
+                        results.forEach((result) => {
+                            result.activity = activity.name;
+                        });
+                        setSearchResults((prevResults) => [...prevResults, ...results]);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(chosenLocation);
                     } else {
