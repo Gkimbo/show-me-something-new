@@ -14,7 +14,7 @@ const ResultList = (props) => {
     const activityContainers = Object.keys(resultsByActivity).map((activity) => {
         const results = resultsByActivity[activity];
         return (
-            <div key={activity} className="activity-container">
+            <div key={activity} className="container-4">
                 <h2>{activity}</h2>
                 <div className="grid-x grid-margin-x grid-margin-y">
                     {results.map((result) => (
@@ -31,7 +31,6 @@ const ResultList = (props) => {
             </div>
         );
     });
-    console.log(activityContainers);
 
     return <div>{activityContainers}</div>;
 };

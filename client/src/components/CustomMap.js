@@ -128,7 +128,7 @@ const CustomMap = (props) => {
                 });
             };
 
-            customActivities.forEach((activity) => {
+            customActivities.map((activity) => {
                 const request = {
                     query: activity.name,
                     location: chosenLocation,
@@ -140,8 +140,7 @@ const CustomMap = (props) => {
                         results.forEach((result) => {
                             result.activity = activity.name;
                         });
-
-                        setSearchResults(results);
+                        setSearchResults((prevResults) => [...prevResults, ...results]);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);
                     } else {
@@ -149,6 +148,7 @@ const CustomMap = (props) => {
                     }
                 });
             });
+
             setSelectedMarker(null);
         });
     }, [chosenLocation]);
