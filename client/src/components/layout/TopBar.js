@@ -26,9 +26,7 @@ const TopBar = ({ user }) => {
                 </div>
             </div>
             <div className="cell small-12 medium-4">
-                <div className="nave-bar-center">
-                    <ActivitySearchBar />
-                </div>
+                <div className="nave-bar-center">{user ? <ActivitySearchBar /> : null}</div>
             </div>
             <div className="cell small-6 medium-4 ">
                 <div className="nav-bar-right">
