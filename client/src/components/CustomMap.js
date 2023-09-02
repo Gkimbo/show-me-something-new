@@ -170,7 +170,7 @@ const CustomMap = (props) => {
                 <h1 className="page-title-1">What you like near you!</h1>
                 <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
-            <div className="cell small-12 medium-6 container-4">
+            <div className="cell small-12 medium-6 container-of-containers">
                 <div className="cell small-12"></div>
                 {chosenLocation === null ? (
                     <Spinner
