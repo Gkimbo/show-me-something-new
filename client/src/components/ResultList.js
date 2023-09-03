@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useState } from "react";
 import ResultTile from "./ResultTile";
 
 const ResultList = (props) => {
+    const [selectedActivity, setSelectedActivity] = useState(null);
     const resultsByActivity = {};
     props.searchResults.forEach((result) => {
         if (result.activity in resultsByActivity) {
@@ -10,6 +11,15 @@ const ResultList = (props) => {
             resultsByActivity[result.activity] = [result];
         }
     });
+
+    const handleClick = (event) => {
+        console.log(event);
+        if (selectedActivity === event) {
+            setSelectedActivity(null);
+        } else {
+            setSelectedActivity(event);
+        }
+    };
 
     let activityContainers;
     if (props.searchResults.length <= 20) {
@@ -35,21 +45,28 @@ const ResultList = (props) => {
             const results = resultsByActivity[activity];
             return (
                 <div key={activity}>
-                    <h2 className="result-container-title">{activity}</h2>
-                    <div className="container-of-tiles">
-                        <div className="grid-x grid-margin-x grid-margin-y">
-                            {results.map((result) => (
-                                <ResultTile
-                                    key={result.place_id}
-                                    result={result}
-                                    onTileClick={props.centerMapOnMarker}
-                                    markerLocation={props.markerLocation}
-                                    setSelectedMarker={props.setSelectedMarker}
-                                    centerMapOnMarker={props.centerMapOnMarker}
-                                />
-                            ))}
-                        </div>
+                    <div
+                        className="result-container-title button-1-activity"
+                        onClick={() => handleClick(activity)}
+                    >
+                        {activity}
                     </div>
+                    {selectedActivity === activity ? (
+                        <div className="container-of-tiles">
+                            <div className="grid-x grid-margin-x grid-margin-y">
+                                {results.map((result) => (
+                                    <ResultTile
+                                        key={result.place_id}
+                                        result={result}
+                                        onTileClick={props.centerMapOnMarker}
+                                        markerLocation={props.markerLocation}
+                                        setSelectedMarker={props.setSelectedMarker}
+                                        centerMapOnMarker={props.centerMapOnMarker}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
                 </div>
             );
         });
