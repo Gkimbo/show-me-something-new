@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { Spinner } from "@chakra-ui/react";
+import _ from "lodash";
 
 import ResultList from "./ResultList";
 import LocationSearchBar from "./LocationSearchBar";
@@ -159,7 +160,10 @@ const ActivitiesAroundMeMap = (props) => {
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
-                <h1 className="page-title-1">{searchQuery} near you!</h1>
+                <h1 className="page-title-1">
+                    {_.upperFirst(searchQuery)}{" "}
+                    {mapSearchQuery ? `in ${_.upperFirst(mapSearchQuery)}` : "Near you!"}
+                </h1>
                 <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
