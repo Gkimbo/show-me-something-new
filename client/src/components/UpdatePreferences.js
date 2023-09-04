@@ -11,11 +11,16 @@ const UpdatePreferences = (props) => {
     const [editForm, setEditForm] = useState(false);
     const [preference, setPreference] = useState([]);
     const [error, setError] = useState({});
-
     useEffect(() => {
-        GetActivity.getCustomActivities().then((activityData) => {
-            setCustomActivities(activityData);
-        });
+        if (props.user.username === "admin") {
+            GetActivity.getAllActivities().then((activityData) => {
+                setCustomActivities(activityData);
+            });
+        } else {
+            GetActivity.getCustomActivities().then((activityData) => {
+                setCustomActivities(activityData);
+            });
+        }
     }, []);
 
     const removePreference = async (id) => {
@@ -108,7 +113,11 @@ const UpdatePreferences = (props) => {
     return (
         <div className="grid-x">
             <div className="cell small-12 activity-title-2">
-                <h1 className="page-title">Manage your interests here!</h1>
+                <h1 className="page-title">
+                    {props.user.username === "admin"
+                        ? "Manage all interests"
+                        : "Manage your interests here!"}
+                </h1>
             </div>
             <div className="cell small-12 medium-6 list-div">
                 <div className="container-manage-update">

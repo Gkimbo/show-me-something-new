@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Preference, UserPreference } from "../models/index.js";
+import { Preference } from "../models/index.js";
 
 class AddPreferenceToDatabase {
     static async addPreferencesArray(array, user) {
@@ -42,6 +42,20 @@ class AddPreferenceToDatabase {
             }
         }
         return true;
+    }
+
+    static async adminAddPreference(preference) {
+        const lowerCasePreference = preference.toLowerCase();
+        const upperCase = _.upperFirst(lowerCasePreference);
+        const currentPreference = await Preference.query().findOne({
+            name: upperCase,
+        });
+        if (!currentPreference) {
+            await Preference.query().insert({ name: upperCase });
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

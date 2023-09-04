@@ -12,7 +12,6 @@ const ActivitiesAroundMeMap = (props) => {
     const [searchQuery, setSearchQuery] = useState(props.computedMatch.params.name);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    const [mapSearchQuery, setMapSearchQuery] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -46,7 +45,7 @@ const ActivitiesAroundMeMap = (props) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     setChosenLocation(results[0].geometry.location);
                 } else {
-                    setError(`No results found for "${mapSearchQuery}".`);
+                    setError(`No results found for "${props.mapSearchQuery}".`);
                     setSearchResults([]);
                 }
             });
@@ -150,21 +149,27 @@ const ActivitiesAroundMeMap = (props) => {
     }, [chosenLocation]);
 
     useEffect(() => {
-        getCurrentPosition();
+        if (props.mapSearchQuery) {
+            getLocation(props.mapSearchQuery);
+        } else {
+            getCurrentPosition();
+        }
     }, []);
 
     useEffect(() => {
-        getLocation(mapSearchQuery);
-    }, [mapSearchQuery]);
+        getLocation(props.mapSearchQuery);
+    }, [props.mapSearchQuery]);
 
     return (
         <div className="grid-x home-page-div">
             <div className="cell small-12 activity-title-1">
                 <h1 className="page-title-1">
                     {_.upperFirst(searchQuery)}{" "}
-                    {mapSearchQuery ? `in ${_.upperFirst(mapSearchQuery)}` : "Near you!"}
+                    {props.mapSearchQuery
+                        ? `in ${_.upperFirst(props.mapSearchQuery)}`
+                        : "Near you!"}
                 </h1>
-                <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
+                <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
                 <div className="cell small-12"></div>
