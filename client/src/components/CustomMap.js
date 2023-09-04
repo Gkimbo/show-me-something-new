@@ -140,7 +140,7 @@ const CustomMap = (props) => {
                         results.forEach((result) => {
                             result.activity = activity.name;
                         });
-                        setSearchResults((prevResults) => [...prevResults, ...results]);
+                        setSearchResults((prevResults) => [...results, ...prevResults]);
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);
                     } else {
