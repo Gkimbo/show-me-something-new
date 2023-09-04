@@ -17,6 +17,8 @@ import UpdatePreferences from "./UpdatePreferences";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);
+    const [mapSearchQuery, setMapSearchQuery] = useState(null);
+
     const fetchCurrentUser = async () => {
         try {
             const user = await getCurrentUser();
@@ -33,7 +35,11 @@ const App = (props) => {
     return (
         <ChakraProvider>
             <Router>
-                <TopBar user={currentUser} />
+                <TopBar
+                    user={currentUser}
+                    mapSearchQuery={mapSearchQuery}
+                    setMapSearchQuery={setMapSearchQuery}
+                />
                 <Switch>
                     <AuthenticatedRoute
                         exact={true}
@@ -47,6 +53,8 @@ const App = (props) => {
                         path="/my-activities"
                         component={CustomMap}
                         user={currentUser}
+                        mapSearchQuery={mapSearchQuery}
+                        setMapSearchQuery={setMapSearchQuery}
                     />
                     <AuthenticatedRoute
                         exact={true}
@@ -59,12 +67,16 @@ const App = (props) => {
                         path="/:name"
                         component={CityMap}
                         user={currentUser}
+                        mapSearchQuery={mapSearchQuery}
+                        setMapSearchQuery={setMapSearchQuery}
                     />
                     <AuthenticatedRoute
                         exact={true}
                         path="/activity/:name"
                         component={ActivitiesAroundMeMap}
                         user={currentUser}
+                        mapSearchQuery={mapSearchQuery}
+                        setMapSearchQuery={setMapSearchQuery}
                     />
                     <Route exact path="/users/new" component={RegistrationForm} />
                 </Switch>

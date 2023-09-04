@@ -4,7 +4,7 @@ import ActivitySearchBar from "../ActivitySearchBar";
 import SignOutButton from "../authentication/SignOutButton";
 import Logo from "../Logo";
 
-const TopBar = ({ user }) => {
+const TopBar = ({ user, mapSearchQuery }) => {
     const authenticatedListItems = [
         <li key="sign-up">
             <Link to="/manage-preferences" className="button-1 update-button">
@@ -26,7 +26,9 @@ const TopBar = ({ user }) => {
                 </div>
             </div>
             <div className="cell small-12 medium-4">
-                <div className="nave-bar-center">{user ? <ActivitySearchBar /> : null}</div>
+                <div className="nave-bar-center">
+                    {user && !mapSearchQuery ? <ActivitySearchBar /> : null}
+                </div>
             </div>
             <div className="cell small-6 medium-4 ">
                 <div className="nav-bar-right">

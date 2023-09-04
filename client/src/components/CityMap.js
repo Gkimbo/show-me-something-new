@@ -13,7 +13,6 @@ const CityMap = (props) => {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    const [mapSearchQuery, setMapSearchQuery] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -31,7 +30,7 @@ const CityMap = (props) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     setChosenLocation(results[0].geometry.location);
                 } else {
-                    setError(`No results found for "${mapSearchQuery}".`);
+                    setError(`No results found for "${props.mapSearchQuery}".`);
                     setSearchResults([]);
                 }
             });
@@ -139,8 +138,8 @@ const CityMap = (props) => {
     }, [chosenLocation]);
 
     useEffect(() => {
-        getLocation(mapSearchQuery);
-    }, [mapSearchQuery]);
+        getLocation(props.mapSearchQuery);
+    }, [props.mapSearchQuery]);
 
     useEffect(() => {
         GetActivity.getCustomActivities().then((activityData) => {
@@ -154,7 +153,7 @@ const CityMap = (props) => {
             <div className="cell small-12 activity-title-1">
                 <h1 className="page-title-1">{`What you like in ${props.computedMatch.params.name}!`}</h1>
 
-                <LocationSearchBar setMapSearchQuery={setMapSearchQuery} />
+                <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
                 <div className="cell small-12"></div>
