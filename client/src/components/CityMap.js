@@ -76,11 +76,6 @@ const CityMap = (props) => {
                             `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
                     }
 
-                    const infowindow = new google.maps.InfoWindow({
-                        content: resultContent,
-                        ariaLabel: result.name,
-                    });
-
                     const marker = new google.maps.Marker({
                         position: new google.maps.LatLng(
                             result.geometry.location.lat(),
@@ -89,27 +84,24 @@ const CityMap = (props) => {
                         map: map,
                     });
 
-                    marker.addListener("click", () => {
-                        if (result.geometry.location === selectedMarker) {
-                            setSelectedMarker(null);
-                        } else {
-                            setSelectedMarker(result.geometry.location);
-                            infowindow.open(map, marker);
-                        }
+                    const infowindow = new google.maps.InfoWindow({
+                        content: resultContent,
+                        ariaLabel: result.name,
                     });
 
                     marker.addListener("click", () => {
                         if (openInfoWindow) {
-                            openInfoWindow.infoWindow.close();
+                            openInfoWindow.close();
                         }
 
-                        const infowindow = new google.maps.InfoWindow({
-                            content: resultContent,
-                            ariaLabel: result.name,
-                        });
-
-                        infowindow.open(map, marker);
-                        setOpenInfoWindow({ infoWindow: infowindow, marker });
+                        if (result.geometry.location === selectedMarker) {
+                            setSelectedMarker(null);
+                            setOpenInfoWindow(null);
+                        } else {
+                            setSelectedMarker(result.geometry.location);
+                            infowindow.open(map, marker);
+                            setOpenInfoWindow(infowindow);
+                        }
                     });
                 });
             };

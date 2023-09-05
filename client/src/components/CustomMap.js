@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { Spinner } from "@chakra-ui/react";
 
@@ -12,7 +12,10 @@ const CustomMap = (props) => {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
+    console.log("outside useEffect", openInfoWindow);
     const [error, setError] = useState("");
+
+    const mapRef = useRef(null);
 
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
@@ -63,6 +66,7 @@ const CustomMap = (props) => {
                 center: chosenLocation,
                 zoom: 16,
             });
+            mapRef.current = map;
             const userMarker = new google.maps.Marker({
                 position: chosenLocation,
                 map: map,
@@ -89,11 +93,6 @@ const CustomMap = (props) => {
                             `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
                     }
 
-                    const infowindow = new google.maps.InfoWindow({
-                        content: resultContent,
-                        ariaLabel: result.name,
-                    });
-
                     const marker = new google.maps.Marker({
                         position: new google.maps.LatLng(
                             result.geometry.location.lat(),
@@ -102,27 +101,24 @@ const CustomMap = (props) => {
                         map: map,
                     });
 
-                    marker.addListener("click", () => {
-                        if (result.geometry.location === selectedMarker) {
-                            setSelectedMarker(null);
-                        } else {
-                            setSelectedMarker(result.geometry.location);
-                            infowindow.open(map, marker);
-                        }
+                    const infowindow = new google.maps.InfoWindow({
+                        content: resultContent,
+                        ariaLabel: result.name,
                     });
 
                     marker.addListener("click", () => {
                         if (openInfoWindow) {
-                            openInfoWindow.infoWindow.close();
+                            openInfoWindow.close();
                         }
 
-                        const infowindow = new google.maps.InfoWindow({
-                            content: resultContent,
-                            ariaLabel: result.name,
-                        });
-
-                        infowindow.open(map, marker);
-                        setOpenInfoWindow({ infoWindow: infowindow, marker });
+                        if (result.geometry.location === selectedMarker) {
+                            setSelectedMarker(null);
+                            setOpenInfoWindow(null);
+                        } else {
+                            setSelectedMarker(result.geometry.location);
+                            infowindow.open(map, marker);
+                            setOpenInfoWindow(infowindow);
+                        }
                     });
                 });
             };

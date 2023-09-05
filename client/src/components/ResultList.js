@@ -13,7 +13,6 @@ const ResultList = (props) => {
     });
 
     const handleClick = (event) => {
-        console.log(event);
         if (selectedActivity === event) {
             setSelectedActivity(null);
         } else {

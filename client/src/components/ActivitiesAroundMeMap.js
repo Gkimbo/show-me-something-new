@@ -115,26 +115,18 @@ const ActivitiesAroundMeMap = (props) => {
                         });
 
                         marker.addListener("click", () => {
+                            if (openInfoWindow) {
+                                openInfoWindow.close();
+                            }
+
                             if (result.geometry.location === selectedMarker) {
                                 setSelectedMarker(null);
+                                setOpenInfoWindow(null);
                             } else {
                                 setSelectedMarker(result.geometry.location);
                                 infowindow.open(map, marker);
+                                setOpenInfoWindow(infowindow);
                             }
-                        });
-
-                        marker.addListener("click", () => {
-                            if (openInfoWindow) {
-                                openInfoWindow.infoWindow.close();
-                            }
-
-                            const infowindow = new google.maps.InfoWindow({
-                                content: resultContent,
-                                ariaLabel: result.name,
-                            });
-
-                            infowindow.open(map, marker);
-                            setOpenInfoWindow({ infoWindow: infowindow, marker });
                         });
                     });
 
