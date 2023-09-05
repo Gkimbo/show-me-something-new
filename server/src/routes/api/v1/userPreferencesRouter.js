@@ -35,7 +35,9 @@ userPreferencesRouter.post("/", async (req, res) => {
 userPreferencesRouter.delete("/:preferenceId", async (req, res) => {
     if (req.user.username === "admin") {
         try {
-            const preferenceToDelete = await Preference.query().findById(req.params.preferenceId);
+            const preferenceToDelete = await Preference.query()
+                .findById(req.params.preferenceId)
+                .delete();
             return res.status(200).json({ preference: preferenceToDelete });
         } catch (err) {
             return res.status(500).json({ errors: err });
