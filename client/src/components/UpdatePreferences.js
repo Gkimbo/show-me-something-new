@@ -107,6 +107,7 @@ const UpdatePreferences = (props) => {
                 name={activity.name}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                user={props.user}
             />
         );
     });
