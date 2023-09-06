@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ResultTile from "./ResultTile";
 
 const ResultList = (props) => {
-    const [selectedActivity, setSelectedActivity] = useState(null);
     const resultsByActivity = {};
     props.searchResults.forEach((result) => {
         if (result.activity in resultsByActivity) {
@@ -13,10 +12,10 @@ const ResultList = (props) => {
     });
 
     const handleClick = (event) => {
-        if (selectedActivity === event) {
-            setSelectedActivity(null);
+        if (props.selectedActivity === event) {
+            props.setSelectedActivity(null);
         } else {
-            setSelectedActivity(event);
+            props.setSelectedActivity(event);
         }
     };
 
@@ -50,7 +49,7 @@ const ResultList = (props) => {
                     >
                         {activity}
                     </div>
-                    {selectedActivity === activity ? (
+                    {props.selectedActivity === activity ? (
                         <div className="container-of-tiles">
                             <div className="grid-x grid-margin-x grid-margin-y">
                                 {results.map((result) => (

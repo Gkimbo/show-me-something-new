@@ -12,7 +12,7 @@ const CustomMap = (props) => {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    console.log("outside useEffect", openInfoWindow);
+    const [selectedActivity, setSelectedActivity] = useState(null);
     const [error, setError] = useState("");
 
     const mapRef = useRef(null);
@@ -118,6 +118,7 @@ const CustomMap = (props) => {
                             setSelectedMarker(result.geometry.location);
                             infowindow.open(map, marker);
                             setOpenInfoWindow(infowindow);
+                            setSelectedActivity(result.activity);
                         }
                     });
                 });
@@ -186,6 +187,8 @@ const CustomMap = (props) => {
                         centerMapOnMarker={centerMapOnMarker}
                         markerLocation={selectedMarker}
                         setSelectedMarker={setSelectedMarker}
+                        setSelectedActivity={setSelectedActivity}
+                        selectedActivity={selectedActivity}
                     />
                 )}
                 {error ? (
