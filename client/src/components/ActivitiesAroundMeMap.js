@@ -12,6 +12,7 @@ const ActivitiesAroundMeMap = (props) => {
     const [searchQuery, setSearchQuery] = useState(props.computedMatch.params.name);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
+    const [selectedActivity, setSelectedActivity] = useState(null);
     const [error, setError] = useState("");
 
     const loader = new Loader({
@@ -126,6 +127,7 @@ const ActivitiesAroundMeMap = (props) => {
                                 setSelectedMarker(result.geometry.location);
                                 infowindow.open(map, marker);
                                 setOpenInfoWindow(infowindow);
+                                setSelectedActivity(result.activity);
                             }
                         });
                     });
@@ -179,6 +181,8 @@ const ActivitiesAroundMeMap = (props) => {
                         centerMapOnMarker={centerMapOnMarker}
                         markerLocation={selectedMarker}
                         setSelectedMarker={setSelectedMarker}
+                        setSelectedActivity={setSelectedActivity}
+                        selectedActivity={selectedActivity}
                     />
                 )}
                 {error ? (
