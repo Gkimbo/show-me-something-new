@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { Spinner } from "@chakra-ui/react";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Box from "@material-ui/core/Box";
 import _ from "lodash";
 
 import ResultList from "./ResultList";
@@ -168,13 +170,11 @@ const ActivitiesAroundMeMap = (props) => {
             <div className="cell small-12 medium-6 container-4">
                 <div className="cell small-12"></div>
                 {chosenLocation === null ? (
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
+                    <Box pt={0.5}>
+                        <Skeleton variant="rect" width={210} height={118} />
+                        <Skeleton width="35.5%" />
+                        <Skeleton width="35.5%" />
+                    </Box>
                 ) : (
                     <ResultList
                         searchResults={searchResults}
@@ -193,7 +193,11 @@ const ActivitiesAroundMeMap = (props) => {
                 ) : null}
             </div>
             <div className="cell small-12 medium-6 map-surround">
-                <div id="map" className="container-4-map"></div>
+                {chosenLocation === null ? (
+                    <Skeleton variant="rect" width={600} height={800} />
+                ) : (
+                    <div id="map" className="container-4-map"></div>
+                )}
             </div>
         </div>
     );
