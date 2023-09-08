@@ -588,7 +588,8 @@ $button-margin: 0.5rem;
     }
 }
 
-.basic-multi-select {
+.basic-multi-select-reg {
+    width: 20rem;
     max-width: 20rem;
     @media (max-width: 631px) {
         max-width: 13rem;
