@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
-import { Spinner } from "@chakra-ui/react";
 import Skeleton from "@material-ui/lab/Skeleton";
-import Box from "@material-ui/core/Box";
+import { Box, Grid } from "@material-ui/core";
 import _ from "lodash";
 
 import ResultList from "./ResultList";
@@ -11,7 +10,6 @@ import LocationSearchBar from "./LocationSearchBar";
 const ActivitiesAroundMeMap = (props) => {
     const [chosenLocation, setChosenLocation] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
-    const [searchQuery, setSearchQuery] = useState(props.computedMatch.params.name);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [selectedActivity, setSelectedActivity] = useState(null);
@@ -21,6 +19,9 @@ const ActivitiesAroundMeMap = (props) => {
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
         libraries: ["places"],
     });
+
+    const searchQuery = props.computedMatch.params.name;
+    const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const getCurrentPosition = () => {
         if (navigator.geolocation) {
@@ -170,11 +171,17 @@ const ActivitiesAroundMeMap = (props) => {
             <div className="cell small-12 medium-6 container-4">
                 <div className="cell small-12"></div>
                 {chosenLocation === null ? (
-                    <Box pt={0.5}>
-                        <Skeleton variant="rect" width={210} height={118} />
-                        <Skeleton width="35.5%" />
-                        <Skeleton width="35.5%" />
-                    </Box>
+                    <Grid container>
+                        {skeletonArray.map((num) => {
+                            return (
+                                <Box marginRight={0.7} my={5}>
+                                    <Skeleton variant="rect" width={150} height={115} />
+                                    <Skeleton />
+                                    <Skeleton />
+                                </Box>
+                            );
+                        })}
+                    </Grid>
                 ) : (
                     <ResultList
                         searchResults={searchResults}
