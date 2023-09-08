@@ -3,9 +3,14 @@ import FormError from "../layout/FormError";
 import config from "../../config";
 import makeNewUser from "../../services/makeNewUser";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 import options from "../../services/userSelections";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import ListItemText from "@material-ui/core/ListItemText";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
@@ -17,6 +22,17 @@ const RegistrationForm = () => {
 
     const [errors, setErrors] = useState({});
     const [shouldRedirect, setShouldRedirect] = useState(false);
+
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
 
     const validateInput = (payload) => {
         const { email, password, passwordConfirmation, preferences } = payload;
@@ -47,9 +63,7 @@ const RegistrationForm = () => {
     };
 
     const onPreferencesChange = (event) => {
-        const eventArray = event.map((eachEvent) => {
-            return eachEvent.value;
-        });
+        const eventArray = event.target.value;
         setUserPayload({
             ...userPayload,
             preferences: eventArray,
@@ -133,18 +147,34 @@ const RegistrationForm = () => {
                                 </label>
                             </div>
                             <div className="preferences-div">
-                                <label htmlFor="preferences">
-                                    Type things you like!
-                                    <ReactMultiSelectCheckboxes
-                                        placeholder="Choose all the interest you'd like!"
-                                        isMulti
-                                        name="preferences"
-                                        options={options}
-                                        className="basic-multi-select"
+                                <FormControl className="basic-multi-select-reg">
+                                    <InputLabel id="demo-mutiple-checkbox-label">
+                                        Interests
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-mutiple-checkbox-label"
+                                        id="demo-mutiple-checkbox"
+                                        multiple
+                                        value={userPayload.preferences}
                                         onChange={onPreferencesChange}
-                                    />
-                                    <FormError error={errors.preferences} />
-                                </label>
+                                        input={<Input />}
+                                        renderValue={(selected) => selected.join(", ")}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {options.map((name) => (
+                                            <MenuItem key={name.value} value={name.value}>
+                                                <Checkbox
+                                                    checked={
+                                                        userPayload.preferences.indexOf(
+                                                            name.value
+                                                        ) > -1
+                                                    }
+                                                />
+                                                <ListItemText primary={name.value} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                             </div>
                             <div>
                                 <input
