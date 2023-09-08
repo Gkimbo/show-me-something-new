@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
-import { Spinner } from "@chakra-ui/react";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Box from "@material-ui/core/Box";
 
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
@@ -174,13 +175,12 @@ const CustomMap = (props) => {
             <div className="cell small-12 medium-6 container-of-containers">
                 <div className="cell small-12"></div>
                 {chosenLocation === null ? (
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
+                    <Box pt={0.5} align="center">
+                        <Skeleton width="50%" height="100px" />
+                        <Skeleton width="50%" height="100px" />
+                        <Skeleton width="50%" height="100px" />
+                        <Skeleton width="50%" height="100px" />
+                    </Box>
                 ) : (
                     <ResultList
                         searchResults={searchResults}
@@ -199,7 +199,13 @@ const CustomMap = (props) => {
                 ) : null}
             </div>
             <div className="cell small-12 medium-6 ">
-                <div id="map" className="container-4-map"></div>
+                {chosenLocation === null ? (
+                    <Box pt={0.5} align="center">
+                        <Skeleton variant="rect" width={600} height={800} />
+                    </Box>
+                ) : (
+                    <div id="map" className="container-4-map"></div>
+                )}
             </div>
         </div>
     );
