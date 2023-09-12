@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useReducer } from "react";
+import React, { useEffect, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
@@ -14,12 +14,10 @@ const CustomMap = (props) => {
         customActivities: [],
         searchResults: [],
         selectedMarker: null,
+        openInfoWindow: null,
+        selectedActivity: null,
+        error: "",
     });
-
-    const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    const [selectedActivity, setSelectedActivity] = useState(null);
-    const [error, setError] = useState("");
-
     const mapRef = useRef(null);
 
     const loader = new Loader({
@@ -38,11 +36,14 @@ const CustomMap = (props) => {
                     });
                 },
                 (error) => {
-                    setError("Error getting user's location: " + error.message);
+                    dispatch({
+                        type: "error",
+                        error: "Error getting user's location: " + error.message,
+                    });
                 }
             );
         } else {
-            setError("Geolocation is not supported by this browser.");
+            dispatch({ type: "error", error: "Geolocation is not supported by this browser." });
         }
     };
 
@@ -59,7 +60,10 @@ const CustomMap = (props) => {
                         chosenLocation: results[0].geometry.location,
                     });
                 } else {
-                    setError(`No results found for "${props.mapSearchQuery}".`);
+                    dispatch({
+                        type: "error",
+                        error: `No results found for "${props.mapSearchQuery}".`,
+                    });
                     dispatch({
                         type: "searchResults",
                         searchResults: [],
@@ -77,7 +81,7 @@ const CustomMap = (props) => {
     };
 
     useEffect(() => {
-        setError("");
+        dispatch({ type: "error", error: "" });
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: state.chosenLocation,
@@ -124,22 +128,24 @@ const CustomMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
-                        if (openInfoWindow) {
-                            openInfoWindow.close();
+                        if (state.openInfoWindow) {
+                            state.openInfoWindow.close();
                         }
 
                         if (result.geometry.location === state.selectedMarker) {
                             dispatch({ type: "selectedMarker", selectedMarker: null });
-                            setOpenInfoWindow(null);
+                            dispatch({ type: "openInfoWindow", openInfoWindow: null });
                         } else {
                             dispatch({
                                 type: "selectedMarker",
                                 selectedMarker: result.geometry.location,
                             });
-
                             infowindow.open(map, marker);
-                            setOpenInfoWindow(infowindow);
-                            setSelectedActivity(result.activity);
+                            dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                            dispatch({
+                                type: "selectedActivity",
+                                selectedActivity: result.activity,
+                            });
                         }
                     });
                 });
@@ -164,7 +170,7 @@ const CustomMap = (props) => {
                         addMarkersAndInfoWindows(results);
                         map.setCenter(results[0].geometry.location);
                     } else {
-                        setError(`No ${activity.query} found.`);
+                        dispatch({ type: "error", error: `No ${activity.query} found.` });
                     }
                 });
             });
@@ -196,7 +202,12 @@ const CustomMap = (props) => {
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
-                <div className="cell small-12"></div>
+                {state.error ? (
+                    <div className="location-error">
+                        <h3>{state.error} </h3>
+                        <p>Please search the location you'd like to see in the search bar above</p>
+                    </div>
+                ) : null}
                 {state.chosenLocation === null ? (
                     <Box pt={0.5} align="center">
                         <Skeleton width="50%" height="100px" />
@@ -209,16 +220,8 @@ const CustomMap = (props) => {
                         dispatch={dispatch}
                         state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        setSelectedActivity={setSelectedActivity}
-                        selectedActivity={selectedActivity}
                     />
                 )}
-                {error ? (
-                    <div className="location-error">
-                        <h3>{error} </h3>
-                        <p>Please search the location you'd like to see in the search bar above</p>
-                    </div>
-                ) : null}
             </div>
             <div className="cell small-12 medium-6 ">
                 {state.chosenLocation === null ? (

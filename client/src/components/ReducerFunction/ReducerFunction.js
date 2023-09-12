@@ -21,6 +21,21 @@ const reducer = (state, action) => {
                 ...state,
                 selectedMarker: action.selectedMarker,
             };
+        case "openInfoWindow":
+            return {
+                ...state,
+                openInfoWindow: action.openInfoWindow,
+            };
+        case "selectedActivity":
+            return {
+                ...state,
+                selectedActivity: action.selectedActivity,
+            };
+        case "error":
+            return {
+                ...state,
+                error: action.error,
+            };
         default:
             throw new Error();
     }
