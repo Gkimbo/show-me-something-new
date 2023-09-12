@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
@@ -6,7 +6,6 @@ import reducer from "./ReducerFunction/ReducerFunction";
 
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
-import GetDestination from "../services/GetDestination";
 import LocationSearchBar from "./LocationSearchBar";
 
 const CityMap = (props) => {
@@ -15,11 +14,10 @@ const CityMap = (props) => {
         customActivities: [],
         searchResults: [],
         selectedMarker: null,
+        openInfoWindow: null,
+        selectedActivity: null,
+        error: "",
     });
-
-    const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    const [selectedActivity, setSelectedActivity] = useState(null);
-    const [error, setError] = useState("");
 
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
@@ -39,7 +37,10 @@ const CityMap = (props) => {
                         chosenLocation: results[0].geometry.location,
                     });
                 } else {
-                    setError(`No results found for "${props.mapSearchQuery}".`);
+                    dispatch({
+                        type: "error",
+                        error: `No results found for "${props.mapSearchQuery}".`,
+                    });
                     dispatch({
                         type: "searchResults",
                         searchResults: [],
@@ -57,7 +58,7 @@ const CityMap = (props) => {
     };
 
     useEffect(() => {
-        setError("");
+        dispatch({ type: "error", error: "" });
         dispatch({ type: "selectedMarker", selectedMarker: null });
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
@@ -105,21 +106,24 @@ const CityMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
-                        if (openInfoWindow) {
-                            openInfoWindow.close();
+                        if (state.openInfoWindow) {
+                            state.openInfoWindow.close();
                         }
 
                         if (result.geometry.location === state.selectedMarker) {
                             dispatch({ type: "selectedMarker", selectedMarker: null });
-                            setOpenInfoWindow(null);
+                            dispatch({ type: "openInfoWindow", openInfoWindow: null });
                         } else {
                             dispatch({
                                 type: "selectedMarker",
                                 selectedMarker: result.geometry.location,
                             });
                             infowindow.open(map, marker);
-                            setOpenInfoWindow(infowindow);
-                            setSelectedActivity(result.activity);
+                            dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                            dispatch({
+                                type: "selectedActivity",
+                                selectedActivity: result.activity,
+                            });
                         }
                     });
                 });
@@ -144,7 +148,7 @@ const CityMap = (props) => {
                         addMarkersAndInfoWindows(results);
                         map.setCenter(state.chosenLocation);
                     } else {
-                        setError(`No ${activity.query} found.`);
+                        dispatch({ type: "error", error: `No ${activity.query} found.` });
                     }
                 });
             });
@@ -188,13 +192,11 @@ const CityMap = (props) => {
                         dispatch={dispatch}
                         state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        setSelectedActivity={setSelectedActivity}
-                        selectedActivity={selectedActivity}
                     />
                 )}
-                {error ? (
+                {state.error ? (
                     <div className="location-error">
-                        <h3>{error} </h3>
+                        <h3>{state.error} </h3>
                         <p>Please search the location you'd like to see in the search bar above</p>
                     </div>
                 ) : null}

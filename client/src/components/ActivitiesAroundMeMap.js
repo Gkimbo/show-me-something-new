@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box, Grid } from "@material-ui/core";
@@ -13,19 +13,18 @@ const ActivitiesAroundMeMap = (props) => {
         chosenLocation: null,
         searchResults: [],
         selectedMarker: null,
+        openInfoWindow: null,
+        selectedActivity: null,
+        error: "",
     });
 
-    const [openInfoWindow, setOpenInfoWindow] = useState(null);
-    const [selectedActivity, setSelectedActivity] = useState(null);
-    const [error, setError] = useState("");
+    const searchQuery = props.computedMatch.params.name;
+    const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
         libraries: ["places"],
     });
-
-    const searchQuery = props.computedMatch.params.name;
-    const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const getCurrentPosition = () => {
         if (navigator.geolocation) {
@@ -38,11 +37,14 @@ const ActivitiesAroundMeMap = (props) => {
                     });
                 },
                 (error) => {
-                    setError("Error getting user's location: " + error.message);
+                    dispatch({
+                        type: "error",
+                        error: "Error getting user's location: " + error.message,
+                    });
                 }
             );
         } else {
-            setError("Geolocation is not supported by this browser.");
+            dispatch({ type: "error", error: "Geolocation is not supported by this browser." });
         }
     };
 
@@ -59,7 +61,10 @@ const ActivitiesAroundMeMap = (props) => {
                         chosenLocation: results[0].geometry.location,
                     });
                 } else {
-                    setError(`No results found for "${props.mapSearchQuery}".`);
+                    dispatch({
+                        type: "error",
+                        error: `No results found for "${props.mapSearchQuery}".`,
+                    });
                     dispatch({
                         type: "searchResults",
                         searchResults: [],
@@ -77,7 +82,7 @@ const ActivitiesAroundMeMap = (props) => {
     };
 
     useEffect(() => {
-        setError("");
+        dispatch({ type: "error", error: "" });
         loader.load().then(() => {
             const request = {
                 query: searchQuery,
@@ -138,28 +143,31 @@ const ActivitiesAroundMeMap = (props) => {
                         });
 
                         marker.addListener("click", () => {
-                            if (openInfoWindow) {
-                                openInfoWindow.close();
+                            if (state.openInfoWindow) {
+                                state.openInfoWindow.close();
                             }
 
                             if (result.geometry.location === state.selectedMarker) {
                                 dispatch({ type: "selectedMarker", selectedMarker: null });
-                                setOpenInfoWindow(null);
+                                dispatch({ type: "openInfoWindow", openInfoWindow: null });
                             } else {
                                 dispatch({
                                     type: "selectedMarker",
                                     selectedMarker: result.geometry.location,
                                 });
                                 infowindow.open(map, marker);
-                                setOpenInfoWindow(infowindow);
-                                setSelectedActivity(result.activity);
+                                dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                                dispatch({
+                                    type: "selectedActivity",
+                                    selectedActivity: result.activity,
+                                });
                             }
                         });
                     });
 
                     map.setCenter(state.chosenLocation);
                 } else {
-                    setError("No results found, please try again.");
+                    dispatch({ type: "error", error: "No results found, please try again." });
                 }
             });
 
@@ -209,13 +217,11 @@ const ActivitiesAroundMeMap = (props) => {
                         dispatch={dispatch}
                         state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        setSelectedActivity={setSelectedActivity}
-                        selectedActivity={selectedActivity}
                     />
                 )}
-                {error ? (
+                {state.error ? (
                     <div className="location-error">
-                        <h3>{error} </h3>
+                        <h3>{state.error} </h3>
                         <p>Please search the location you'd like to see in the search bar above</p>
                     </div>
                 ) : null}

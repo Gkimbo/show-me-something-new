@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ResultTile from "./ResultTile";
 
 const ResultList = (props) => {
@@ -12,10 +12,16 @@ const ResultList = (props) => {
     });
 
     const handleClick = (event) => {
-        if (props.selectedActivity === event) {
-            props.setSelectedActivity(null);
+        if (props.state.selectedActivity === event) {
+            props.dispatch({
+                type: "selectedActivity",
+                selectedActivity: null,
+            });
         } else {
-            props.setSelectedActivity(event);
+            props.dispatch({
+                type: "selectedActivity",
+                selectedActivity: event,
+            });
         }
     };
 
@@ -49,7 +55,7 @@ const ResultList = (props) => {
                     >
                         {activity}
                     </div>
-                    {props.selectedActivity === activity ? (
+                    {props.state.selectedActivity === activity ? (
                         <div className="container-of-tiles">
                             <div className="grid-x grid-margin-x grid-margin-y">
                                 {results.map((result) => (
