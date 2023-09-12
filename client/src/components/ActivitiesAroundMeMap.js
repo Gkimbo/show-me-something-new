@@ -199,7 +199,12 @@ const ActivitiesAroundMeMap = (props) => {
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-4">
-                <div className="cell small-12"></div>
+                {state.error ? (
+                    <div className="location-error">
+                        <h3>{state.error} </h3>
+                        <p>Please search the location you'd like to see in the search bar above</p>
+                    </div>
+                ) : null}
                 {state.chosenLocation === null ? (
                     <Grid container>
                         {skeletonArray.map((num) => {
@@ -219,12 +224,6 @@ const ActivitiesAroundMeMap = (props) => {
                         centerMapOnMarker={centerMapOnMarker}
                     />
                 )}
-                {state.error ? (
-                    <div className="location-error">
-                        <h3>{state.error} </h3>
-                        <p>Please search the location you'd like to see in the search bar above</p>
-                    </div>
-                ) : null}
             </div>
             <div className="cell small-12 medium-6 map-surround">
                 {state.chosenLocation === null ? (
