@@ -11,6 +11,16 @@ const reducer = (state, action) => {
                 ...state,
                 customActivities: action.customActivities,
             };
+        case "searchResults":
+            return {
+                ...state,
+                searchResults: action.searchResults(state.searchResults),
+            };
+        case "selectedMarker":
+            return {
+                ...state,
+                selectedMarker: action.selectedMarker,
+            };
         default:
             throw new Error();
     }

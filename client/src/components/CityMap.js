@@ -13,9 +13,10 @@ const CityMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
         chosenLocation: { lat: 42.361, lng: -71.057 },
         customActivities: [],
+        searchResults: [],
+        selectedMarker: null,
     });
-    const [searchResults, setSearchResults] = useState([]);
-    const [selectedMarker, setSelectedMarker] = useState(null);
+
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [selectedActivity, setSelectedActivity] = useState(null);
     const [error, setError] = useState("");
@@ -39,19 +40,25 @@ const CityMap = (props) => {
                     });
                 } else {
                     setError(`No results found for "${props.mapSearchQuery}".`);
-                    setSearchResults([]);
+                    dispatch({
+                        type: "searchResults",
+                        searchResults: [],
+                    });
                 }
             });
         });
     };
 
     const centerMapOnMarker = (marker) => {
-        setSelectedMarker(marker === selectedMarker ? null : marker);
+        dispatch({
+            type: "selectedMarker",
+            selectedMarker: marker === state.selectedMarker ? null : marker,
+        });
     };
 
     useEffect(() => {
         setError("");
-        setSelectedMarker(null);
+        dispatch({ type: "selectedMarker", selectedMarker: null });
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: state.chosenLocation,
@@ -102,11 +109,14 @@ const CityMap = (props) => {
                             openInfoWindow.close();
                         }
 
-                        if (result.geometry.location === selectedMarker) {
-                            setSelectedMarker(null);
+                        if (result.geometry.location === state.selectedMarker) {
+                            dispatch({ type: "selectedMarker", selectedMarker: null });
                             setOpenInfoWindow(null);
                         } else {
-                            setSelectedMarker(result.geometry.location);
+                            dispatch({
+                                type: "selectedMarker",
+                                selectedMarker: result.geometry.location,
+                            });
                             infowindow.open(map, marker);
                             setOpenInfoWindow(infowindow);
                             setSelectedActivity(result.activity);
@@ -127,7 +137,10 @@ const CityMap = (props) => {
                         results.forEach((result) => {
                             result.activity = activity.name;
                         });
-                        setSearchResults((prevResults) => [...prevResults, ...results]);
+                        dispatch({
+                            type: "searchResults",
+                            searchResults: (prevResults) => [...results, ...prevResults],
+                        });
                         addMarkersAndInfoWindows(results);
                         map.setCenter(state.chosenLocation);
                     } else {
@@ -172,10 +185,9 @@ const CityMap = (props) => {
                     </Box>
                 ) : (
                     <ResultList
-                        searchResults={searchResults}
+                        dispatch={dispatch}
+                        state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        markerLocation={selectedMarker}
-                        setSelectedMarker={setSelectedMarker}
                         setSelectedActivity={setSelectedActivity}
                         selectedActivity={selectedActivity}
                     />

@@ -3,7 +3,7 @@ import ResultTile from "./ResultTile";
 
 const ResultList = (props) => {
     const resultsByActivity = {};
-    props.searchResults.forEach((result) => {
+    props.state.searchResults.forEach((result) => {
         if (result.activity in resultsByActivity) {
             resultsByActivity[result.activity].push(result);
         } else {
@@ -20,7 +20,7 @@ const ResultList = (props) => {
     };
 
     let activityContainers;
-    if (props.searchResults.length <= 20) {
+    if (props.state.searchResults.length <= 20) {
         activityContainers = Object.keys(resultsByActivity).map((activity) => {
             const results = resultsByActivity[activity];
             return (
@@ -28,10 +28,10 @@ const ResultList = (props) => {
                     {results.map((result) => (
                         <ResultTile
                             key={result.place_id}
+                            dispatch={props.dispatch}
+                            state={props.state}
                             result={result}
                             onTileClick={props.centerMapOnMarker}
-                            markerLocation={props.markerLocation}
-                            setSelectedMarker={props.setSelectedMarker}
                             centerMapOnMarker={props.centerMapOnMarker}
                         />
                     ))}
@@ -55,10 +55,10 @@ const ResultList = (props) => {
                                 {results.map((result) => (
                                     <ResultTile
                                         key={result.place_id}
+                                        dispatch={props.dispatch}
+                                        state={props.state}
                                         result={result}
                                         onTileClick={props.centerMapOnMarker}
-                                        markerLocation={props.markerLocation}
-                                        setSelectedMarker={props.setSelectedMarker}
                                         centerMapOnMarker={props.centerMapOnMarker}
                                     />
                                 ))}

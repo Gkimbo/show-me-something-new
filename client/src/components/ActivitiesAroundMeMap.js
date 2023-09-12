@@ -9,10 +9,12 @@ import ResultList from "./ResultList";
 import LocationSearchBar from "./LocationSearchBar";
 
 const ActivitiesAroundMeMap = (props) => {
-    const [state, dispatch] = useReducer(reducer, { chosenLocation: null });
+    const [state, dispatch] = useReducer(reducer, {
+        chosenLocation: null,
+        searchResults: [],
+        selectedMarker: null,
+    });
 
-    const [searchResults, setSearchResults] = useState([]);
-    const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [selectedActivity, setSelectedActivity] = useState(null);
     const [error, setError] = useState("");
@@ -58,14 +60,20 @@ const ActivitiesAroundMeMap = (props) => {
                     });
                 } else {
                     setError(`No results found for "${props.mapSearchQuery}".`);
-                    setSearchResults([]);
+                    dispatch({
+                        type: "searchResults",
+                        searchResults: [],
+                    });
                 }
             });
         });
     };
 
     const centerMapOnMarker = (marker) => {
-        setSelectedMarker(marker === selectedMarker ? null : marker);
+        dispatch({
+            type: "selectedMarker",
+            selectedMarker: marker === state.selectedMarker ? null : marker,
+        });
     };
 
     useEffect(() => {
@@ -98,7 +106,10 @@ const ActivitiesAroundMeMap = (props) => {
                     results.forEach((result) => {
                         result.activity = searchQuery;
                     });
-                    setSearchResults(results);
+                    dispatch({
+                        type: "searchResults",
+                        searchResults: (prevResults) => [...results],
+                    });
                     results.forEach((result) => {
                         let resultContent;
                         if (result.photos) {
@@ -131,11 +142,14 @@ const ActivitiesAroundMeMap = (props) => {
                                 openInfoWindow.close();
                             }
 
-                            if (result.geometry.location === selectedMarker) {
-                                setSelectedMarker(null);
+                            if (result.geometry.location === state.selectedMarker) {
+                                dispatch({ type: "selectedMarker", selectedMarker: null });
                                 setOpenInfoWindow(null);
                             } else {
-                                setSelectedMarker(result.geometry.location);
+                                dispatch({
+                                    type: "selectedMarker",
+                                    selectedMarker: result.geometry.location,
+                                });
                                 infowindow.open(map, marker);
                                 setOpenInfoWindow(infowindow);
                                 setSelectedActivity(result.activity);
@@ -149,7 +163,7 @@ const ActivitiesAroundMeMap = (props) => {
                 }
             });
 
-            setSelectedMarker(null);
+            dispatch({ type: "selectedMarker", selectedMarker: null });
         });
     }, [state.chosenLocation]);
 
@@ -192,10 +206,9 @@ const ActivitiesAroundMeMap = (props) => {
                     </Grid>
                 ) : (
                     <ResultList
-                        searchResults={searchResults}
+                        dispatch={dispatch}
+                        state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        markerLocation={selectedMarker}
-                        setSelectedMarker={setSelectedMarker}
                         setSelectedActivity={setSelectedActivity}
                         selectedActivity={selectedActivity}
                     />
