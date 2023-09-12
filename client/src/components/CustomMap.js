@@ -1,15 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
+import reducer from "./ReducerFunction/ReducerFunction";
 
 import ResultList from "./ResultList";
 import GetActivity from "../services/GetActivity";
 import LocationSearchBar from "./LocationSearchBar";
 
 const CustomMap = (props) => {
-    const [chosenLocation, setChosenLocation] = useState(null);
-    const [customActivities, setCustomActivities] = useState([]);
+    const [state, dispatch] = useReducer(reducer, {
+        chosenLocation: null,
+        customActivities: [],
+    });
+
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
@@ -28,7 +32,10 @@ const CustomMap = (props) => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setChosenLocation({ lat: latitude, lng: longitude });
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: { lat: latitude, lng: longitude },
+                    });
                 },
                 (error) => {
                     setError("Error getting user's location: " + error.message);
@@ -47,7 +54,10 @@ const CustomMap = (props) => {
             };
             service.textSearch(searchRequest, (results, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    setChosenLocation(results[0].geometry.location);
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: results[0].geometry.location,
+                    });
                 } else {
                     setError(`No results found for "${props.mapSearchQuery}".`);
                     setSearchResults([]);
@@ -64,12 +74,12 @@ const CustomMap = (props) => {
         setError("");
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
-                center: chosenLocation,
+                center: state.chosenLocation,
                 zoom: 16,
             });
             mapRef.current = map;
             const userMarker = new google.maps.Marker({
-                position: chosenLocation,
+                position: state.chosenLocation,
                 map: map,
                 icon: {
                     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -125,10 +135,10 @@ const CustomMap = (props) => {
                 });
             };
 
-            customActivities.map((activity) => {
+            state.customActivities.map((activity) => {
                 const request = {
                     query: activity.name,
-                    location: chosenLocation,
+                    location: state.chosenLocation,
                     radius: "150",
                 };
 
@@ -148,11 +158,11 @@ const CustomMap = (props) => {
 
             setSelectedMarker(null);
         });
-    }, [chosenLocation]);
+    }, [state.chosenLocation]);
 
     useEffect(() => {
         GetActivity.getCustomActivities().then((activityData) => {
-            setCustomActivities(activityData);
+            dispatch({ type: "customActivities", customActivities: activityData });
         });
         getCurrentPosition();
     }, []);
@@ -174,7 +184,7 @@ const CustomMap = (props) => {
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
                 <div className="cell small-12"></div>
-                {chosenLocation === null ? (
+                {state.chosenLocation === null ? (
                     <Box pt={0.5} align="center">
                         <Skeleton width="50%" height="100px" />
                         <Skeleton width="50%" height="100px" />
@@ -199,7 +209,7 @@ const CustomMap = (props) => {
                 ) : null}
             </div>
             <div className="cell small-12 medium-6 ">
-                {chosenLocation === null ? (
+                {state.chosenLocation === null ? (
                     <Box pt={0.5} align="center">
                         <Skeleton variant="rect" width={600} height={800} />
                     </Box>

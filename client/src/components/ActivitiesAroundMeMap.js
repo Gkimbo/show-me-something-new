@@ -10,9 +10,7 @@ import LocationSearchBar from "./LocationSearchBar";
 
 const ActivitiesAroundMeMap = (props) => {
     const [state, dispatch] = useReducer(reducer, { chosenLocation: null });
-    console.log("state: ", state.chosenLocation);
 
-    // const [chosenLocation, setChosenLocation] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const [selectedMarker, setSelectedMarker] = useState(null);
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
@@ -32,7 +30,10 @@ const ActivitiesAroundMeMap = (props) => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    dispatch({ type: "chosenLocation", lat: latitude, lng: longitude });
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: { lat: latitude, lng: longitude },
+                    });
                 },
                 (error) => {
                     setError("Error getting user's location: " + error.message);
@@ -53,8 +54,7 @@ const ActivitiesAroundMeMap = (props) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     dispatch({
                         type: "chosenLocation",
-                        lat: results[0].geometry.location.lat,
-                        lng: results[0].geometry.location.lng,
+                        chosenLocation: results[0].geometry.location,
                     });
                 } else {
                     setError(`No results found for "${props.mapSearchQuery}".`);
@@ -208,12 +208,11 @@ const ActivitiesAroundMeMap = (props) => {
                 ) : null}
             </div>
             <div className="cell small-12 medium-6 map-surround">
-                {/* {state.chosenLocation === null ? (
+                {state.chosenLocation === null ? (
                     <Skeleton variant="rect" width={600} height={800} />
                 ) : (
                     <div id="map" className="container-4-map"></div>
-                )} */}
-                <div id="map" className="container-4-map"></div>
+                )}
             </div>
         </div>
     );
