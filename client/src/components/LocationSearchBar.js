@@ -3,7 +3,6 @@ import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
 const LocationSearchBar = ({ setMapSearchQuery }) => {
     const [searchBarInput, setSearchBarInput] = useState("");
-    const [error, setError] = useState(false);
 
     const handleChange = (event) => {
         setSearchBarInput(event.currentTarget.value);
@@ -44,7 +43,6 @@ const LocationSearchBar = ({ setMapSearchQuery }) => {
                     </InputRightElement>
                 </InputGroup>
             </label>
-            {error ? <p>Please enter a valid city!</p> : null}
         </form>
     );
 };
