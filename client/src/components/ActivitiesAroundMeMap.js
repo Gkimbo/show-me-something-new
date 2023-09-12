@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box, Grid } from "@material-ui/core";
 import _ from "lodash";
+import reducer from "./ReducerFunction/ReducerFunction";
 
 import ResultList from "./ResultList";
 import LocationSearchBar from "./LocationSearchBar";
 
 const ActivitiesAroundMeMap = (props) => {
-    const [chosenLocation, setChosenLocation] = useState(null);
-    const [searchResults, setSearchResults] = useState([]);
-    const [selectedMarker, setSelectedMarker] = useState(null);
+    const [state, dispatch] = useReducer(reducer, {
+        chosenLocation: null,
+        searchResults: [],
+        selectedMarker: null,
+    });
+
     const [openInfoWindow, setOpenInfoWindow] = useState(null);
     const [selectedActivity, setSelectedActivity] = useState(null);
     const [error, setError] = useState("");
@@ -28,7 +32,10 @@ const ActivitiesAroundMeMap = (props) => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setChosenLocation({ lat: latitude, lng: longitude });
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: { lat: latitude, lng: longitude },
+                    });
                 },
                 (error) => {
                     setError("Error getting user's location: " + error.message);
@@ -47,17 +54,26 @@ const ActivitiesAroundMeMap = (props) => {
             };
             service.textSearch(searchRequest, (results, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    setChosenLocation(results[0].geometry.location);
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: results[0].geometry.location,
+                    });
                 } else {
                     setError(`No results found for "${props.mapSearchQuery}".`);
-                    setSearchResults([]);
+                    dispatch({
+                        type: "searchResults",
+                        searchResults: [],
+                    });
                 }
             });
         });
     };
 
     const centerMapOnMarker = (marker) => {
-        setSelectedMarker(marker === selectedMarker ? null : marker);
+        dispatch({
+            type: "selectedMarker",
+            selectedMarker: marker === state.selectedMarker ? null : marker,
+        });
     };
 
     useEffect(() => {
@@ -65,17 +81,17 @@ const ActivitiesAroundMeMap = (props) => {
         loader.load().then(() => {
             const request = {
                 query: searchQuery,
-                location: chosenLocation,
+                location: state.chosenLocation,
                 radius: "100",
             };
 
             const map = new google.maps.Map(document.getElementById("map"), {
-                center: chosenLocation,
+                center: state.chosenLocation,
                 zoom: 16,
             });
 
             const userMarker = new google.maps.Marker({
-                position: chosenLocation,
+                position: state.chosenLocation,
                 map: map,
                 icon: {
                     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
@@ -90,7 +106,10 @@ const ActivitiesAroundMeMap = (props) => {
                     results.forEach((result) => {
                         result.activity = searchQuery;
                     });
-                    setSearchResults(results);
+                    dispatch({
+                        type: "searchResults",
+                        searchResults: (prevResults) => [...results],
+                    });
                     results.forEach((result) => {
                         let resultContent;
                         if (result.photos) {
@@ -123,11 +142,14 @@ const ActivitiesAroundMeMap = (props) => {
                                 openInfoWindow.close();
                             }
 
-                            if (result.geometry.location === selectedMarker) {
-                                setSelectedMarker(null);
+                            if (result.geometry.location === state.selectedMarker) {
+                                dispatch({ type: "selectedMarker", selectedMarker: null });
                                 setOpenInfoWindow(null);
                             } else {
-                                setSelectedMarker(result.geometry.location);
+                                dispatch({
+                                    type: "selectedMarker",
+                                    selectedMarker: result.geometry.location,
+                                });
                                 infowindow.open(map, marker);
                                 setOpenInfoWindow(infowindow);
                                 setSelectedActivity(result.activity);
@@ -135,15 +157,15 @@ const ActivitiesAroundMeMap = (props) => {
                         });
                     });
 
-                    map.setCenter(chosenLocation);
+                    map.setCenter(state.chosenLocation);
                 } else {
                     setError("No results found, please try again.");
                 }
             });
 
-            setSelectedMarker(null);
+            dispatch({ type: "selectedMarker", selectedMarker: null });
         });
-    }, [chosenLocation]);
+    }, [state.chosenLocation]);
 
     useEffect(() => {
         if (props.mapSearchQuery) {
@@ -170,7 +192,7 @@ const ActivitiesAroundMeMap = (props) => {
             </div>
             <div className="cell small-12 medium-6 container-4">
                 <div className="cell small-12"></div>
-                {chosenLocation === null ? (
+                {state.chosenLocation === null ? (
                     <Grid container>
                         {skeletonArray.map((num) => {
                             return (
@@ -184,10 +206,9 @@ const ActivitiesAroundMeMap = (props) => {
                     </Grid>
                 ) : (
                     <ResultList
-                        searchResults={searchResults}
+                        dispatch={dispatch}
+                        state={state}
                         centerMapOnMarker={centerMapOnMarker}
-                        markerLocation={selectedMarker}
-                        setSelectedMarker={setSelectedMarker}
                         setSelectedActivity={setSelectedActivity}
                         selectedActivity={selectedActivity}
                     />
@@ -200,7 +221,7 @@ const ActivitiesAroundMeMap = (props) => {
                 ) : null}
             </div>
             <div className="cell small-12 medium-6 map-surround">
-                {chosenLocation === null ? (
+                {state.chosenLocation === null ? (
                     <Skeleton variant="rect" width={600} height={800} />
                 ) : (
                     <div id="map" className="container-4-map"></div>
