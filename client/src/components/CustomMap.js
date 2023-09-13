@@ -85,7 +85,7 @@ const CustomMap = (props) => {
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: state.chosenLocation,
-                zoom: 16,
+                zoom: 14,
             });
             mapRef.current = map;
             const userMarker = new google.maps.Marker({
@@ -155,7 +155,7 @@ const CustomMap = (props) => {
                 const request = {
                     query: activity.name,
                     location: state.chosenLocation,
-                    radius: "150",
+                    radius: "100",
                 };
 
                 service.textSearch(request, (results, status) => {
@@ -168,7 +168,7 @@ const CustomMap = (props) => {
                             searchResults: (prevResults) => [...results, ...prevResults],
                         });
                         addMarkersAndInfoWindows(results);
-                        map.setCenter(results[0].geometry.location);
+                        map.setCenter(state.chosenLocation);
                     } else {
                         dispatch({ type: "error", error: `No ${activity.query} found.` });
                     }

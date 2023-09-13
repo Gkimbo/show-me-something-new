@@ -63,7 +63,7 @@ const CityMap = (props) => {
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: state.chosenLocation,
-                zoom: 17,
+                zoom: 14,
             });
 
             const userMarker = new google.maps.Marker({
@@ -201,7 +201,14 @@ const CityMap = (props) => {
                 )}
             </div>
             <div className="cell small-12 medium-6 ">
-                <div id="map" className="container-4-map"></div>
+                {state.chosenLocation.lat === 42.361 ? (
+                    <>
+                        <Skeleton variant="rect" width={600} height={800} />
+                        <div id="map"></div>
+                    </>
+                ) : (
+                    <div id="map" className="container-4-map"></div>
+                )}
             </div>
         </div>
     );
