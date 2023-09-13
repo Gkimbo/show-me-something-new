@@ -19,7 +19,6 @@ const CustomMap = (props) => {
         error: "",
     });
     const mapRef = useRef(null);
-
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
         libraries: ["places"],
@@ -128,25 +127,16 @@ const CustomMap = (props) => {
                     });
 
                     marker.addListener("click", () => {
-                        if (state.openInfoWindow) {
-                            state.openInfoWindow.close();
-                        }
-
-                        if (result.geometry.location === state.selectedMarker) {
-                            dispatch({ type: "selectedMarker", selectedMarker: null });
-                            dispatch({ type: "openInfoWindow", openInfoWindow: null });
-                        } else {
-                            dispatch({
-                                type: "selectedMarker",
-                                selectedMarker: result.geometry.location,
-                            });
-                            infowindow.open(map, marker);
-                            dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
-                            dispatch({
-                                type: "selectedActivity",
-                                selectedActivity: result.activity,
-                            });
-                        }
+                        dispatch({
+                            type: "selectedMarker",
+                            selectedMarker: result.geometry.location,
+                        });
+                        infowindow.open(map, marker);
+                        dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                        dispatch({
+                            type: "selectedActivity",
+                            selectedActivity: result.activity,
+                        });
                     });
                 });
             };
