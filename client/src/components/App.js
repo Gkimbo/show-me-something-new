@@ -10,10 +10,10 @@ import RegistrationForm from "./registration/RegistrationForm";
 import TopBar from "./layout/TopBar";
 import LandingPage from "./LandingPage";
 import HomePage from "./HomePage";
-import ActivitiesAroundMeMap from "./ActivitiesAroundMeMap";
-import CustomMap from "./CustomMap";
-import CityMap from "./CityMap";
-import UpdatePreferences from "./UpdatePreferences";
+import ActivitiesAroundMeMap from "./maps/ActivitiesAroundMeMap";
+import CustomMap from "./maps/CustomMap";
+import CityMap from "./maps/CityMap";
+import UpdatePreferences from "./UpdatePreferencesPage";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);

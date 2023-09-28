@@ -1,16 +1,17 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
-import reducer from "./ReducerFunction/ReducerFunction";
 
-import ResultList from "./ResultList";
-import GetActivity from "../services/GetActivity";
-import LocationSearchBar from "./LocationSearchBar";
+import reducer from "../ReducerFunction/ReducerFunction";
 
-const CityMap = (props) => {
+import ResultList from "../listComponents/ResultList";
+import GetActivity from "../../services/GetActivity";
+import LocationSearchBar from "../layout/LocationSearchBar";
+
+const CustomMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
-        chosenLocation: { lat: 42.361, lng: -71.057 },
+        chosenLocation: null,
         customActivities: [],
         searchResults: [],
         selectedMarker: null,
@@ -18,11 +19,33 @@ const CityMap = (props) => {
         selectedActivity: null,
         error: "",
     });
-
+    const mapRef = useRef(null);
     const loader = new Loader({
         apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
         libraries: ["places"],
     });
+
+    const getCurrentPosition = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    dispatch({
+                        type: "chosenLocation",
+                        chosenLocation: { lat: latitude, lng: longitude },
+                    });
+                },
+                (error) => {
+                    dispatch({
+                        type: "error",
+                        error: "Error getting user's location: " + error.message,
+                    });
+                }
+            );
+        } else {
+            dispatch({ type: "error", error: "Geolocation is not supported by this browser." });
+        }
+    };
 
     const getLocation = (request) => {
         loader.load().then(() => {
@@ -59,13 +82,12 @@ const CityMap = (props) => {
 
     useEffect(() => {
         dispatch({ type: "error", error: "" });
-        dispatch({ type: "selectedMarker", selectedMarker: null });
         loader.load().then(() => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 center: state.chosenLocation,
                 zoom: 14,
             });
-
+            mapRef.current = map;
             const userMarker = new google.maps.Marker({
                 position: state.chosenLocation,
                 map: map,
@@ -120,7 +142,7 @@ const CityMap = (props) => {
                 });
             };
 
-            state.customActivities.forEach((activity) => {
+            state.customActivities.map((activity) => {
                 const request = {
                     query: activity.name,
                     location: state.chosenLocation,
@@ -143,19 +165,21 @@ const CityMap = (props) => {
                     }
                 });
             });
+
+            dispatch({ type: "selectedMarker", selectedMarker: null });
         });
     }, [state.chosenLocation]);
-
-    useEffect(() => {
-        getLocation(props.mapSearchQuery);
-    }, [props.mapSearchQuery]);
 
     useEffect(() => {
         GetActivity.getCustomActivities().then((activityData) => {
             dispatch({ type: "customActivities", customActivities: activityData });
         });
-        getLocation(props.computedMatch.params.name);
+        getCurrentPosition();
     }, []);
+
+    useEffect(() => {
+        getLocation(props.mapSearchQuery);
+    }, [props.mapSearchQuery]);
 
     return (
         <div className="grid-x home-page-div">
@@ -164,9 +188,8 @@ const CityMap = (props) => {
                     What you like{" "}
                     {props.mapSearchQuery
                         ? `in ${_.upperFirst(props.mapSearchQuery)}`
-                        : `in ${props.computedMatch.params.name}`}
+                        : "Near you!"}
                 </h1>
-
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
@@ -176,7 +199,7 @@ const CityMap = (props) => {
                         <p>Please search the location you'd like to see in the search bar above</p>
                     </div>
                 ) : null}
-                {state.chosenLocation.lat === 42.361 ? (
+                {state.chosenLocation === null ? (
                     <Box pt={0.5} align="center">
                         <Skeleton width="50%" height="100px" />
                         <Skeleton width="50%" height="100px" />
@@ -192,11 +215,10 @@ const CityMap = (props) => {
                 )}
             </div>
             <div className="cell small-12 medium-6 ">
-                {state.chosenLocation.lat === 42.361 ? (
-                    <>
+                {state.chosenLocation === null ? (
+                    <Box pt={0.5} align="center">
                         <Skeleton variant="rect" width={600} height={800} />
-                        <div id="map"></div>
-                    </>
+                    </Box>
                 ) : (
                     <div id="map" className="container-4-map"></div>
                 )}
@@ -205,4 +227,4 @@ const CityMap = (props) => {
     );
 };
 
-export default CityMap;
+export default CustomMap;

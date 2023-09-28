@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import GetActivity from "../services/GetActivity";
 import ModifyPreferences from "../services/ModifyPreferences";
-import AddPreferenceForm from "./AddPreferencesForm";
-import EditPreferenceForm from "./EditPreferenceForm";
-import PreferenceTile from "./PreferenceTile";
+import AddPreferenceForm from "./forms/AddPreferencesForm";
+import EditPreferenceForm from "./forms/EditPreferenceForm";
+import PreferenceTile from "./tiles/PreferenceTile";
 import FormError from "./layout/FormError";
 
 const UpdatePreferences = (props) => {
