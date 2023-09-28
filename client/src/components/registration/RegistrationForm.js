@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import FormError from "../layout/FormError";
-import config from "../../config";
-import makeNewUser from "../../services/makeNewUser";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import config from "../../config";
+import {
+    Checkbox,
+    Select,
+    ListItemText,
+    FormControl,
+    MenuItem,
+    InputLabel,
+    Input,
+} from "@material-ui/core";
+import FormError from "../layout/FormError";
+import makeNewUser from "../../services/makeNewUser";
 import options from "../../services/userSelections";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import ListItemText from "@material-ui/core/ListItemText";
-import Select from "@material-ui/core/Select";
-import Checkbox from "@material-ui/core/Checkbox";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({

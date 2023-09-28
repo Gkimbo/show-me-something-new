@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GetActivity from "../services/GetActivity";
-import ActivityTile from "./ActivityTile";
+import ActivityTile from "../tiles/ActivityTile";
+import GetActivity from "../../services/GetActivity";
 
 const ActivitiesList = (props) => {
     const [activities, setActivities] = useState([]);

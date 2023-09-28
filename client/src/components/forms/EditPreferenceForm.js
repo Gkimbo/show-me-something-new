@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Input, Text } from "@chakra-ui/react";
-import options from "../services/userSelections";
+import { Text } from "@chakra-ui/react";
 import CreatableSelect from "react-select/creatable";
 
-const AddPreferenceForm = (props) => {
+import options from "../../services/userSelections";
+
+const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
         name: "",
-        icon: '<i class="fa-solid fa-user-plus"></i>',
     });
+
     const handleInputChange = (event) => {
         setNewPreference({
             ...newPreference,
@@ -17,40 +18,42 @@ const AddPreferenceForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onAddPreference(newPreference);
+        changePreference(newPreference);
         clearForm();
     };
 
     const clearForm = () => {
         setNewPreference({
             name: "",
-            icon: '<i class="fa-solid fa-user-plus"></i>',
         });
+        setEditForm(false);
     };
+
     return (
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
-                    <Text lg="20px" className="createable-select-title">
-                        Add a new Interest!
-                    </Text>
+                    <Text
+                        lg="20px"
+                        className="createable-select-title"
+                    >{`Edit Your ${preference.name} interest!`}</Text>
                     <CreatableSelect
                         isClearable
                         className="createable-select"
                         options={options}
                         onChange={handleInputChange}
-                        focusBorderColor="#0606ff"
-                        placeholder="Type a new interest!"
+                        focusBorderColor="#13a200"
+                        placeholder={`Edit ${preference.name} here!`}
                         defaultValue={newPreference.name}
                         size="sm"
                     />
                 </label>
                 <div className="button-add cell small-12" onClick={handleSubmit}>
-                    Add
+                    Edit
                 </div>
             </form>
         </div>
     );
 };
 
-export default AddPreferenceForm;
+export default EditPreferenceForm;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import getBackgroundPhoto from "../services/getBackgroundPhoto";
-import ActivitiesList from "./ActivitiesList";
-import PopularDestinationList from "./PopularDestinationList";
+import ActivitiesList from "./listComponents/ActivitiesList";
+import PopularDestinationList from "./listComponents/PopularDestinationList";
 
 const HomePage = (props) => {
     const [imageUrl, setImageUrl] = useState("");

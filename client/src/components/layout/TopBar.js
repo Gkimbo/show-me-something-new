@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ActivitySearchBar from "../ActivitySearchBar";
+
+import ActivitySearchBar from "./ActivitySearchBar";
 import SignOutButton from "../authentication/SignOutButton";
-import Logo from "../Logo";
+import Logo from "./Logo";
 
 const TopBar = ({ user, mapSearchQuery }) => {
     const authenticatedListItems = [
