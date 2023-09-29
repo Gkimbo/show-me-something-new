@@ -19,21 +19,21 @@ const TopBar = ({ user, mapSearchQuery }) => {
 
     return (
         <div className="grid-x nav-bar">
-            <div className="cell small-6 medium-4">
+            <div className="cell small-4">
                 <div className="nav-bar-left">
                     <Link to="/">
                         <Logo />
                     </Link>
                 </div>
             </div>
-            <div className="cell small-12 medium-4">
-                <div className="nave-bar-center">
-                    {user && !mapSearchQuery ? <ActivitySearchBar /> : null}
-                </div>
-            </div>
-            <div className="cell small-6 medium-4 ">
+            <div className="cell small-8">
                 <div className="nav-bar-right">
                     <ul>{user ? authenticatedListItems : null}</ul>
+                </div>
+            </div>
+            <div className="cell small-12 search-bar-1">
+                <div className="nav-bar-center">
+                    {user && !mapSearchQuery ? <ActivitySearchBar /> : null}
                 </div>
             </div>
         </div>
