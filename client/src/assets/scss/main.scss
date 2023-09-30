@@ -104,6 +104,9 @@ $button-margin: 0.5rem;
     margin-left: 3.8rem;
     height: 50%;
     display: inline-block;
+    @media (max-width: 500px) {
+        margin-left: 1rem;
+    }
 }
 
 .nav-bar-right {
@@ -113,6 +116,9 @@ $button-margin: 0.5rem;
     height: 50%;
     display: flex;
     justify-content: flex-end;
+    @media (max-width: 500px) {
+        margin-right: 1rem;
+    }
 }
 
 .city-img {
@@ -546,10 +552,10 @@ $button-margin: 0.5rem;
         font-size: small;
     }
     @media (max-width: 411px) {
-        margin: 25% auto 2% auto;
+        margin: 22% auto 2% auto;
     }
     @media (max-width: 373px) {
-        margin: 30% auto 2% auto;
+        margin: 25% auto 2% auto;
     }
 }
 
@@ -635,6 +641,8 @@ $button-margin: 0.5rem;
     @media (max-width: 511px) {
         margin: 20% auto 2% auto;
         font-size: small;
+        height: 80%;
+        width: 80%;
     }
     @media (max-width: 411px) {
         margin: 25% auto 2% auto;
@@ -843,6 +851,10 @@ $button-margin: 0.5rem;
 
 .home-page-div {
     padding: 0 4rem;
+    @media (max-width: 500px) {
+        font-size: medium;
+        padding: 0 1rem;
+    }
 }
 
 .interest-icon {
@@ -1122,8 +1134,9 @@ $button-margin: 0.5rem;
     @media (max-width: 600px) {
         max-width: 75%;
     }
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
         max-width: 68%;
+        margin-top: 10%;
     }
 }
 
@@ -1245,13 +1258,13 @@ $button-margin: 0.5rem;
         font-size: large;
     }
     @media (max-width: 548px) {
-        margin: 30% auto 2% auto;
+        margin: 33% auto 2% auto;
     }
     @media (max-width: 500px) {
-        margin: 40% auto 2% auto;
+        margin: 38% auto 2% auto;
     }
     @media (max-width: 400px) {
-        margin: 45% auto 2% auto;
+        margin: 43% auto 2% auto;
     }
 }
 @media (max-width: 768px) {
