@@ -2,13 +2,16 @@ import React from "react";
 
 const ResultTile = (props) => {
     const markerLocation = props.result.geometry.location;
+    const markerName = props.result.name;
     const isSelectedMarker = props.state.selectedMarker === markerLocation;
 
     const handleTileClick = () => {
         if (props.markerLocation === markerLocation) {
             props.dispatch({ type: "selectedMarker", selectedMarker: null });
+            props.dispatch({ type: "selectedPlaceName", selectedPlaceName: null });
         } else {
             props.dispatch({ type: "selectedMarker", selectedMarker: markerLocation });
+            props.dispatch({ type: "selectedPlaceName", selectedPlaceName: markerName });
             props.centerMapOnMarker(markerLocation);
         }
     };

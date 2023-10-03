@@ -8,6 +8,7 @@ import reducer from "../ReducerFunction/ReducerFunction";
 import ResultList from "../listComponents/ResultList";
 import GetActivity from "../../services/GetActivity";
 import LocationSearchBar from "../layout/LocationSearchBar";
+import showMap from "../../services/showMap";
 
 const CityMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
@@ -17,6 +18,7 @@ const CityMap = (props) => {
         selectedMarker: null,
         openInfoWindow: null,
         selectedActivity: null,
+        selectedPlaceName: null,
         error: "",
     });
 
@@ -59,93 +61,95 @@ const CityMap = (props) => {
     };
 
     useEffect(() => {
-        dispatch({ type: "error", error: "" });
-        dispatch({ type: "selectedMarker", selectedMarker: null });
-        loader.load().then(() => {
-            const map = new google.maps.Map(document.getElementById("map"), {
-                center: state.chosenLocation,
-                zoom: 14,
-            });
-
-            const userMarker = new google.maps.Marker({
-                position: state.chosenLocation,
-                map: map,
-                icon: {
-                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                },
-                title: "Your Location",
-            });
-
-            const service = new google.maps.places.PlacesService(map);
-
-            const addMarkersAndInfoWindows = (places) => {
-                places.forEach((result) => {
-                    let resultContent;
-                    if (result.photos) {
-                        resultContent =
-                            `<p>${result.name}</p>` +
-                            `<p>${result.formatted_address}</p>` +
-                            `<img src="${result.photos && result.photos[0].getUrl()}" alt="${
-                                result.name
-                            }" style="max-width: 100px; max-height: 100px;">`;
-                    } else {
-                        resultContent =
-                            `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
-                    }
-
-                    const marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(
-                            result.geometry.location.lat(),
-                            result.geometry.location.lng()
-                        ),
-                        map: map,
-                    });
-
-                    const infowindow = new google.maps.InfoWindow({
-                        content: resultContent,
-                        ariaLabel: result.name,
-                    });
-
-                    marker.addListener("click", () => {
-                        dispatch({
-                            type: "selectedMarker",
-                            selectedMarker: result.geometry.location,
-                        });
-                        infowindow.open(map, marker);
-                        dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
-                        dispatch({
-                            type: "selectedActivity",
-                            selectedActivity: result.activity,
-                        });
-                    });
+        if (state.selectedMarker === null) {
+            dispatch({ type: "error", error: "" });
+            dispatch({ type: "selectedMarker", selectedMarker: null });
+            loader.load().then(() => {
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    center: state.chosenLocation,
+                    zoom: 14,
                 });
-            };
 
-            state.customActivities.forEach((activity) => {
-                const request = {
-                    query: activity.name,
-                    location: state.chosenLocation,
-                    radius: "100",
+                const userMarker = new google.maps.Marker({
+                    position: state.chosenLocation,
+                    map: map,
+                    icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    },
+                    title: "Your Location",
+                });
+
+                const service = new google.maps.places.PlacesService(map);
+
+                const addMarkersAndInfoWindows = (places) => {
+                    places.forEach((result) => {
+                        let resultContent;
+                        if (result.photos) {
+                            resultContent =
+                                `<p>${result.name}</p>` +
+                                `<p>${result.formatted_address}</p>` +
+                                `<img src="${result.photos && result.photos[0].getUrl()}" alt="${
+                                    result.name
+                                }" style="max-width: 100px; max-height: 100px;">`;
+                        } else {
+                            resultContent =
+                                `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                        }
+
+                        const marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(
+                                result.geometry.location.lat(),
+                                result.geometry.location.lng()
+                            ),
+                            map: map,
+                        });
+
+                        const infowindow = new google.maps.InfoWindow({
+                            content: resultContent,
+                            ariaLabel: result.name,
+                        });
+
+                        marker.addListener("click", () => {
+                            dispatch({
+                                type: "selectedMarker",
+                                selectedMarker: result.geometry.location,
+                            });
+                            infowindow.open(map, marker);
+                            dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                            dispatch({
+                                type: "selectedActivity",
+                                selectedActivity: result.activity,
+                            });
+                        });
+                    });
                 };
 
-                service.textSearch(request, (results, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        results.forEach((result) => {
-                            result.activity = activity.name;
-                        });
-                        dispatch({
-                            type: "searchResults",
-                            searchResults: (prevResults) => [...results, ...prevResults],
-                        });
-                        addMarkersAndInfoWindows(results);
-                        map.setCenter(state.chosenLocation);
-                    } else {
-                        dispatch({ type: "error", error: `No ${activity.query} found.` });
-                    }
+                state.customActivities.forEach((activity) => {
+                    const request = {
+                        query: activity.name,
+                        location: state.chosenLocation,
+                        radius: "100",
+                    };
+
+                    service.textSearch(request, (results, status) => {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            results.forEach((result) => {
+                                result.activity = activity.name;
+                            });
+                            dispatch({
+                                type: "searchResults",
+                                searchResults: (prevResults) => [...results, ...prevResults],
+                            });
+                            addMarkersAndInfoWindows(results);
+                            map.setCenter(state.chosenLocation);
+                        } else {
+                            dispatch({ type: "error", error: `No ${activity.query} found.` });
+                        }
+                    });
                 });
             });
-        });
-    }, [state.chosenLocation]);
+        }
+    }, [state.chosenLocation, state.selectedMarker]);
 
     useEffect(() => {
         getLocation(props.mapSearchQuery);
@@ -157,6 +161,12 @@ const CityMap = (props) => {
         });
         getLocation(props.computedMatch.params.name);
     }, []);
+
+    useEffect(() => {
+        if (state.selectedMarker) {
+            showMap(state.selectedMarker, state.chosenLocation, state.selectedPlaceName);
+        }
+    }, [state.selectedMarker]);
 
     return (
         <div className="grid-x home-page-div">
