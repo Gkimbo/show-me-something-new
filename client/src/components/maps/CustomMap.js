@@ -8,6 +8,7 @@ import reducer from "../ReducerFunction/ReducerFunction";
 import ResultList from "../listComponents/ResultList";
 import GetActivity from "../../services/GetActivity";
 import LocationSearchBar from "../layout/LocationSearchBar";
+import showMap from "../../services/showMap";
 
 const CustomMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
