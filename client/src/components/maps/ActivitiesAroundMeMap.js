@@ -8,6 +8,7 @@ import reducer from "../ReducerFunction/ReducerFunction";
 
 import ResultList from "../listComponents/ResultList";
 import LocationSearchBar from "../layout/LocationSearchBar";
+import showMap from "../../services/showMap";
 
 const ActivitiesAroundMeMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
@@ -16,6 +17,7 @@ const ActivitiesAroundMeMap = (props) => {
         selectedMarker: null,
         openInfoWindow: null,
         selectedActivity: null,
+        selectedPlaceName: null,
         error: "",
     });
 
@@ -83,89 +85,93 @@ const ActivitiesAroundMeMap = (props) => {
     };
 
     useEffect(() => {
-        dispatch({ type: "error", error: "" });
-        loader.load().then(() => {
-            const request = {
-                query: searchQuery,
-                location: state.chosenLocation,
-                radius: "100",
-            };
+        if (state.selectedMarker === null) {
+            dispatch({ type: "error", error: "" });
+            loader.load().then(() => {
+                const request = {
+                    query: searchQuery,
+                    location: state.chosenLocation,
+                    radius: "100",
+                };
 
-            const map = new google.maps.Map(document.getElementById("map"), {
-                center: state.chosenLocation,
-                zoom: 14,
-            });
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    center: state.chosenLocation,
+                    zoom: 14,
+                });
 
-            const userMarker = new google.maps.Marker({
-                position: state.chosenLocation,
-                map: map,
-                icon: {
-                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                },
-                title: "Your Location",
-            });
+                const userMarker = new google.maps.Marker({
+                    position: state.chosenLocation,
+                    map: map,
+                    icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                    },
+                    title: "Your Location",
+                });
 
-            const service = new google.maps.places.PlacesService(map);
+                const service = new google.maps.places.PlacesService(map);
 
-            service.textSearch(request, function (results, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    results.forEach((result) => {
-                        result.activity = searchQuery;
-                    });
-                    dispatch({
-                        type: "searchResults",
-                        searchResults: (prevResults) => [...results],
-                    });
-                    results.forEach((result) => {
-                        let resultContent;
-                        if (result.photos) {
-                            resultContent =
-                                `<p>${result.name}</p>` +
-                                `<p>${result.formatted_address}</p>` +
-                                `<img src="${result.photos && result.photos[0].getUrl()}" alt="${
-                                    result.name
-                                }" style="max-width: 100px; max-height: 100px;">`;
-                        } else {
-                            resultContent =
-                                `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
-                        }
-
-                        const infowindow = new google.maps.InfoWindow({
-                            content: resultContent,
-                            ariaLabel: result.name,
+                service.textSearch(request, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        results.forEach((result) => {
+                            result.activity = searchQuery;
                         });
-
-                        const marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(
-                                result.geometry.location.lat(),
-                                result.geometry.location.lng()
-                            ),
-                            map: map,
+                        dispatch({
+                            type: "searchResults",
+                            searchResults: (prevResults) => [...results],
                         });
+                        results.forEach((result) => {
+                            let resultContent;
+                            if (result.photos) {
+                                resultContent =
+                                    `<p>${result.name}</p>` +
+                                    `<p>${result.formatted_address}</p>` +
+                                    `<img src="${
+                                        result.photos && result.photos[0].getUrl()
+                                    }" alt="${
+                                        result.name
+                                    }" style="max-width: 100px; max-height: 100px;">`;
+                            } else {
+                                resultContent =
+                                    `<p>${result.name}</p>` + `<p>${result.formatted_address}</p>`;
+                            }
 
-                        marker.addListener("click", () => {
-                            dispatch({
-                                type: "selectedMarker",
-                                selectedMarker: result.geometry.location,
+                            const infowindow = new google.maps.InfoWindow({
+                                content: resultContent,
+                                ariaLabel: result.name,
                             });
-                            infowindow.open(map, marker);
-                            dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
-                            dispatch({
-                                type: "selectedActivity",
-                                selectedActivity: result.activity,
+
+                            const marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(
+                                    result.geometry.location.lat(),
+                                    result.geometry.location.lng()
+                                ),
+                                map: map,
+                            });
+
+                            marker.addListener("click", () => {
+                                dispatch({
+                                    type: "selectedMarker",
+                                    selectedMarker: result.geometry.location,
+                                });
+                                infowindow.open(map, marker);
+                                dispatch({ type: "openInfoWindow", openInfoWindow: infowindow });
+                                dispatch({
+                                    type: "selectedActivity",
+                                    selectedActivity: result.activity,
+                                });
                             });
                         });
-                    });
 
-                    map.setCenter(state.chosenLocation);
-                } else {
-                    dispatch({ type: "error", error: "No results found, please try again." });
-                }
+                        map.setCenter(state.chosenLocation);
+                    } else {
+                        dispatch({ type: "error", error: "No results found, please try again." });
+                    }
+                });
+
+                dispatch({ type: "selectedMarker", selectedMarker: null });
             });
-
-            dispatch({ type: "selectedMarker", selectedMarker: null });
-        });
-    }, [state.chosenLocation]);
+        }
+    }, [state.chosenLocation, state.selectedMarker]);
 
     useEffect(() => {
         if (props.mapSearchQuery) {
@@ -178,6 +184,12 @@ const ActivitiesAroundMeMap = (props) => {
     useEffect(() => {
         getLocation(props.mapSearchQuery);
     }, [props.mapSearchQuery]);
+
+    useEffect(() => {
+        if (state.selectedMarker) {
+            showMap(state.selectedMarker, state.chosenLocation, state.selectedPlaceName);
+        }
+    }, [state.selectedMarker]);
 
     return (
         <div className="grid-x home-page-div">

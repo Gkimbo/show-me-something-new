@@ -30,6 +30,11 @@ const reducer = (state, action) => {
                 ...state,
                 selectedActivity: action.selectedActivity,
             };
+        case "selectedPlaceName":
+            return {
+                ...state,
+                selectedPlaceName: action.selectedPlaceName,
+            };
         case "error":
             return {
                 ...state,
