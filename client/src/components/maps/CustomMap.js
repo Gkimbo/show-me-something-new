@@ -187,7 +187,7 @@ const CustomMap = (props) => {
 
     useEffect(() => {
         if (state.selectedMarker) {
-            showMap(state.selectedMarker, state.chosenLocation, state.selectedPlaceName);
+            showMap(state.selectedMarker, state.chosenLocation);
         }
     }, [state.selectedMarker]);
 
