@@ -19,8 +19,5 @@
   "engines": {
     "node": "^16.18",
     "yarn": "1.22.19"
-  },
-  "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.2"
   }
 }
