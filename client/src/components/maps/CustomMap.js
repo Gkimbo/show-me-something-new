@@ -9,6 +9,7 @@ import ResultList from "../listComponents/ResultList";
 import GetActivity from "../../services/GetActivity";
 import LocationSearchBar from "../layout/LocationSearchBar";
 import showMap from "../../services/showMap";
+import TransitSelectionButton from "../radioButtons/TransitSelectionButtons";
 
 const CustomMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
@@ -19,6 +20,7 @@ const CustomMap = (props) => {
         openInfoWindow: null,
         selectedActivity: null,
         selectedPlaceName: null,
+        modeOfTransportation: "WALKING",
         error: "",
     });
     const mapRef = useRef(null);
@@ -187,9 +189,9 @@ const CustomMap = (props) => {
 
     useEffect(() => {
         if (state.selectedMarker) {
-            showMap(state.selectedMarker, state.chosenLocation);
+            showMap(state.selectedMarker, state.chosenLocation, state.modeOfTransportation);
         }
-    }, [state.selectedMarker]);
+    }, [state.selectedMarker, state.modeOfTransportation]);
 
     return (
         <div className="grid-x home-page-div">
@@ -201,6 +203,9 @@ const CustomMap = (props) => {
                         : "Near you!"}
                 </h1>
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
+                {state.selectedMarker !== null ? (
+                    <TransitSelectionButton dispatch={dispatch} />
+                ) : null}
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
                 {state.error ? (

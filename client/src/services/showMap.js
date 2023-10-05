@@ -5,12 +5,12 @@ const googleMapsLoader = new Loader({
     libraries: ["places"],
 });
 
-const showMap = (selectedLocation, myLocation) => {
+const showMap = (selectedLocation, myLocation, modeOfTransportation) => {
     googleMapsLoader.load().then(() => {
         const request = {
             destination: selectedLocation,
             origin: myLocation,
-            travelMode: "WALKING",
+            travelMode: modeOfTransportation,
         };
 
         const directionsService = new google.maps.DirectionsService();
@@ -47,7 +47,7 @@ const showMap = (selectedLocation, myLocation) => {
 
         const infoWindow = new google.maps.InfoWindow({
             content: `
-                <h2>Route Information</h2>
+                <h1>Walking</h1>
                 <p>Distance: ${leg.distance.text}</p>
                 <p>Time: ${leg.duration.text}</p>
             `,

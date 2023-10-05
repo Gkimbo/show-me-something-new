@@ -9,6 +9,7 @@ import reducer from "../ReducerFunction/ReducerFunction";
 import ResultList from "../listComponents/ResultList";
 import LocationSearchBar from "../layout/LocationSearchBar";
 import showMap from "../../services/showMap";
+import TransitSelectionButton from "../radioButtons/TransitSelectionButtons";
 
 const ActivitiesAroundMeMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {
@@ -18,8 +19,11 @@ const ActivitiesAroundMeMap = (props) => {
         openInfoWindow: null,
         selectedActivity: null,
         selectedPlaceName: null,
+        modeOfTransportation: "WALKING",
         error: "",
     });
+
+    console.log(state);
 
     const searchQuery = props.computedMatch.params.name;
     const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -187,9 +191,9 @@ const ActivitiesAroundMeMap = (props) => {
 
     useEffect(() => {
         if (state.selectedMarker) {
-            showMap(state.selectedMarker, state.chosenLocation);
+            showMap(state.selectedMarker, state.chosenLocation, state.modeOfTransportation);
         }
-    }, [state.selectedMarker]);
+    }, [state.selectedMarker, state.modeOfTransportation]);
 
     return (
         <div className="grid-x home-page-div">
@@ -201,6 +205,9 @@ const ActivitiesAroundMeMap = (props) => {
                         : "Near you!"}
                 </h1>
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
+                {state.selectedMarker !== null ? (
+                    <TransitSelectionButton dispatch={dispatch} />
+                ) : null}
             </div>
             <div className="cell small-12 medium-6 container-4">
                 {state.error ? (
@@ -229,6 +236,7 @@ const ActivitiesAroundMeMap = (props) => {
                     />
                 )}
             </div>
+
             <div className="cell small-12 medium-6 map-surround">
                 {state.chosenLocation === null ? (
                     <Skeleton variant="rect" width={600} height={800} />
