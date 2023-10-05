@@ -35,6 +35,11 @@ const reducer = (state, action) => {
                 ...state,
                 selectedPlaceName: action.selectedPlaceName,
             };
+        case "modeOfTransportation":
+            return {
+                ...state,
+                modeOfTransportation: action.transportation,
+            };
         case "error":
             return {
                 ...state,
