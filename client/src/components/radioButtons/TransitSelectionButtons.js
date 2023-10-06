@@ -9,7 +9,7 @@ const TransitSelectionButton = ({ dispatch }) => {
     return (
         <FormControl component="fieldset">
             <FormLabel component="legend">Mode of transportation</FormLabel>
-            <RadioGroup row aria-label="position" name="position" defaultValue="top">
+            <RadioGroup row aria-label="position" name="position" defaultValue="WALKING">
                 <FormControlLabel
                     value="DRIVING"
                     control={<Radio color="primary" />}

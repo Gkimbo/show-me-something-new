@@ -1,4 +1,5 @@
 import { Loader } from "@googlemaps/js-api-loader";
+import _ from "lodash";
 
 const googleMapsLoader = new Loader({
     apiKey: "AIzaSyClukZ0HyAZru-8zwolHjvS8SnTCaK3V7c",
@@ -44,10 +45,10 @@ const showMap = (selectedLocation, myLocation, modeOfTransportation) => {
     function displayRouteInformation(result, map) {
         const route = result.routes[0];
         const leg = route.legs[0];
-
+        const mode = _.upperFirst(modeOfTransportation.toLowerCase());
         const infoWindow = new google.maps.InfoWindow({
             content: `
-                <h1>Walking</h1>
+                <h1>${mode}</h1>
                 <p>Distance: ${leg.distance.text}</p>
                 <p>Time: ${leg.duration.text}</p>
             `,
