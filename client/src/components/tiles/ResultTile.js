@@ -5,7 +5,7 @@ const ResultTile = (props) => {
     const markerLocation = props.result.geometry.location;
     const markerName = props.result.name;
     const isSelectedMarker = props.state.selectedMarker === markerLocation;
-    const userLocation = props.state.currentLocation;
+    const userLocation = props.state.chosenLocation;
     const modeOfTransportation = props.state.modeOfTransportation;
 
     const distance = distancesToPlaces(markerLocation, userLocation, modeOfTransportation);

@@ -12,15 +12,15 @@ const distancesToPlaces = (destination, myLocation, modeOfTransportation) => {
             origin: myLocation,
             travelMode: modeOfTransportation,
         };
-
         const directionsService = new google.maps.DirectionsService();
 
         directionsService.route(request, (result, status) => {
             if (status === "OK") {
-                const route = result.routes[0].distance.text;
-                const leg = route.legs[0].duration.text;
-                // console.log(route);
-                // console.log(leg);
+                const route = result.routes[0];
+                const leg = route.legs[0];
+                const distance = leg.distance.text;
+                const time = leg.duration.text;
+                info = distance + time;
             } else {
                 console.log("Directions request failed:", status);
             }
