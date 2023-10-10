@@ -181,9 +181,7 @@ const CityMap = (props) => {
                 </h1>
 
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
-                {state.selectedMarker !== null ? (
-                    <TransitSelectionButton dispatch={dispatch} />
-                ) : null}
+                <TransitSelectionButton dispatch={dispatch} />
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
                 {state.error ? (

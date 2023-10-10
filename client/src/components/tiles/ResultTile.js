@@ -20,9 +20,7 @@ const ResultTile = (props) => {
         return () => {
             isMounted = false;
         };
-    }, []);
-
-    console.log(timeAndDistance);
+    }, [modeOfTransportation]);
 
     const handleTileClick = () => {
         if (props.markerLocation === markerLocation) {

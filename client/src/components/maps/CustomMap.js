@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
-
 import reducer from "../ReducerFunction/ReducerFunction";
 
 import ResultList from "../listComponents/ResultList";
