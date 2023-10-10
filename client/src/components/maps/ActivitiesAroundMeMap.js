@@ -23,8 +23,6 @@ const ActivitiesAroundMeMap = (props) => {
         error: "",
     });
 
-    console.log(state);
-
     const searchQuery = props.computedMatch.params.name;
     const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

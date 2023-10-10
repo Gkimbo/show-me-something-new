@@ -1,9 +1,15 @@
 import React from "react";
+import distancesToPlaces from "../../services/distancesToPlaces";
 
 const ResultTile = (props) => {
     const markerLocation = props.result.geometry.location;
     const markerName = props.result.name;
     const isSelectedMarker = props.state.selectedMarker === markerLocation;
+    const userLocation = props.state.currentLocation;
+    const modeOfTransportation = props.state.modeOfTransportation;
+
+    const distance = distancesToPlaces(markerLocation, userLocation, modeOfTransportation);
+    // console.log(distance);
 
     const handleTileClick = () => {
         if (props.markerLocation === markerLocation) {

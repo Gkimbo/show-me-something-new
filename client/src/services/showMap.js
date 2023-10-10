@@ -24,13 +24,6 @@ const showMap = (selectedLocation, myLocation, modeOfTransportation) => {
         });
 
         directionsRenderer.setMap(map);
-        const startMarker = new google.maps.Marker({
-            position: myLocation,
-            label: {
-                text: "Start",
-                color: "blue",
-            },
-        });
 
         directionsService.route(request, (result, status) => {
             if (status === "OK") {
@@ -53,7 +46,6 @@ const showMap = (selectedLocation, myLocation, modeOfTransportation) => {
                 <p>Time: ${leg.duration.text}</p>
             `,
         });
-
         infoWindow.setPosition(map.getCenter());
         infoWindow.open(map);
     }
