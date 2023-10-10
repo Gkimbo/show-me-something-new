@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
-
 import reducer from "../ReducerFunction/ReducerFunction";
 
 import ResultList from "../listComponents/ResultList";
@@ -203,9 +202,7 @@ const CustomMap = (props) => {
                         : "Near you!"}
                 </h1>
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
-                {state.selectedMarker !== null ? (
-                    <TransitSelectionButton dispatch={dispatch} />
-                ) : null}
+                <TransitSelectionButton dispatch={dispatch} />
             </div>
             <div className="cell small-12 medium-6 container-of-containers">
                 {state.error ? (

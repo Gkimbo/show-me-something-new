@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import distancesToPlaces from "../../services/distancesToPlaces";
 
 const ResultTile = (props) => {
+    const [timeAndDistance, setTimeAndDistance] = useState(null);
+
     const markerLocation = props.result.geometry.location;
     const markerName = props.result.name;
     const isSelectedMarker = props.state.selectedMarker === markerLocation;
+    const userLocation = props.state.chosenLocation;
+    const modeOfTransportation = props.state.modeOfTransportation;
+
+    useEffect(() => {
+        let isMounted = true;
+        distancesToPlaces(markerLocation, userLocation, modeOfTransportation).then((result) => {
+            if (isMounted) {
+                setTimeAndDistance(result);
+            }
+        });
+        return () => {
+            isMounted = false;
+        };
+    }, [modeOfTransportation]);
 
     const handleTileClick = () => {
         if (props.markerLocation === markerLocation) {
@@ -33,7 +50,8 @@ const ResultTile = (props) => {
                         alt="Brick wall"
                     />
                 )}
-                <h6>{props.result.name}</h6>
+                <h5>{props.result.name}</h5>
+                {timeAndDistance}
 
                 {props.state.selectedMarker === markerLocation ? (
                     <ul>

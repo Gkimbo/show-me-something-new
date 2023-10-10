@@ -23,8 +23,6 @@ const ActivitiesAroundMeMap = (props) => {
         error: "",
     });
 
-    console.log(state);
-
     const searchQuery = props.computedMatch.params.name;
     const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -205,9 +203,7 @@ const ActivitiesAroundMeMap = (props) => {
                         : "Near you!"}
                 </h1>
                 <LocationSearchBar setMapSearchQuery={props.setMapSearchQuery} />
-                {state.selectedMarker !== null ? (
-                    <TransitSelectionButton dispatch={dispatch} />
-                ) : null}
+                <TransitSelectionButton dispatch={dispatch} />
             </div>
             <div className="cell small-12 medium-6 container-4">
                 {state.error ? (
