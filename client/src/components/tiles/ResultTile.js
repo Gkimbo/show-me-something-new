@@ -5,7 +5,6 @@ const ResultTile = (props) => {
     const [timeAndDistance, setTimeAndDistance] = useState(null);
 
     const markerLocation = props.result.geometry.location;
-    const markerName = props.result.name;
     const isSelectedMarker = props.state.selectedMarker === markerLocation;
     const userLocation = props.state.chosenLocation;
     const modeOfTransportation = props.state.modeOfTransportation;
@@ -28,7 +27,7 @@ const ResultTile = (props) => {
             props.dispatch({ type: "selectedPlaceName", selectedPlaceName: null });
         } else {
             props.dispatch({ type: "selectedMarker", selectedMarker: markerLocation });
-            props.dispatch({ type: "selectedPlaceName", selectedPlaceName: markerName });
+            props.dispatch({ type: "selectedPlaceName", selectedPlaceName: props.result.name });
             props.centerMapOnMarker(markerLocation);
         }
     };

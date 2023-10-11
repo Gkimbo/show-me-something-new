@@ -122,6 +122,7 @@ const CityMap = (props) => {
                                 type: "selectedActivity",
                                 selectedActivity: result.activity,
                             });
+                            dispatch({ type: "selectedPlaceName", selectedPlaceName: result.name });
                         });
                     });
                 };
