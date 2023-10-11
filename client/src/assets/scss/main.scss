@@ -663,7 +663,7 @@ $button-margin: 0.5rem;
 }
 
 .container-4 {
-    padding: 0 5%;
+    padding: 0 3% 0 1.5%;
     font-family: var(--font-family);
     align-items: center;
     margin: 1% auto;
@@ -671,7 +671,7 @@ $button-margin: 0.5rem;
     border-radius: 5px;
     text-align: center;
     overflow: scroll;
-    width: 35vw;
+    width: 100%;
     height: 50vw;
     @media (max-width: 500px) {
         height: 70vw;
@@ -703,9 +703,8 @@ $button-margin: 0.5rem;
     border-radius: 5px;
     text-align: center;
     overflow: scroll;
-    width: 35vw;
+    width: 100%;
     height: 35vw;
-    border: 0.5px solid #094067;
     @media (max-width: 500px) {
         height: 70vw;
     }
@@ -718,7 +717,7 @@ $button-margin: 0.5rem;
 
 .container-4-map {
     font-family: var(--font-family);
-    width: 35vw;
+    width: 100%;
     height: 50vw;
     display: flex;
     flex-wrap: wrap;
@@ -1082,12 +1081,12 @@ $button-margin: 0.5rem;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    min-height: 10rem;
-    margin: 5%;
-    padding: 2%;
+    min-height: 13rem;
+    margin: 4%;
+    padding: 0;
     border: 1px solid #094067;
     color: #000000;
-    border-radius: 10px;
+    border-radius: 4px;
     text-align: center;
     overflow: hidden;
     font-size: 85%;
@@ -1107,10 +1106,10 @@ $button-margin: 0.5rem;
 }
 
 .tile-container img {
-    width: 7rem;
-    height: 4rem;
+    width: 100%;
+    height: 7rem;
     border-radius: 5px;
-    margin: 5% 10%;
+    margin: 0 10% 5% 10%;
 }
 
 .sign-out-button {
@@ -1163,7 +1162,7 @@ $button-margin: 0.5rem;
     background-color: rgb(219, 241, 255);
     align-items: center;
     color: #000000;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     text-align: center;
     font-size: 85%;
     z-index: 1;
