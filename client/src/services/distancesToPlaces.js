@@ -35,7 +35,7 @@ const distancesToPlaces = async (destination, myLocation, modeOfTransportation) 
     const distance = leg.distance.text;
     const time = leg.duration.text;
     return (
-        <ul>
+        <ul className="cell small-12">
             <li>{`Distance: ${distance}`}</li>
             <li>{`Time: ${time}`}</li>
         </ul>
