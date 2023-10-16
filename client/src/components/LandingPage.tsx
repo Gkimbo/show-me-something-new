@@ -1,7 +1,7 @@
 import React from "react";
 import SignInForm from "./authentication/SignInForm";
 
-const LandingPage = (props) => {
+const LandingPage = () => {
     return (
         <div className="landing-page-image">
             <div className="grid-x">

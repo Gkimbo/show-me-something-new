@@ -4,7 +4,7 @@ import getBackgroundPhoto from "../services/getBackgroundPhoto";
 import ActivitiesList from "./listComponents/ActivitiesList";
 import PopularDestinationList from "./listComponents/PopularDestinationList";
 
-const HomePage = (props) => {
+const HomePage = () => {
     const [imageUrl, setImageUrl] = useState("");
 
     useEffect(() => {
