@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useReducer } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Box from "@material-ui/core/Box";
-import reducer from "../ReducerFunction/ReducerFunction";
+import reducer from "../ReducerFunction/ReducerFunction.js";
 
-import ResultList from "../listComponents/ResultList";
-import GetActivity from "../../services/GetActivity";
-import LocationSearchBar from "../layout/LocationSearchBar";
-import showMap from "../../services/showMap";
-import TransitSelectionButton from "../radioButtons/TransitSelectionButtons";
+import ResultList from "../listComponents/ResultList.js";
+import GetActivity from "../../services/GetActivity.js";
+import LocationSearchBar from "../layout/LocationSearchBar.js";
+import showMap from "../../services/showMap.js";
+import TransitSelectionButton from "../radioButtons/TransitSelectionButtons.js";
 
 const CustomMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {

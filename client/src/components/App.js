@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
-import getCurrentUser from "../services/getCurrentUser";
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js";
+import getCurrentUser from "../services/getCurrentUser.js";
 import "../assets/scss/main.scss";
-import RegistrationForm from "./registration/RegistrationForm";
-import TopBar from "./layout/TopBar";
-import LandingPage from "./LandingPage";
-import HomePage from "./HomePage";
-import ActivitiesAroundMeMap from "./maps/ActivitiesAroundMeMap";
-import CustomMap from "./maps/CustomMap";
-import CityMap from "./maps/CityMap";
-import UpdatePreferences from "./UpdatePreferencesPage";
+import RegistrationForm from "./registration/RegistrationForm.js";
+import TopBar from "./layout/TopBar.js";
+import LandingPage from "./LandingPage.js";
+import HomePage from "./HomePage.js";
+import ActivitiesAroundMeMap from "./maps/ActivitiesAroundMeMap.js";
+import CustomMap from "./maps/CustomMap.js";
+import CityMap from "./maps/CityMap.js";
+import UpdatePreferences from "./UpdatePreferencesPage.js";
 
 const App = (props) => {
     const [currentUser, setCurrentUser] = useState(undefined);

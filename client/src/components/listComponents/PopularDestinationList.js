@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import PopularDestinationTile from "../tiles/PopularDestinationTile";
-import GetDestination from "../../services/GetDestination";
+import PopularDestinationTile from "../tiles/PopularDestinationTile.js";
+import GetDestination from "../../services/GetDestination.js";
 
 const PopularDestinationList = (props) => {
     const [popularDestinations, setPopularDestinations] = useState([]);

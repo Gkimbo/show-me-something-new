@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import distancesToPlaces from "../../services/distancesToPlaces";
+import distancesToPlaces from "../../services/distancesToPlaces.js";
 
 const ResultTile = (props) => {
     const [timeAndDistance, setTimeAndDistance] = useState(null);

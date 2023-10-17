@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import GetActivity from "../services/GetActivity";
-import ModifyPreferences from "../services/ModifyPreferences";
-import AddPreferenceForm from "./forms/AddPreferencesForm";
-import EditPreferenceForm from "./forms/EditPreferenceForm";
-import PreferenceTile from "./tiles/PreferenceTile";
-import FormError from "./layout/FormError";
+import GetActivity from "../services/GetActivity.js";
+import ModifyPreferences from "../services/ModifyPreferences.js";
+import AddPreferenceForm from "./forms/AddPreferencesForm.js";
+import EditPreferenceForm from "./forms/EditPreferenceForm.js";
+import PreferenceTile from "./tiles/PreferenceTile.js";
+import FormError from "./layout/FormError.js";
 
 const UpdatePreferences = (props) => {
     const [customActivities, setCustomActivities] = useState([]);

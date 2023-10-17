@@ -4,12 +4,12 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { Box, Grid } from "@material-ui/core";
 import _ from "lodash";
 
-import reducer from "../ReducerFunction/ReducerFunction";
+import reducer from "../ReducerFunction/ReducerFunction.js";
 
-import ResultList from "../listComponents/ResultList";
-import LocationSearchBar from "../layout/LocationSearchBar";
-import showMap from "../../services/showMap";
-import TransitSelectionButton from "../radioButtons/TransitSelectionButtons";
+import ResultList from "../listComponents/ResultList.js";
+import LocationSearchBar from "../layout/LocationSearchBar.js";
+import showMap from "../../services/showMap.js";
+import TransitSelectionButton from "../radioButtons/TransitSelectionButtons.js";
 
 const ActivitiesAroundMeMap = (props) => {
     const [state, dispatch] = useReducer(reducer, {

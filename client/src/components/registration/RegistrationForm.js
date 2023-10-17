@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import config from "../../config";
+import config from "../../config.js";
 import {
     Checkbox,
     Select,
@@ -12,8 +12,7 @@ import {
 } from "@material-ui/core";
 import FormError from "../layout/FormError";
 import makeNewUser from "../../services/makeNewUser";
-import options from "../../services/userSelections";
-
+import options from "../../services/userSelections.js";
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
         email: "",

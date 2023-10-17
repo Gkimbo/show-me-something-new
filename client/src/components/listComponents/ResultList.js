@@ -1,5 +1,5 @@
 import React from "react";
-import ResultTile from "../tiles/ResultTile";
+import ResultTile from "../tiles/ResultTile.js";
 
 const ResultList = (props) => {
     const resultsByActivity = {};

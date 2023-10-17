@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import config from "../../config";
-import FormError from "../layout/FormError";
+import config from "../../config.js";
+import FormError from "../layout/FormError.js";
 
 const SignInForm = () => {
     const [userPayload, setUserPayload] = useState({ email: "", password: "" });

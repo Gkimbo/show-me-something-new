@@ -1,5 +1,5 @@
 import React from "react";
-import SignInForm from "./authentication/SignInForm";
+import SignInForm from "./authentication/SignInForm.js";
 
 const LandingPage = () => {
     return (

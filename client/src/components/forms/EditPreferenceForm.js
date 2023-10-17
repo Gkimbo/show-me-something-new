@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
 import CreatableSelect from "react-select/creatable";
 
-import options from "../../services/userSelections";
+import options from "../../services/userSelections.js";
 
 const EditPreferenceForm = ({ changePreference, preference, setEditForm }) => {
     const [newPreference, setNewPreference] = useState({
