@@ -7,20 +7,23 @@ const photoApiAccessKey = process.env.UNSPLASH_PHOTO_ACCESS_KEY;
 
 class CityClientApi {
     static async getCities() {
-        const baseUrl = "https://api.api-ninjas.com";
-        try {
-            const apiResponse = await got({
-                url: `${baseUrl}` + "/v1/city?country=us&limit=30",
-                headers: {
-                    "X-Api-Key": `${cityApiKey}`,
-                },
-            });
-            const responseBody = apiResponse.body;
-            const parsedData = JSON.parse(responseBody);
-            return parsedData;
-        } catch (error) {
-            return { error: error.message };
-        }
+        // const baseUrl = "https://api.api-ninjas.com";
+        // try {
+        //     const apiResponse = await got({
+        //         url: `${baseUrl}` + "/v1/city?country=us&limit=30",
+        //         headers: {
+        //             "X-Api-Key": `${cityApiKey}`,
+        //         },
+        //     });
+        //     const responseBody = apiResponse.body;
+        //     const parsedData = JSON.parse(responseBody);
+        //     return parsedData;
+        // } catch (error) {
+        //     console.error("Error:", error.message);
+        //     console.error("Request details:", error.request.options);
+        //     console.error("Response body:", error.response ? error.response.body : "N/A");
+        //     return { error: error.message };
+        // }
     }
 
     static async getOneCity(name) {

@@ -1,13 +1,15 @@
 import express from "express";
 import CitySerializer from "../../../serializers/CitySerializer.js";
 import CityClientApi from "../../../apiClient/CityClientApi.js";
+import { cities } from "../../../../cities.js";
 
 const popularDestinationRouter = new express.Router();
 
 popularDestinationRouter.get("/", async (req, res) => {
     try {
-        const cities = await CityClientApi.getCities();
-        const serializedCities = await CitySerializer.getSummaryOfArray(cities);
+        // const cities = await CityClientApi.getCities();
+        const citiesArray = cities;
+        const serializedCities = await CitySerializer.getSummaryOfArray(citiesArray);
         return res.status(200).json({ cities: serializedCities });
     } catch (error) {
         return res.status(500).json({ errors: error });
