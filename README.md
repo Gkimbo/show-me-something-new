@@ -25,7 +25,7 @@ Prerequisites
 npm install --global yarn
 ```
 
-3. Install <a href="https://www.postgresql.org/download/" >PostGreSQL</a>
+3. Install <a href="https://www.postgresql.org/download/" >PostgreSQL</a>
 
 4. Use Git to clone the repository
 
