@@ -1,9 +1,11 @@
 import React from "react";
 import SignInForm from "./authentication/SignInForm";
+import image2 from "../services/photos/explore.jpg";
+import { Parallax } from "react-parallax";
 
 const LandingPage = (props) => {
     return (
-        <div className="landing-page-image">
+        <Parallax className="image-landing" bgImage={image2} bgImageAlt="mug" strength={800}>
             <div className="grid-x">
                 <div className="landing-page cell medium-12 large-6">
                     <div className="landing-page-description container-manage">
@@ -29,7 +31,7 @@ const LandingPage = (props) => {
                     <SignInForm />
                 </div>
             </div>
-        </div>
+        </Parallax>
     );
 };
 
