@@ -13,6 +13,8 @@ import {
 import FormError from "../layout/FormError";
 import makeNewUser from "../../services/makeNewUser";
 import options from "../../services/userSelections";
+import image2 from "../../services/photos/explore.jpg";
+import { Parallax } from "react-parallax";
 
 const RegistrationForm = () => {
     const [userPayload, setUserPayload] = useState({
@@ -101,7 +103,7 @@ const RegistrationForm = () => {
     }
 
     return (
-        <div className="landing-page-image">
+        <Parallax className="image-landing" bgImage={image2} bgImageAlt="mug" strength={800}>
             <div className="grid-x">
                 <div className="container-3">
                     <div className="cell small-12">
@@ -196,7 +198,7 @@ const RegistrationForm = () => {
                     </p>
                 </div>
             </div>
-        </div>
+        </Parallax>
     );
 };
 
