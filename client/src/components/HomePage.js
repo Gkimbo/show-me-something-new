@@ -20,7 +20,12 @@ const HomePage = (props) => {
         <div className="grid-x home-page-div">
             <h1 className="home-title">Explore your surroundings</h1>
             <div className="cell small-12">
-                <Parallax className="image-main" bgImage={image1} bgImageAlt="mug" strength={800}>
+                <Parallax
+                    className="image-main"
+                    bgImage={image1}
+                    bgImageAlt="landscape"
+                    strength={800}
+                >
                     <div className="content">
                         <Link to="/my-activities" className="button-1">
                             Click Me for things to do!
@@ -35,10 +40,10 @@ const HomePage = (props) => {
                 <Parallax
                     className="image-activities"
                     bgImage={image2}
-                    bgImageAlt="mug"
+                    bgImageAlt="sky"
                     strength={800}
                 >
-                    <div className="container-2">
+                    <div className="container-2-activities">
                         <h1 className="page-title cell small-12">Activity List</h1>
                         <ActivitiesList />
                     </div>
