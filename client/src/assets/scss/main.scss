@@ -59,6 +59,18 @@ h5 {
 .image-activities {
     position: "relative";
     height: 140vh;
+    @media (max-width: 1361px) {
+        height: 150vh;
+    }
+    @media (max-width: 1163px) {
+        height: 160vh;
+    }
+    @media (max-width: 1025px) {
+        height: 200vh;
+    }
+    @media (max-width: 640px) {
+        height: 300vh;
+    }
 }
 .content {
     display: flex;
@@ -519,6 +531,25 @@ $button-margin: 0.5rem;
     margin: 0 auto;
     padding: 5%;
     border: 1px solid #094067;
+    color: #000000;
+    border-radius: 5px;
+    text-align: center;
+    overflow: scroll;
+}
+
+.container-2-activities {
+    font-family: var(--font-family);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5%;
+    border-top: 1px solid #094067;
+    border-right: 1px solid #094067;
+    border-left: 1px solid #094067;
     color: #000000;
     border-radius: 5px;
     text-align: center;
