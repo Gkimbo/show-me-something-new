@@ -1,6 +1,6 @@
 import { User } from "../../models/index.js";
 
-class AdminUserSeeder {
+class GuestUserSeeder {
     static async seed() {
         const adminAccounts = [
             {
@@ -21,4 +21,4 @@ class AdminUserSeeder {
     }
 }
 
-export default AdminUserSeeder;
+export default GuestUserSeeder;

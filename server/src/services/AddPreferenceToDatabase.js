@@ -12,14 +12,7 @@ class AddPreferenceToDatabase {
             if (!currentPreference) {
                 await user.$relatedQuery("preferences").insert({ name: upperCase });
             } else {
-                const check = await user
-                    .$relatedQuery("preferences")
-                    .findById(currentPreference.id);
-                if (!check) {
-                    await currentPreference.$relatedQuery("users").relate(user);
-                } else {
-                    return false;
-                }
+                await currentPreference.$relatedQuery("users").relate(user);
             }
         }
         return true;

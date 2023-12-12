@@ -11,6 +11,7 @@ const UpdatePreferences = (props) => {
     const [editForm, setEditForm] = useState(false);
     const [preference, setPreference] = useState([]);
     const [error, setError] = useState({});
+    const username = props.user.username;
     useEffect(() => {
         if (props.user.username === "admin") {
             GetActivity.getAllActivities().then((activityData) => {
@@ -85,8 +86,15 @@ const UpdatePreferences = (props) => {
     };
 
     const handleDelete = (id) => {
-        setEditForm(false);
-        removePreference(id);
+        if (username === "guest") {
+            setError({
+                guestError:
+                    "This is a guest account, please sign in or sign up to customize interests!",
+            });
+        } else {
+            setEditForm(false);
+            removePreference(id);
+        }
     };
 
     const handleEdit = (id) => {
@@ -121,6 +129,11 @@ const UpdatePreferences = (props) => {
                 </h1>
             </div>
             <div className="cell small-12 medium-6 list-div">
+                {error.guestError && (
+                    <div className="delete-error">
+                        <FormError error={error.guestError} />
+                    </div>
+                )}
                 <div className="container-manage-update">
                     <div className="grid-x">{listUsersPreference}</div>
                 </div>
@@ -133,6 +146,7 @@ const UpdatePreferences = (props) => {
                                 <AddPreferenceForm
                                     preference={preference}
                                     onAddPreference={onAddPreference}
+                                    username={username}
                                 />
                                 {error.addError && <FormError error={error.addError} />}
                                 {error.addInputError && <FormError error={error.addInputError} />}
@@ -148,6 +162,7 @@ const UpdatePreferences = (props) => {
                                     preference={preference}
                                     changePreference={changePreference}
                                     setEditForm={setEditForm}
+                                    username={username}
                                 />
                             </>
                         )}

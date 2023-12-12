@@ -31,6 +31,31 @@ const SignInForm = () => {
         setErrors(newErrors);
     };
 
+    const handleGuestLogin = async (event) => {
+        const guest = { email: "GUEST@Guest.com", password: "guest1" };
+        try {
+            const response = await fetch("/api/v1/user-sessions", {
+                method: "post",
+                body: JSON.stringify(guest),
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+            });
+            if (!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`;
+                const error = new Error(errorMessage);
+                throw error;
+            }
+            const userData = await response.json();
+            setShouldRedirect(true);
+        } catch (err) {
+            if (err.message === "401 (Unauthorized)") {
+                setErrors({ ...errors, unauthorized: "No user found - please sign-up" });
+            }
+            console.error(`Error in fetch: ${err.message}`);
+        }
+    };
+
     const onSubmit = async (event) => {
         event.preventDefault();
         validateInput(userPayload);
@@ -112,6 +137,13 @@ const SignInForm = () => {
                 <Link to="/users/new" className="button-toggle-1">
                     Sign-Up Here
                 </Link>
+            </p>
+            <p className="spacer">_____________________________________</p>
+            <p className="alt-link-guest cell small-12">
+                Continue as Guest!
+                <div onClick={handleGuestLogin} className="button-toggle-1-guest">
+                    Guest
+                </div>
             </p>
         </div>
     );

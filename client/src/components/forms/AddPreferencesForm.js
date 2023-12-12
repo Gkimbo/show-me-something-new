@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text } from "@chakra-ui/react";
 import CreatableSelect from "react-select/creatable";
+import FormError from "../layout/FormError";
 
 import options from "../../services/userSelections";
 
@@ -9,6 +10,7 @@ const AddPreferenceForm = (props) => {
         name: "",
         icon: '<i class="fa-solid fa-user-plus"></i>',
     });
+    const [error, setError] = useState(null);
     const handleInputChange = (event) => {
         setNewPreference({
             ...newPreference,
@@ -18,8 +20,12 @@ const AddPreferenceForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onAddPreference(newPreference);
-        clearForm();
+        if (props.username === "guest") {
+            setError("This is a guest account, please sign in or sign up to customize interests!");
+        } else {
+            props.onAddPreference(newPreference);
+            clearForm();
+        }
     };
 
     const clearForm = () => {
@@ -49,6 +55,11 @@ const AddPreferenceForm = (props) => {
                 <div className="button-add cell small-12" onClick={handleSubmit}>
                     Add
                 </div>
+                {error && (
+                    <div className="delete-error">
+                        <FormError error={error} />
+                    </div>
+                )}
             </form>
         </div>
     );
