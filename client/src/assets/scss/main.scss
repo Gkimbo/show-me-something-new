@@ -75,7 +75,10 @@ h5 {
 
 .image-landing {
     position: "relative";
-    height: 100vh;
+    height: 140vh;
+    @media (max-width: 931px) {
+        height: 200vh;
+    }
 }
 
 .page-title {
